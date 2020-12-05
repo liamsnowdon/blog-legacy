@@ -1,0 +1,113 @@
+.p-search-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 40px;
+
+    &__field {
+        flex: 0 0 100%;
+        
+        @include breakpoint('medium') {
+            max-width: 30%;
+            margin-right: 20px;
+            flex: 1 1 0px;
+        }
+
+        @include breakpoint('medium', 'down') {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            height: 46px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            border-radius: 2.5px;
+            appearance: none;
+        }
+    }
+
+    &__filters {
+        @include breakpoint('medium') {
+            flex: 1 0 0px;
+            max-width: 50%;
+            display: flex;
+            justify-content: flex-end;
+            flex: 0 0 100%;
+        }
+
+        @include breakpoint('medium', 'down') {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 10px;
+            width: 100%;
+        }
+
+        @include breakpoint('small', 'down') {
+            grid-template-columns: auto;
+            grid-gap: 20px;
+        }
+    }
+
+    &__dropdown {
+        @include breakpoint('medium') {
+            flex: 1 0 200px;
+        }
+
+        &--category {
+            @include breakpoint('medium') {
+                flex: 0 0 260px;
+            }
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        &:not(:last-child) {
+            @include breakpoint('medium') {
+                margin-right: 10px;
+            }
+        }
+    }
+}
+
+.p-search-results {
+    text-align: center;
+
+    .c-search-post {
+        margin-bottom: 40px;
+    }
+}
+
+.p-search-post {
+    display: flex;
+    text-align: left;
+
+    &__image {
+        @include breakpoint('medium') {
+            flex: 0 0 200px;
+        }
+
+        @include breakpoint('medium', 'down') {
+            display: none;
+        }
+    }
+
+    &__content {
+        @include breakpoint('medium') {
+            padding-left: 40px;
+        }
+    }
+    
+    &:not(:last-child) {
+        margin-bottom: 25px;
+    }
+}

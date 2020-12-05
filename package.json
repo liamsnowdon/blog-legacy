@@ -1,0 +1,32 @@
+{
+  "name": "blog-static",
+  "version": "1.0.0",
+  "description": "Static version of my blog",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liamsnowdon/blog-static.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/liamsnowdon/blog-static/issues"
+  },
+  "homepage": "https://github.com/liamsnowdon/blog-static#readme",
+  "devDependencies": {
+    "autoprefixer": "^9.6.1",
+    "browser-sync": "^2.26.13",
+    "css-mqpacker": "^7.0.0",
+    "cssnano": "^4.1.10",
+    "dart-sass": "^1.25.0",
+    "gulp": "^4.0.2",
+    "gulp-data": "^1.3.1",
+    "gulp-nunjucks-render": "^2.2.3",
+    "gulp-postcss": "^9.0.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-sourcemaps": "^3.0.0"
+  }
+}

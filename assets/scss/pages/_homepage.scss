@@ -1,0 +1,26 @@
+.homepage-hero {
+    background: $primary-color;
+    color: $primary-white;
+
+    &__content {
+        max-width: 1440px;
+        padding: 30px 25px;
+
+        @include breakpoint('medium') {
+            padding: 5rem 2.5rem;
+            width: 60%;
+        }
+    }
+
+    &__title {
+        margin-bottom: 0.5rem;
+    }
+
+    &__subtitle {
+        margin-bottom: 2rem;
+    }
+
+    &__paragraph {
+        margin-bottom: 1.5rem;
+    }
+}

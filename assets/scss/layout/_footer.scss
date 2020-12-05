@@ -1,0 +1,13 @@
+.l-footer {
+    padding: 10px 25px;
+    height: 39px;
+    background: $primary-color;
+    color: $primary-white;
+    font-size: $body-small-font-size;
+    text-align: center;
+
+    &__content {
+        max-width: $global-width;
+        margin: 0 auto;
+    }
+}

@@ -1,0 +1,15 @@
+{% extends "layout.njk" %}
+
+{% import "macros/post-page.njk" as postPage %}
+
+{% set post = data.posts[0] %}
+
+{% block content %}
+  {{ postPage.header(post) }}
+  
+  <main>
+    {% include "partials/sticky-navigation.njk" %}
+
+    {{ postPage.content(post) }}
+  </main>
+{% endblock %}

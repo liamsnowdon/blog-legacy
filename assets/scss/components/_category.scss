@@ -1,0 +1,39 @@
+.c-category {
+    $block: &;
+
+    height: 100%;
+
+    &__image {
+        height: 300px;
+        width: 100%;
+        background: center/cover no-repeat $primary-grey;
+
+        &--html {
+            background-image: url('/images/categories/html.png');
+        }
+
+        &--css {
+            background-image: url('/images/categories/css.png');
+        }
+
+        &--sass {
+            background-image: url('/images/categories/sass.png');
+        }
+
+        &--javascript {
+            background-image: url('/images/categories/javascript.png');
+        }
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        height: calc(100% - 300px);
+        padding: 15px;
+        text-align: center;
+    }
+
+    &__button-holder {
+        margin-top: auto;
+    }
+}

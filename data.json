@@ -1,0 +1,31 @@
+{
+    "posts": [
+        {
+            "id": 1,
+            "file": "responsive-images-picture-element.html",
+            "title": "Using the <picture> element for responsive images",
+            "category": "HTML",
+            "intro": "Lorem ipsum blah blah blah",
+            "tags": [
+                "responsive"
+            ],
+            "datePosted": "2020-12-04T05:12:20.330Z",
+            "content": "This is the content for the responsive images picture element post.",
+            "relatedPosts": [1]
+        },
+        {
+            "id": 2,
+            "file": "mobile-button-hover-states.html",
+            "title": "Handling button hover states for touchscreen devices",
+            "category": "CSS",
+            "intro": "Lorem ipsum blah blah blah 2",
+            "tags": [
+                "responsive",
+                "accessiblility"
+            ],
+            "datePosted": "2019-12-04T05:12:20.330Z",
+            "content": "This is the content for the mobile button hover states post.",
+            "relatedPosts": [0]
+        }
+    ]
+  }

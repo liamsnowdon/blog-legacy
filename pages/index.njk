@@ -1,0 +1,94 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+  {% import "macros/post-pods.njk" as pods %}
+
+  <div class="homepage-hero">
+    <div class="homepage-hero__content">
+      <h1 class="homepage-hero__title">
+        Welcome to my Blog!
+      </h1>
+      <h5 class="homepage-hero__subtitle">
+        A place for fancy, cool front end tips and tricks!
+      </h5>
+      <p class="homepage-hero__paragraph">
+        My name is Liam Snowdon. I'm a front end developer and this is my blog where I will post about all things HTML, CSS, Sass and JavaScript. My posts are categorised and tagged with keywords to make it easy to find exactly what you're looking for.
+      </p>
+    </div>
+    <div class="homepage-hero__image"></div>
+  </div>
+
+  <main>
+    {% include "partials/sticky-navigation.njk" %}
+
+    <div class="l-wrapper">
+      <div class="l-content">
+        <div class="l-content__title">
+          <h2>Most recent</h2>
+        </div>
+
+        {% for post in data.posts|sort(true, true, 'datePosted') %}
+          {% if loop.index0 < 1 %}   
+            {{ pods.mostRecentPostPod(post) }}
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <div class="l-wrapper l-wrapper--grey-2">
+        <div class="l-content">
+          <div class="l-content__title">
+            <h2>Most recent by category</h2>
+          </div>
+
+          <div class="l-grid">
+            <div class="l-grid__row l-grid__row--column-margins">
+              {% set htmlPostFound = false %}
+              {% set cssPostFound = false %}
+              {% set javascriptPostFound = false %}
+
+              {% for post in data.posts|sort(true, true, 'datePosted') %}
+                {% if post.category === 'HTML' and not htmlPostFound %}
+                  {% set htmlPostFound = true %}
+                  <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column--large-3">
+                    {{ pods.postPod(post) }}
+                  </div>
+                {% endif %}
+
+                {% if post.category === 'CSS' and not cssPostFound %}
+                  {% set cssPostFound = true %}
+                  <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column--large-3">
+                    {{ pods.postPod(post) }}
+                  </div>
+                {% endif %}
+
+                {% if post.category === 'JavaScript' and not javascriptPostFound %}
+                  {% set javascriptPostFound = true %}
+                  <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column--large-3">
+                    {{ pods.postPod(post) }}
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="l-wrapper">
+        <div class="l-content">
+          <div class="l-content__title">
+            <h2>All posts</h2>
+          </div>
+
+          <div class="l-grid">
+            <div class="l-grid__row l-grid__row--column-margins">
+              {% for post in data.posts|sort(true, true, 'datePosted') %}
+                <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column--large-3">
+                  {{ pods.postPod(post) }}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  {% endblock %}

@@ -1,0 +1,66 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+  <header class="l-header">
+    <div class="l-header__content">
+      <h1 class="l-header__heading">Categories</h1>
+    </div>
+  </header>
+
+  <main>
+    {% include "partials/sticky-navigation.njk" %}
+
+    <div class="l-wrapper">
+      <div class="l-content">
+        <div class="l-grid">
+          <div class="l-grid__row l-grid__row--column-margins">
+            <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6">
+              <div class="c-category">
+                <div class="c-category__image c-category__image--html"></div>
+                <div class="c-category__content">
+                  <h5 class="c-category__title">HTML</h4>
+                  <p class="c-category__intro">
+                    The markup language for displaying content for web pages. With it, you can show text, images, videos and more. If you're seeing something on a web page, it is made up of HTML.
+                  </p>
+                  <div class="c-category__button-holder">
+                    <a class="c-button" href="/categories/html.html">Explore</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6">
+              <div class="c-category">
+                <div class="c-category__image c-category__image--css"></div>
+                <div class="c-category__content">
+                  <h5 class="c-category__title">CSS</h4>
+                  <p class="c-category__intro">
+                    Using stylesheets, a page can be styled to your designs and imagination. Whether it's layout, colour themes, typography or input fields, CSS will play the role of how your site will look.
+                  </p>
+                  <div class="c-category__button-holder">
+                    <a class="c-button" href="/categories/css.html">Explore</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6">
+              <div class="c-category">
+                <div class="c-category__image c-category__image--javascript"></div>
+                <div class="c-category__content">
+                  <h5 class="c-category__title">JavaScript</h4>
+                  <p class="c-category__intro">
+                    The programming language of the web, JavaScript gives you the power to control a web page to your heart's content; updating the DOM, sending asynchronous requests, dynamic content and more interactive elements like carousels, maps and even games.
+                  </p>
+                  <div class="c-category__button-holder">
+                    <a class="c-button" href="/categories/javascript.html">Explore</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}

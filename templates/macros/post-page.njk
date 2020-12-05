@@ -1,0 +1,79 @@
+{% macro header(post) %}
+  <div class="post-hero" style="">
+    <div class="l-content">
+      <div class="post-hero__content">
+        <div class="post-hero__left">
+          <h1>{{ post.title }}</h1>
+          <p>{{ post.intro }}</p>
+        </div>
+        
+        <div class="post-hero__right">
+          <h5><strong>Posted:</strong> {{ post.datePosted|longDate }}</h5>
+
+          <h5><strong>Category:</strong> <a href="/categories/{{ post.category }}.html">{{ post.category }}</a></h5>
+                        
+          <h5>
+            <strong>Tags:</strong>
+            {% for tag in post.tags %}
+              <a href="/search?tags={{ tag }}">{{ tag }}</a>
+            {% endfor %}
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro content(post) %}
+  <div id="post" class="l-wrapper">
+    <div class="l-content">
+      <div class="post">
+        <article class="post__article">
+          <div>{{ post.content }}</div>
+        </article>
+
+        <aside class="post__sidebar">
+          {{ relatedPosts(post) }}
+          {{ mostRecentInCategory(post) }}
+        </aside>
+      </div>
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro relatedPosts(post) %}
+  <div class="sidebar-pod">
+    <div class="sidebar-pod__header">
+        <h4>Related posts</h4>
+    </div>
+
+    <div class="sidebar-pod__content">
+      {% for index in post.relatedPosts %}
+        {% set relatedPost = data.posts[index] %}
+
+        <a class="sidebar-pod__row" href="/posts/{{ relatedPost.file }}" title="{{ relatedPost.title }}">
+          <span class="sidebar-pod__title">{{ relatedPost.title }}</span>
+          <span class="sidebar-pod__date">{{ relatedPost.datePosted|shortDate }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro mostRecentInCategory(post) %}
+  <div class="sidebar-pod">
+    <div class="sidebar-pod__header">
+      <h4>Most recent in {{ post.category }}</h4>
+    </div>
+    <div class="sidebar-pod__content">
+      {% for recentPost in data.posts|sort(true, true, 'datePosted') %}
+        {% if recentPost.category === post.category %}
+          <a class="sidebar-pod__row" href="/posts/{{ recentPost.file }}" title="{{ recentPost.title }}">
+            <span class="sidebar-pod__title">{{ recentPost.title }}</span>
+            <span class="sidebar-pod__date">{{ recentPost.datePosted|shortDate }}</span>
+          </a>
+        {% endif %}
+      {% endfor %}
+  </div>
+</div>
+{% endmacro %}
