@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+  </head>
+  <body>
+    <nav class="l-navigation js-navigation">
+    <div class="l-navigation__links">
+        <a class="l-navigation__link l-navigation__link--home" href="/">Blog</a>
+
+        <ul class="l-navigation__list">
+            <li class="l-navigation__item">
+                <a class="l-navigation__link" href="/categories.html">Categories</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="l-navigation__search">
+        <input class="l-navigation__search-input js-navigation-search-input" 
+               type="search" 
+               value="" 
+               placeholder="Search..."
+        />
+    </div>
+    
+
+    <div class="l-navigation__search-overlay js-navigation-search-overlay">
+        <span class="l-navigation__search-close js-navigation-search-close-btn" role="button"></span>
+        <h3>Search</h3>
+        <p>Search my blog by using the search box above.</p>
+
+        <p class="js-navigation-search-no-results" style="display: none;">No results found.</p>
+
+        <div class="l-navigation__search-results js-navigation-search-results"></div>
+
+        <a class="c-button js-navigation-full-search-button" href="/search">Full search</a>
+    </div>
+</nav>
+
+<div class="l-navigation-backdrop js-navigation-search-backdrop"></div>
+
+    
+  <header class="l-header">
+    <div class="l-header__content">
+      <h1 class="l-header__heading">Post Creator</h1>
+      <p>
+        Use this tool to create blog posts. After filling out all fields, hit the "Copy to JSON" button to copy the 
+        post data to the clipboard and add it to the data.json file for nunjucks.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <div class="l-wrapper">
+      <div class="l-content">
+        <div class="l-grid">
+          <form class="js-post-creator-form">
+            <h3>General</h3>
+
+            <div class="l-grid__row l-grid__row--column-margins">            
+              
+              <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column-large-4">
+                <div class="c-input">
+                  <input 
+                    id="id"
+                    class="c-input__input js-id"
+                    placeholder="ID"
+                    type="number"
+                    name="id"
+                    required
+                  />
+
+                  <label class="c-input__label" for="id">ID</label>
+                </div>
+              </div>
+
+              
+              <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column-large-4">
+                <div class="c-input">
+                  <input 
+                    id="file"
+                    class="c-input__input js-file"
+                    placeholder="HTML File"
+                    type="text"
+                    name="file"
+                    required
+                  />
+
+                  <label class="c-input__label" for="file">HTML File</label>
+                </div>
+              </div>
+
+              
+              <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column-large-4">
+                <div class="c-input">
+                  <input 
+                    id="image-url"
+                    class="c-input__input js-image-url"
+                    placeholder="Image URL"
+                    type="text"
+                    name="image-url"
+                    required
+                  />
+
+                  <label class="c-input__label" for="file">Image URL</label>
+                </div>
+              </div>
+            </div>
+            
+            <h3>Header</h3>
+
+            <div class="l-grid__row l-grid__row--column-margins">
+              
+              <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6">
+                <div class="c-input">
+                  <input 
+                    id="title"
+                    class="c-input__input js-title"
+                    placeholder="Title"
+                    type="text"
+                    name="title"
+                    required
+                  />
+
+                  <label class="c-input__label" for="title">Title</label>
+                </div>
+              </div>
+
+              
+              <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6">
+                <div class="c-input">
+                  <input 
+                    id="intro"
+                    class="c-input__input js-intro"
+                    placeholder="Intro"
+                    type="text"
+                    name="intro"
+                    required
+                  />
+
+                  <label class="c-input__label" for="intro">Intro</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="l-grid__row l-grid__row--column-margins">
+              
+              <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column-large-4">
+                <div class="c-input">
+                  <input 
+                    id="datePosted"
+                    class="c-input__input js-date-posted"
+                    placeholder="Date Posted"
+                    type="text"
+                    name="datePosted"
+                    required
+                  />
+
+                  <label class="c-input__label" for="datePosted">Date Posted</label>
+                </div>
+              </div>
+
+              
+              <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column-large-4">
+                <select 
+                  id="category"
+                  name="category"
+                  class="js-category"
+                  required
+                >
+                  <option value="" placeholder>Please select a category</option>
+                </select>
+              </div>
+
+              
+              <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column-large-4">
+                <select 
+                  id="tags"
+                  name="tags"
+                  multiple 
+                  class="js-tags"
+                  required
+                ></select>
+              </div>
+            </div>
+
+            <h3>Content</h3>
+
+            <textarea name="content" id="content" rows="5" class="js-content"></textarea>
+
+            <button class="c-button js-copy">Copy to JSON</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+
+    <footer class="l-footer">
+    <div class="l-footer__content">
+        Copyright &copy; <span class="js-copyright-year"></span> Liam Snowdon
+    </div>
+</footer>
+
+    <script src="/assets/third-party/choices/scripts/choices.min.js"></script>
+    <script src="/assets/third-party/tinymce/js/tinymce/tinymce.min.js"></script>
+
+    
+  <script src="/assets/js/post-creator.js"></script>
+
+  <script type="text/javascript">
+    window.PostCreator.initialise();
+  </script>
+
+  </body>
+</html>
