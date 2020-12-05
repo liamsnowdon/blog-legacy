@@ -17,7 +17,7 @@ var PostCreator = (function () {
         /**
          * Initialises the page.
          */
-        initialise () {
+        initialise: function () {
             this.form = document.querySelector('.js-post-creator-form');
             this.title = this.form.querySelector('.js-title');
             this.intro = this.form.querySelector('.js-intro');
@@ -63,7 +63,7 @@ var PostCreator = (function () {
         /**
          * Attaches event listeners.
          */
-        connectEvents () {
+        connectEvents: function () {
             this.form.addEventListener('submit', this.onFormSubmit.bind(this));
         },
 
@@ -72,7 +72,7 @@ var PostCreator = (function () {
          * 
          * @param event 
          */
-        onFormSubmit (event) {
+        onFormSubmit: function (event) {
             event.preventDefault();
 
             /*
@@ -93,7 +93,9 @@ var PostCreator = (function () {
                 title: this.title.value,
                 intro: this.intro.value,
                 category: this.category.value,
-                tags: Array.from(this.tags.selectedOptions).map(option => option.value),
+                tags: Array.from(this.tags.selectedOptions).map(function (option) {
+                    return option.value;
+                }),
                 content: this.content.value,
             };
 
