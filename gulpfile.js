@@ -19,8 +19,15 @@ const postcssPlugins = [
 ];
 
 const manageEnvironment = (environment) => {
-    const data = JSON.parse(fs.readFileSync('data.json'));
-    environment.addGlobal('data', data);
+    const posts = JSON.parse(fs.readFileSync('posts.json'));
+    const tags = JSON.parse(fs.readFileSync('tags.json'));
+    const categories = JSON.parse(fs.readFileSync('categories.json'));
+
+    environment.addGlobal('data', {
+        posts,
+        tags,
+        categories
+    });
 
     environment.addFilter('longDate', (date) => {
         return longDate(date);
