@@ -15,6 +15,9 @@
         relatedPosts: null,
         content: null,
 
+        editForm: null,
+        json: null,
+
         datePostedPicker: null,
 
         categoryChoices: [],
@@ -42,15 +45,16 @@
             this.file = this.form.querySelector('.js-file');
             this.imageUrl = this.form.querySelector('.js-image-url');
             this.author = this.form.querySelector('.js-author');
-
             this.title = this.form.querySelector('.js-title');
             this.intro = this.form.querySelector('.js-intro');
             this.datePosted = this.form.querySelector('.js-date-posted');
             this.category = this.form.querySelector('.js-category');
             this.tags = this.form.querySelector('.js-tags');
             this.relatedPosts = this.form.querySelector('.js-related-posts');
-
             this.content = this.form.querySelector('.js-content');
+
+            this.editForm = document.querySelector('.js-post-editor-form');
+            this.json = this.editForm.querySelector('.js-json');
 
             this.datePostedPicker = new Pikaday({ 
                 field: this.datePosted
@@ -146,6 +150,7 @@
          */
         connectEvents: function () {
             this.form.addEventListener('submit', this.onFormSubmit.bind(this));
+            this.editForm.addEventListener('submit', this.onEditFormSubmit.bind(this));
         },
 
         /**
@@ -192,6 +197,51 @@
                 }, function () {
                     alert('Error copying JSON to clipboard.');
                 });
+        },
+
+        onEditFormSubmit: function (event) {
+            event.preventDefault();
+
+            var jsonData = this.json.value;
+
+            if (!jsonData) {
+                return;
+            }
+
+            try {
+                jsonData = JSON.parse(jsonData);
+            } catch (e) {
+                alert('Error loading post data from JSON. Check console.');
+                console.error(e);
+                return;
+            }
+
+            this.id.value = jsonData.id | null;
+            this.file.value = jsonData.file || null;
+            this.imageUrl.value = jsonData.imageUrl || null;
+            this.author.value = jsonData.author || null;
+            this.title.value = jsonData.title || null;
+            this.intro.value = jsonData.intro || null;
+            
+            if (jsonData.content) {
+                tinymce.editors.content.setContent(jsonData.content)
+            }
+
+            if (jsonData.datePosted) {
+                this.datePostedPicker.setDate(jsonData.datePosted);
+            }
+            
+            if (typeof jsonData.category !== 'undefined') {
+                this.categoryChoicesSelect.setChoiceByValue(jsonData.category);
+            }
+
+            if (jsonData.tags && jsonData.tags.length > 0) {
+                this.tagsChoicesSelect.setChoiceByValue(jsonData.tags);
+            }
+            
+            if (jsonData.relatedPosts && jsonData.relatedPosts.length > 0) {
+                this.relatedPostsChoicesSelect.setChoiceByValue(jsonData.relatedPosts);
+            }
         }
     };
 

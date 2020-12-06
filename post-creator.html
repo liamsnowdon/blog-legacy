@@ -44,6 +44,9 @@
       <p>
         Use this tool to create blog posts. After filling out all fields, hit the "Copy to JSON" button to copy the 
         post data to the clipboard and add it to the data.json file for nunjucks.
+
+        Alternatively, edit a blog post by providing the JSON from data.json, hitting "Load post data" and the form will be
+        prefilled with its data.
       </p>
     </div>
   </header>
@@ -51,6 +54,35 @@
   <main>
     <div class="l-wrapper">
       <div class="l-content">
+        <h2>Edit a post</h2>
+          
+        <div class="l-grid">
+          <form class="js-post-editor-form">
+            <div class="l-grid__row">            
+              <div class="l-grid__column l-grid__column--12">
+                <div class="c-input">
+                  <input 
+                    id="id"
+                    class="c-input__input js-json"
+                    placeholder="JSON"
+                    type="text"
+                    name="json"
+                    required
+                  />
+
+                  <label class="c-input__label" for="json">JSON</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-end mt-20 mb-20">
+              <button class="c-button">Load post data</button>
+            </div>
+          </form>
+        </div>
+        
+        <hr>
+
         <div class="l-grid">
           <form class="js-post-creator-form">
             <h3>General</h3>
