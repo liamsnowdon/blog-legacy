@@ -3,13 +3,15 @@
     margin-bottom: 10px;
   
     &__input {
-      height: 56px;
+      height: 46px;
       width: 100%;
       padding: 20px 10px;
-      border: 1px solid $primary-color;
-      background: $primary-white;
+      border: 1px solid #ddd;
+      border-radius: 2.5px;
+      background: #f9f9f9;
       transition: all .3s ease-in-out;
       color: $text-color;
+      font-size: 14px;
       appearance: none;
   
       &:focus {

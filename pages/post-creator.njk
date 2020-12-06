@@ -1,5 +1,9 @@
 {% extends "layout.njk" %}
 
+{% block metaTitle %}Post Creator{% endblock %}
+{% block metaRobots %}noindex, nofollow{% endblock %}
+{% block metaDescription %}This is the post creator page{% endblock %}
+
 {% block content %}
   <header class="l-header">
     <div class="l-header__content">
@@ -63,7 +67,23 @@
                     required
                   />
 
-                  <label class="c-input__label" for="file">Image URL</label>
+                  <label class="c-input__label" for="image-url">Image URL</label>
+                </div>
+              </div>
+
+              {# Author #}
+              <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column-large-4">
+                <div class="c-input">
+                  <input 
+                    id="author"
+                    class="c-input__input js-author"
+                    placeholder="Author"
+                    type="text"
+                    name="author"
+                    required
+                  />
+
+                  <label class="c-input__label" for="author">Author</label>
                 </div>
               </div>
             </div>
@@ -149,7 +169,9 @@
 
             <textarea name="content" id="content" rows="5" class="js-content"></textarea>
 
-            <button class="c-button js-copy">Copy to JSON</button>
+            <div class="d-flex justify-end">
+              <button class="c-button">Copy to JSON</button>
+            </div>
           </form>
         </div>
       </div>
@@ -161,6 +183,13 @@
   <script src="/assets/js/post-creator.js"></script>
 
   <script type="text/javascript">
-    window.PostCreator.initialise();
+    (function () {
+      var njkData = {
+        tags: '{{ data.tags }}'.split(','),
+        categories: '{{ data.categories }}'.split(','),
+      };
+
+      window.PostCreator.initialise(njkData);
+    })();
   </script>
 {% endblock %}

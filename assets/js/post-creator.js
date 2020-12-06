@@ -1,23 +1,32 @@
 var PostCreator = (function () {
     return {
+        njkData: null,
+
         form: null,
         title: null,
         intro: null,
         category: null,
         tags: null,
         content: null,
-
         id: null,
         datePosted: null,
         imageUrl: null,
+        author: null,
 
+        categoryChoices: [],
         categoryChoicesSelect: null,
+
+        tagsChoices: [],
         tagsChoicesSelect: null,
 
         /**
          * Initialises the page.
+         * 
+         * @param {Object} njkData - Nunjucks data
+         * @param {Array} njkData.tags
+         * @param {Array} njkData.categories
          */
-        initialise: function () {
+        initialise: function (njkData) {
             this.form = document.querySelector('.js-post-creator-form');
             this.title = this.form.querySelector('.js-title');
             this.intro = this.form.querySelector('.js-intro');
@@ -28,36 +37,72 @@ var PostCreator = (function () {
             this.id = this.form.querySelector('.js-id');
             this.datePosted = this.form.querySelector('.js-date-posted');
             this.imageUrl = this.form.querySelector('.js-image-url');
+            this.author = this.form.querySelector('.js-author');
 
-            // Initialises the tinyMCE editor for the content textarea
+            this.processNjkData(njkData);
+
+            // Set default author... Meeeee :)
+            this.author.value = 'Liam Snowdon';
+
+            this.initTinymce();
+            this.initChoices();
+
+            this.connectEvents();
+        },
+
+        /**
+         * Initialises the tinyMCE editor for the content textarea
+         */
+        initTinymce: function () {
             tinymce.init({
                 selector: '#content',
                 height: 500,
                 plugins: 'codesample code lists link',
                 toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | link | bullist numlist outdent indent | codesample code | removeformat'
             });
+        },
 
+        /**
+         * Initialises the Choices plugin on select boxes
+         */
+        initChoices: function () {
             // Initialises the category Choices select box
             this.categoryChoicesSelect = new Choices('#category', {
                 searchEnabled: false,
-                choices: [
-                    { value: 'HTML', label: 'HTML' },
-                    { value: 'CSS', label: 'CSS' },
-                    { value: 'JavaScript', label: 'JavaScript' }
-                ]
+                choices: this.categoryChoices
             });
 
             // Initialises the tags Choices multiselect box
             this.tagsChoicesSelect = new Choices('#tags', {
                 removeItemButton: true,
                 placeholderValue: 'Add tags',
-                choices: [
-                    { value: 'accessiblility', label: 'Accessibility' },
-                    { value: 'forms', label: 'Forms' }
-                ]
+                choices: this.tagsChoices
+            });
+        },
+
+        /**
+         * Processes data from Nunjucks
+         * 
+         * @param {Object} njkData 
+         * @param {Array} njkData.tags
+         * @param {Array} njkData.categories
+         */
+        processNjkData: function (njkData) {
+            this.njkData = njkData;
+            
+            this.categoryChoices = this.njkData.categories.map(function (category) {
+                return {
+                    value: category,
+                    label: category
+                };
             });
 
-            this.connectEvents();
+            this.tagsChoices = this.njkData.tags.map(function (tag) {
+                return {
+                    value: tag,
+                    label: tag
+                };
+            });
         },
 
         /**
@@ -85,10 +130,11 @@ var PostCreator = (function () {
             */
             tinymce.triggerSave();
 
-            var data = {
-                id: this.id ? this.id.value : null,
+            var data = JSON.stringify({
+                id: this.id ? Number(this.id.value) : null,
                 datePosted: this.datePosted ? this.datePosted.value : null,
                 imageUrl: this.imageUrl ? this.imageUrl.value : null,
+                author: this.author ? this.author.value : null,
 
                 title: this.title.value,
                 intro: this.intro.value,
@@ -97,9 +143,9 @@ var PostCreator = (function () {
                     return option.value;
                 }),
                 content: this.content.value,
-            };
+            });
 
-            console.log(data);
+            navigator.clipboard.writeText(data);
         }
     };
 })();

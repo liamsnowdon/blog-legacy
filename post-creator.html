@@ -2,7 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    
+    <title>Post Creator</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="This is the post creator page">
+    <meta name="author" content="Liam Snowdon">
+
+    <meta property="og:title" content="Blog">
+    <meta property="og:description" content="asdwads">
+    <meta property="og:image" content="">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="600">
+    <meta property="og:url" content="https://blog.liamsnowdon.co.uk">
+    <meta property="og:site_name" content="Blog">
+    <meta name="twitter:card" content="summary">
+
     <link rel="stylesheet" href="/assets/css/styles.css">
   </head>
   <body>
@@ -104,7 +118,23 @@
                     required
                   />
 
-                  <label class="c-input__label" for="file">Image URL</label>
+                  <label class="c-input__label" for="image-url">Image URL</label>
+                </div>
+              </div>
+
+              
+              <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column-large-4">
+                <div class="c-input">
+                  <input 
+                    id="author"
+                    class="c-input__input js-author"
+                    placeholder="Author"
+                    type="text"
+                    name="author"
+                    required
+                  />
+
+                  <label class="c-input__label" for="author">Author</label>
                 </div>
               </div>
             </div>
@@ -190,7 +220,9 @@
 
             <textarea name="content" id="content" rows="5" class="js-content"></textarea>
 
-            <button class="c-button js-copy">Copy to JSON</button>
+            <div class="d-flex justify-end">
+              <button class="c-button">Copy to JSON</button>
+            </div>
           </form>
         </div>
       </div>
@@ -211,7 +243,14 @@
   <script src="/assets/js/post-creator.js"></script>
 
   <script type="text/javascript">
-    window.PostCreator.initialise();
+    (function () {
+      var njkData = {
+        tags: 'Responsive,Accessiblility,Forms'.split(','),
+        categories: 'HTML,CSS,JavaScript'.split(','),
+      };
+
+      window.PostCreator.initialise(njkData);
+    })();
   </script>
 
   </body>
