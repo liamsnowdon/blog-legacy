@@ -3,15 +3,18 @@ var PostCreator = (function () {
         njkData: null,
 
         form: null,
+        id: null,
+        file: null,
+        imageUrl: null,
+        author: null,
         title: null,
         intro: null,
+        datePosted: null,
         category: null,
         tags: null,
         content: null,
-        id: null,
-        datePosted: null,
-        imageUrl: null,
-        author: null,
+
+        datePostedPicker: null,
 
         categoryChoices: [],
         categoryChoicesSelect: null,
@@ -28,16 +31,24 @@ var PostCreator = (function () {
          */
         initialise: function (njkData) {
             this.form = document.querySelector('.js-post-creator-form');
-            this.title = this.form.querySelector('.js-title');
-            this.intro = this.form.querySelector('.js-intro');
-            this.category = this.form.querySelector('.js-category');
-            this.tags = this.form.querySelector('.js-tags');
-            this.content = this.form.querySelector('.js-content');
-
+            
             this.id = this.form.querySelector('.js-id');
-            this.datePosted = this.form.querySelector('.js-date-posted');
+            this.file = this.form.querySelector('.js-file');
             this.imageUrl = this.form.querySelector('.js-image-url');
             this.author = this.form.querySelector('.js-author');
+
+            this.title = this.form.querySelector('.js-title');
+            this.intro = this.form.querySelector('.js-intro');
+            this.datePosted = this.form.querySelector('.js-date-posted');
+            this.category = this.form.querySelector('.js-category');
+            this.tags = this.form.querySelector('.js-tags');
+
+            this.content = this.form.querySelector('.js-content');
+
+
+            this.datePostedPicker = new Pikaday({ 
+                field: this.datePosted
+            });
 
             this.processNjkData(njkData);
 
@@ -57,8 +68,10 @@ var PostCreator = (function () {
             tinymce.init({
                 selector: '#content',
                 height: 500,
-                plugins: 'codesample code lists link',
-                toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | link | bullist numlist outdent indent | codesample code | removeformat'
+                plugins: 'codesample code lists link image',
+                toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | link | bullist numlist outdent indent | codesample code | image | removeformat',
+                image_dimensions: false,
+                image_prepend_url: '/assets/images/posts/'
             });
         },
 
@@ -89,17 +102,19 @@ var PostCreator = (function () {
          */
         processNjkData: function (njkData) {
             this.njkData = njkData;
+
+            this.id.value = this.njkData.newPostId;
             
-            this.categoryChoices = this.njkData.categories.map(function (category) {
+            this.categoryChoices = this.njkData.categories.map(function (category, index) {
                 return {
-                    value: category,
+                    value: index,
                     label: category
                 };
             });
 
-            this.tagsChoices = this.njkData.tags.map(function (tag) {
+            this.tagsChoices = this.njkData.tags.map(function (tag, index) {
                 return {
-                    value: tag,
+                    value: index,
                     label: tag
                 };
             });
@@ -132,17 +147,19 @@ var PostCreator = (function () {
 
             var data = JSON.stringify({
                 id: this.id ? Number(this.id.value) : null,
-                datePosted: this.datePosted ? this.datePosted.value : null,
+                file: this.file ? this.file.value: null,
                 imageUrl: this.imageUrl ? this.imageUrl.value : null,
                 author: this.author ? this.author.value : null,
-
+            
                 title: this.title.value,
                 intro: this.intro.value,
-                category: this.category.value,
+                datePosted: this.datePosted ? new Date(this.datePosted.value).toISOString() : null,
+                category: Number(this.category.value),
                 tags: Array.from(this.tags.selectedOptions).map(function (option) {
-                    return option.value;
+                    return Number(option.value);
                 }),
-                content: this.content.value,
+
+                content: this.content.value
             });
 
             navigator.clipboard.writeText(data);

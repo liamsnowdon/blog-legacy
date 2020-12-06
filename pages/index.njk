@@ -47,21 +47,21 @@
               {% set javascriptPostFound = false %}
 
               {% for post in data.posts|sort(true, true, 'datePosted') %}
-                {% if post.category === 'HTML' and not htmlPostFound %}
+                {% if post.category === 0 and not htmlPostFound %}
                   {% set htmlPostFound = true %}
                   <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column--large-3">
                     {{ pods.postPod(post) }}
                   </div>
                 {% endif %}
 
-                {% if post.category === 'CSS' and not cssPostFound %}
+                {% if post.category === 1 and not cssPostFound %}
                   {% set cssPostFound = true %}
                   <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column--large-3">
                     {{ pods.postPod(post) }}
                   </div>
                 {% endif %}
 
-                {% if post.category === 'JavaScript' and not javascriptPostFound %}
+                {% if post.category === 2 and not javascriptPostFound %}
                   {% set javascriptPostFound = true %}
                   <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column--large-3">
                     {{ pods.postPod(post) }}

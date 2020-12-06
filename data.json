@@ -31,6 +31,47 @@
             "datePosted": "2019-12-04T05:12:20.330Z",
             "content": "This is the content for the mobile button hover states post.",
             "relatedPosts": [0]
+        },
+        {
+            "id": 3,
+            "datePosted": "06/12/2020",
+            "imageUrl": "/assets/posts/gulp.jpg",
+            "author": "Liam Snowdon",
+            "title": "Integrating Gulp 4 into your workflow",
+            "intro": "There are many build tools out there. Gulp 4 is the new-ish major version of Gulp.js which introduces new features removing the need of other dependencies.",
+            "category": 2,
+            "tags": [],
+            "content": "<p>As dnajsn dkajsdj nakjsndjk nasknd jkansjkdn kjansjkd najksndkj asd ajnsdjj nwjdnj njdwnw.</p>\n<pre class=\"language-markup\"><code>&lt;div&gt;&lt;h3&gt;As snd wnjaknsd&lt;/h2&gt;&lt;p&gt;Asd njwan ksndkankwdn k&lt;/p&gt;&lt;/div&gt;</code></pre>"
+        },
+        {
+            "id": 4,
+            "file": null,
+            "imageUrl": "/assets/adwqd.jpg",
+            "author": "Liam Snowdon",
+            "title": "header",
+            "intro": "ajsnd kansjkdnj kansjkdn jkasnjkdnkj",
+            "datePosted": "2020-12-23T00:00:00.000Z",
+            "category": 1,
+            "tags": [
+                1,
+                2
+            ],
+            "content": "<p>as dasn jdnasnd kjanjkdnkqwd</p>"
+        },
+        {
+            "id": 5,
+            "file": "adwqdw.html",
+            "imageUrl": "/assets/adwqd.jpg",
+            "author": "Liam Snowdon",
+            "title": "Liam test",
+            "intro": "ajsnd kansjkdnj kansjkdn jkasnjkdnkj",
+            "datePosted": "2020-12-06T00:00:00.000Z",
+            "category": 0,
+            "tags": [
+                1,
+                0
+            ],
+            "content": "<p>as dnajksn djkansjkd nkjqwd</p>"
         }
     ]
   }

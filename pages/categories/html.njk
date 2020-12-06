@@ -17,7 +17,7 @@
         <div class="l-grid">
           <div class="l-grid__row l-grid__row--column-margins">
             {% for post in data.posts %}
-              {% if post.category === 'HTML' %}
+              {% if post.category === 0 %}
                 <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column--large-3">
                   {{ pods.postPod(post) }}
                 </div>

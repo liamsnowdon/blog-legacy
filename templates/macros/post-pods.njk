@@ -3,20 +3,22 @@
     <div class="c-post__image" style="background-image: url({{ post.file }})"></div>
 
     <div class="c-post__content">
-      <a class="c-post__category" href="/categories/{{ post.category }}.html">{{ post.category }}</a>
+      <a class="c-post__category" href="/categories/{{ post.category }}.html">{{ data.categories[post.category] }}</a>
 
       <h6 class="c-post__title">{{ post.title }}</h6>
       <p class="c-post__intro">{{ post.intro }}</p>
 
       <div class="c-post__button-holder">
-        <p class="fw-600">
-          Tags:
+        {% if post.tags.length %}
+          <p class="fw-600">
+            Tags:
             <span class="fs-italic">
               {% for tag in post.tags %}
-                <a href="/search?tags={{ tag }}">{{ tag }}</a>
+                <a href="/search?tags={{ data.tags[tag] }}">{{ data.tags[tag] }}</a>
               {% endfor %}
             </span>
-        </p>
+          </p>
+        {% endif %}
 
         <a class="c-button c-post__button" href="/posts/{{ post.file }}">Go to post</a>
       </div>
@@ -31,21 +33,23 @@
       <h3 class="c-recent-post__title">{{ post.title }}</h3>
       <h5 class="c-recent-post__subtitle">
         <span class="ws-no-wrap">20/12/2020 |
-          <a href="/categories/{{ post.category }}.html">{{ post.category }}</a>
+          <a href="/categories/{{ post.category }}.html">{{ data.categories[post.category] }}</a>
         </h5>
 
         <p class="c-recent-post__intro">
           {{ post.intro }}
         </p>
 
-        <p class="fw-600">
-          Tags:
-          <span class="fs-italic">
-            {% for tag in post.tags %}
-                <a href="/search?tags={{ tag }}">{{ tag }}</a>
-            {% endfor %}
-          </span>
-        </p>
+        {% if post.tags.length %}
+          <p class="fw-600">
+            Tags:
+            <span class="fs-italic">
+              {% for tag in post.tags %}
+                  <a href="/search?tags={{ data.tags[tag] }}">{{ data.tags[tag] }}</a>
+              {% endfor %}
+            </span>
+          </p>
+        {% endif %}
 
         <a class="c-button" href="/posts/{{ post.file }}">Go to post</a>
       </div>

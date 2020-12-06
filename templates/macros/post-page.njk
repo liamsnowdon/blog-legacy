@@ -10,12 +10,12 @@
         <div class="post-hero__right">
           <h5><strong>Posted:</strong> {{ post.datePosted|longDate }}</h5>
 
-          <h5><strong>Category:</strong> <a href="/categories/{{ post.category }}.html">{{ post.category }}</a></h5>
+          <h5><strong>Category:</strong> <a href="/categories/{{ post.category }}.html">{{ data.categories[post.category] }}</a></h5>
                         
           <h5>
             <strong>Tags:</strong>
             {% for tag in post.tags %}
-              <a href="/search?tags={{ tag }}">{{ tag }}</a>
+              <a href="/search?tags={{ data.tags[tag] }}">{{ data.tags[tag] }}</a>
             {% endfor %}
           </h5>
         </div>
@@ -63,7 +63,7 @@
 {% macro mostRecentInCategory(post) %}
   <div class="sidebar-pod">
     <div class="sidebar-pod__header">
-      <h4>Most recent in {{ post.category }}</h4>
+      <h4>Most recent in {{ data.categories[post.category] }}</h4>
     </div>
     <div class="sidebar-pod__content">
       {% for recentPost in data.posts|sort(true, true, 'datePosted') %}
