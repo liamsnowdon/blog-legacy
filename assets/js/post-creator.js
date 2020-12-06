@@ -12,6 +12,7 @@ var PostCreator = (function () {
         datePosted: null,
         category: null,
         tags: null,
+        relatedPosts: null,
         content: null,
 
         datePostedPicker: null,
@@ -22,12 +23,16 @@ var PostCreator = (function () {
         tagsChoices: [],
         tagsChoicesSelect: null,
 
+        relatedPostsChoices: [],
+        relatedPostsChoicesSelect: null,
+
         /**
          * Initialises the page.
          * 
          * @param {Object} njkData - Nunjucks data
          * @param {Array} njkData.tags
          * @param {Array} njkData.categories
+         * @param {Array} njkData.posts
          */
         initialise: function (njkData) {
             this.form = document.querySelector('.js-post-creator-form');
@@ -42,9 +47,9 @@ var PostCreator = (function () {
             this.datePosted = this.form.querySelector('.js-date-posted');
             this.category = this.form.querySelector('.js-category');
             this.tags = this.form.querySelector('.js-tags');
+            this.relatedPosts = this.form.querySelector('.js-related-posts');
 
             this.content = this.form.querySelector('.js-content');
-
 
             this.datePostedPicker = new Pikaday({ 
                 field: this.datePosted
@@ -91,6 +96,12 @@ var PostCreator = (function () {
                 placeholderValue: 'Add tags',
                 choices: this.tagsChoices
             });
+
+            this.relatedPostsChoicesSelect = new Choices('#related-posts', {
+                removeItemButton: true,
+                placeholderValue: 'Add related post',
+                choices: this.relatedPostsChoices
+            })
         },
 
         /**
@@ -99,6 +110,7 @@ var PostCreator = (function () {
          * @param {Object} njkData 
          * @param {Array} njkData.tags
          * @param {Array} njkData.categories
+         * @param {Array} njkData.posts
          */
         processNjkData: function (njkData) {
             this.njkData = njkData;
@@ -116,6 +128,13 @@ var PostCreator = (function () {
                 return {
                     value: index,
                     label: tag
+                };
+            });
+
+            this.relatedPostsChoices = this.njkData.posts.map(function (post, index) {
+                return {
+                    value: index,
+                    label: post
                 };
             });
         },
@@ -156,6 +175,9 @@ var PostCreator = (function () {
                 datePosted: this.datePosted ? new Date(this.datePosted.value).toISOString() : null,
                 category: Number(this.category.value),
                 tags: Array.from(this.tags.selectedOptions).map(function (option) {
+                    return Number(option.value);
+                }),
+                relatedPosts: Array.from(this.relatedPosts.selectedOptions).map(function (option) {
                     return Number(option.value);
                 }),
 

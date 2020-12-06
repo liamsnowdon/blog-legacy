@@ -86,6 +86,15 @@
                   <label class="c-input__label" for="author">Author</label>
                 </div>
               </div>
+
+              <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column-large-4">
+                <select 
+                  id="related-posts"
+                  name="related-posts"
+                  multiple 
+                  class="js-related-posts"
+                ></select>
+              </div>
             </div>
             
             <h3>Header</h3>
@@ -195,9 +204,14 @@
         {% for category in data.categories %}'{{ category.name }}',{% endfor %}
       ];
 
+      var posts = [
+        {% for post in data.posts %}'{{ post.title }}',{% endfor %}
+      ];
+
       var njkData = {
         tags: tags,
         categories: categories,
+        posts: posts,
         newPostId: {{ data.posts | length + 1 }}
       };
 

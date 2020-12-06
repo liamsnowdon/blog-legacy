@@ -119,6 +119,15 @@
                   <label class="c-input__label" for="author">Author</label>
                 </div>
               </div>
+
+              <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column-large-4">
+                <select 
+                  id="related-posts"
+                  name="related-posts"
+                  multiple 
+                  class="js-related-posts"
+                ></select>
+              </div>
             </div>
             
             <h3>Header</h3>
@@ -234,9 +243,14 @@
         'HTML','CSS','JavaScript',
       ];
 
+      var posts = [
+        'Using the &lt;picture&gt; element for responsive images','Handling button hover states for touchscreen devices','Integrating Gulp 4 into your workflow','header','Liam test',
+      ];
+
       var njkData = {
         tags: tags,
         categories: categories,
+        posts: posts,
         newPostId: 6
       };
 
