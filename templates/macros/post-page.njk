@@ -63,7 +63,7 @@
 {% macro mostRecentInCategory(post) %}
   <div class="sidebar-pod">
     <div class="sidebar-pod__header">
-      <h4>Most recent in {{ data.categories[post.category] }}</h4>
+      <h4>Most recent in {{ data.categories[post.category].name }}</h4>
     </div>
     <div class="sidebar-pod__content">
       {% for recentPost in data.posts|sort(true, true, 'datePosted') %}
