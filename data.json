@@ -1,13 +1,46 @@
 {
     "tags": [
-        "Responsive",
-        "Accessibility",
-        "Forms"
+        {
+            "id": 1,
+            "file": "responsive.html",
+            "name": "Responsive",
+            "intro": "Having a responsive website means it will function on a range of devices: mobile, tablet, desktop, etc."
+        },
+        {
+            "id": 2,
+            "file": "accessibility.html",
+            "name": "Accessibility",
+            "intro": "Making your web pages accessibile is key to making sure all your users are able to use it."
+        },
+        {
+            "id": 3,
+            "file": "forms.html",
+            "name": "Forms",
+            "intro": "Collecting user input is done with forms and is commonly used to send data to a server for processing."
+        }
     ],
     "categories": [
-        "HTML",
-        "CSS",
-        "JavaScript"
+        {
+            "id": 1,
+            "file": "html.html",
+            "name": "HTML",
+            "intro": "The markup language for displaying content for web pages. With it, you can show text, images, videos and more. If you're seeing something on a web site, it is made up of HTML.",
+            "faClass": "fa-html5"
+        },
+        {
+            "id": 2,
+            "file": "css.html",
+            "name": "CSS",
+            "intro": "Using stylesheets, a page can be styled to your designs and imagination. Whether it's layout, colour themes, typography or input fields, CSS will play the role of how your site will look.",
+            "faClass": "fa-css3-alt"
+        },
+        {
+            "id": 3,
+            "file": "javascript.html",
+            "name": "JavaScript",
+            "intro": "The programming language of the web, JavaScript gives you the power to control a web page to your heart's content; updating the DOM, sending asynchronous requests, dynamic content and more interactive elements like carousels, maps and even games.",
+            "faClass": "fa-js"
+        }
     ],
     "posts": [
         {

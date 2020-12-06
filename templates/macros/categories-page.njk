@@ -1,0 +1,15 @@
+{% macro pod(category) %}
+  <div class="c-pod">
+    <div class="c-pod__image c-pod__image--{{ category.name | lower }}"></div>
+    <div class="c-pod__content">
+      <h5 class="c-pod__title">{{ category.name }}</h4>
+      <p class="c-pod__intro">
+        {{ category.intro }}
+      </p>
+      
+      <div class="c-pod__button-holder">
+        <a class="c-button" href="/categories/{{ category.file }}">Explore</a>
+      </div>
+    </div>
+  </div>
+{% endmacro %}

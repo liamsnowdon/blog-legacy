@@ -187,10 +187,18 @@
 
   <script type="text/javascript">
     (function () {
+      var tags = [
+        {% for tag in data.tags %}'{{ tag.name }}',{% endfor %}
+      ];
+
+      var categories = [
+        {% for category in data.categories %}'{{ category.name }}',{% endfor %}
+      ];
+
       var njkData = {
-        tags: '{{ data.tags }}'.split(','),
-        categories: '{{ data.categories }}'.split(','),
-        newPostId: {{ data.posts|length + 1 }}
+        tags: tags,
+        categories: categories,
+        newPostId: {{ data.posts | length + 1 }}
       };
 
       window.PostCreator.initialise(njkData);
