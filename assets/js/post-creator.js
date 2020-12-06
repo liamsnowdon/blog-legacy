@@ -1,5 +1,5 @@
-var PostCreator = (function () {
-    return {
+(function () {
+    var PostCreator = {
         njkData: null,
 
         form: null,
@@ -33,6 +33,7 @@ var PostCreator = (function () {
          * @param {Array} njkData.tags
          * @param {Array} njkData.categories
          * @param {Array} njkData.posts
+         * @param {number} njkData.newPostId
          */
         initialise: function (njkData) {
             this.form = document.querySelector('.js-post-creator-form');
@@ -111,6 +112,7 @@ var PostCreator = (function () {
          * @param {Array} njkData.tags
          * @param {Array} njkData.categories
          * @param {Array} njkData.posts
+         * @param {number} njkData.newPostId
          */
         processNjkData: function (njkData) {
             this.njkData = njkData;
@@ -184,7 +186,15 @@ var PostCreator = (function () {
                 content: this.content.value
             });
 
-            navigator.clipboard.writeText(data);
+            navigator.clipboard.writeText(data)
+                .then(function () {
+                    alert('JSON copied to clipboard.');
+                }, function () {
+                    alert('Error copying JSON to clipboard.');
+                });
         }
     };
+
+    window.Blog = window.Blog || {};
+    window.Blog.PostCreator = PostCreator;
 })();

@@ -2,7 +2,6 @@
 
 {% block metaTitle %}Post Creator{% endblock %}
 {% block metaRobots %}noindex, nofollow{% endblock %}
-{% block metaDescription %}This is the post creator page{% endblock %}
 
 {% block content %}
   <header class="l-header">
@@ -87,6 +86,7 @@
                 </div>
               </div>
 
+              {# Related Posts #}
               <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column-large-4">
                 <select 
                   id="related-posts"
@@ -215,7 +215,7 @@
         newPostId: {{ data.posts | length + 1 }}
       };
 
-      window.PostCreator.initialise(njkData);
+      window.Blog.PostCreator.initialise(njkData);
     })();
   </script>
 {% endblock %}

@@ -60,18 +60,13 @@ function watchCss () {
 }
 
 function nunjucks () {
-    // Gets .html and .nunjucks files in pages
+    // Gets .html and .njk files in pages
     return gulp.src('pages/**/*.+(html|njk)')
-        // // Adding data to Nunjucks
-        // .pipe(data(function() {
-        //     return require('./data.json')
-        // }))
         // Renders template with nunjucks
         .pipe(nunjucksRender({
             path: ['templates'],
             manageEnv: manageEnvironment
         }))
-        // output files in app folder
         .pipe(gulp.dest('./'));
 }
 

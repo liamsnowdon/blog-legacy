@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     
-    <title>Post Creator</title>
+    <title>Tag Creator</title>
     <meta name="robots" content="noindex, nofollow">
     <meta name="description" content="asdwads">
     <meta name="author" content="Liam Snowdon">
@@ -40,9 +40,9 @@
     
   <header class="l-header">
     <div class="l-header__content">
-      <h1 class="l-header__heading">Post Creator</h1>
+      <h1 class="l-header__heading">Tag Creator</h1>
       <p>
-        Use this tool to create blog posts. After filling out all fields, hit the "Copy to JSON" button to copy the 
+        Use this tool to create tags for blog posts. After filling out all fields, hit the "Copy to JSON" button to copy the 
         post data to the clipboard and add it to the data.json file for nunjucks.
       </p>
     </div>
@@ -71,7 +71,9 @@
                   <label class="c-input__label" for="id">ID</label>
                 </div>
               </div>
+            </div>
 
+            <div class="l-grid__row l-grid__row--column-margins">
               
               <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column-large-4">
                 <div class="c-input">
@@ -103,50 +105,22 @@
                   <label class="c-input__label" for="image-url">Image URL</label>
                 </div>
               </div>
-
-              
-              <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column-large-4">
-                <div class="c-input">
-                  <input 
-                    id="author"
-                    class="c-input__input js-author"
-                    placeholder="Author"
-                    type="text"
-                    name="author"
-                    required
-                  />
-
-                  <label class="c-input__label" for="author">Author</label>
-                </div>
-              </div>
-
-              
-              <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column-large-4">
-                <select 
-                  id="related-posts"
-                  name="related-posts"
-                  multiple 
-                  class="js-related-posts"
-                ></select>
-              </div>
             </div>
-            
-            <h3>Header</h3>
 
             <div class="l-grid__row l-grid__row--column-margins">
               
               <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6">
                 <div class="c-input">
                   <input 
-                    id="title"
-                    class="c-input__input js-title"
-                    placeholder="Title"
+                    id="name"
+                    class="c-input__input js-name"
+                    placeholder="Name"
                     type="text"
-                    name="title"
+                    name="name"
                     required
                   />
 
-                  <label class="c-input__label" for="title">Title</label>
+                  <label class="c-input__label" for="name">Name</label>
                 </div>
               </div>
 
@@ -167,51 +141,6 @@
               </div>
             </div>
 
-            <div class="l-grid__row l-grid__row--column-margins">
-              
-              <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column-large-4">
-                <div class="c-input">
-                  <input 
-                    id="datePosted"
-                    class="c-input__input js-date-posted"
-                    placeholder="Date Posted"
-                    type="text"
-                    name="datePosted"
-                    autocomplete="off"
-                    required
-                  />
-
-                  <label class="c-input__label" for="datePosted">Date Posted</label>
-                </div>
-              </div>
-
-              
-              <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column-large-4">
-                <select 
-                  id="category"
-                  name="category"
-                  class="js-category"
-                  required
-                >
-                  <option value="" placeholder>Please select a category</option>
-                </select>
-              </div>
-
-              
-              <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column-large-4">
-                <select 
-                  id="tags"
-                  name="tags"
-                  multiple 
-                  class="js-tags"
-                ></select>
-              </div>
-            </div>
-
-            <h3>Content</h3>
-
-            <textarea name="content" id="content" rows="5" class="js-content"></textarea>
-
             <div class="d-flex justify-end mt-20">
               <button class="c-button">Copy to JSON</button>
             </div>
@@ -229,33 +158,15 @@
 </footer>
 
     
-  <script src="/assets/third-party/choices/scripts/choices.min.js"></script>
-  <script src="/assets/third-party/tinymce/js/tinymce/tinymce.min.js"></script>
-  <script src="/assets/third-party/pikaday/pikaday.js"></script>
-  <script src="/assets/js/post-creator.js"></script>
+  <script src="/assets/js/tag-creator.js"></script>
 
   <script type="text/javascript">
     (function () {
-      var tags = [
-        'Responsive','Accessibility','Forms',
-      ];
-
-      var categories = [
-        'HTML','CSS','JavaScript',
-      ];
-
-      var posts = [
-        'Using the &lt;picture&gt; element for responsive images','Handling button hover states for touchscreen devices','Integrating Gulp 4 into your workflow','header','Liam test',
-      ];
-
       var njkData = {
-        tags: tags,
-        categories: categories,
-        posts: posts,
-        newPostId: 6
+        newTagId: 4
       };
 
-      window.Blog.PostCreator.initialise(njkData);
+      window.Blog.TagCreator.initialise(njkData);
     })();
   </script>
 
