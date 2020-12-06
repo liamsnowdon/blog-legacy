@@ -29,6 +29,14 @@ const manageEnvironment = (environment) => {
     environment.addFilter('shortDate', (date) => {
         return shortDate(date);
     });
+
+    environment.addFilter('includes', (arr, item) => {
+        return arr.includes(item);
+    });
+
+    environment.addFilter('index', (arr, item) => {
+        return arr.findIndex(function (i) { return i === item });
+    });
 };
 
 function devCss () {

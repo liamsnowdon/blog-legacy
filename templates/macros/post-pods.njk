@@ -14,7 +14,7 @@
             Tags:
             <span class="fs-italic">
               {% for tag in post.tags %}
-                <a href="/search?tags={{ data.tags[tag] }}">{{ data.tags[tag] }}</a>
+                <a href="/tags/{{ data.tags[tag] | lower }}.html">{{ data.tags[tag] | lower }}</a>
               {% endfor %}
             </span>
           </p>
@@ -45,7 +45,7 @@
             Tags:
             <span class="fs-italic">
               {% for tag in post.tags %}
-                  <a href="/search?tags={{ data.tags[tag] }}">{{ data.tags[tag] }}</a>
+                  <a href="/search?tags={{ data.tags[tag] }}">{{ data.tags[tag] | lower }}</a>
               {% endfor %}
             </span>
           </p>

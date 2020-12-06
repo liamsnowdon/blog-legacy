@@ -1,0 +1,66 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+  <header class="l-header">
+    <div class="l-header__content">
+      <h1 class="l-header__heading">Tags</h1>
+    </div>
+  </header>
+
+  <main>
+    {% include "partials/sticky-navigation.njk" %}
+
+    <div class="l-wrapper">
+      <div class="l-content">
+        <div class="l-grid">
+          <div class="l-grid__row l-grid__row--column-margins">
+            <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6">
+              <div class="c-category">
+                <div class="c-category__image c-category__image--html"></div>
+                <div class="c-category__content">
+                  <h5 class="c-category__title">Responsive</h4>
+                  <p class="c-category__intro">
+                    Having a responsive website means it will function on a range of devices: mobile, tablet, desktop, etc.
+                  </p>
+                  <div class="c-category__button-holder">
+                    <a class="c-button" href="/tags/responsive.html">Explore</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6">
+              <div class="c-category">
+                <div class="c-category__image c-category__image--css"></div>
+                <div class="c-category__content">
+                  <h5 class="c-category__title">Accessibility</h4>
+                  <p class="c-category__intro">
+                    Making your web pages accessibile is key to making sure all your users are able to use it.
+                  </p>
+                  <div class="c-category__button-holder">
+                    <a class="c-button" href="/tags/accessibility.html">Explore</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6">
+              <div class="c-category">
+                <div class="c-category__image c-category__image--javascript"></div>
+                <div class="c-category__content">
+                  <h5 class="c-category__title">Forms</h4>
+                  <p class="c-category__intro">
+                    Collecting user input is done with forms and is commonly used to send data to a server for processing.
+                  </p>
+                  <div class="c-category__button-holder">
+                    <a class="c-button" href="/tags/forms.html">Explore</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}
