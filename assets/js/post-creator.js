@@ -210,6 +210,7 @@
 
             try {
                 jsonData = JSON.parse(jsonData);
+                this.json.value = null;
             } catch (e) {
                 alert('Error loading post data from JSON. Check console.');
                 console.error(e);
