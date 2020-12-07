@@ -1,34 +1,9 @@
 (function () {
+    var STORAGE = {
+        SAVED_FOR_LATER_POSTS: 'savedForLaterPosts'
+    };
+
     var PostCreator = {
-        njkData: null,
-
-        form: null,
-        id: null,
-        file: null,
-        imageUrl: null,
-        author: null,
-        title: null,
-        intro: null,
-        datePosted: null,
-        category: null,
-        tags: null,
-        relatedPosts: null,
-        content: null,
-
-        editForm: null,
-        json: null,
-
-        datePostedPicker: null,
-
-        categoryChoices: [],
-        categoryChoicesSelect: null,
-
-        tagsChoices: [],
-        tagsChoicesSelect: null,
-
-        relatedPostsChoices: [],
-        relatedPostsChoicesSelect: null,
-
         /**
          * Initialises the page.
          * 
@@ -39,8 +14,36 @@
          * @param {number} njkData.newPostId
          */
         initialise: function (njkData) {
+            this.initViewElements();
+
+            this.datePostedPicker = new Pikaday({ 
+                field: this.datePosted
+            });
+
+            this.processNjkData(njkData);
+            this.setSavedForLaterChoices();
+
+            // Set default author... Meeeee :)
+            this.author.value = 'Liam Snowdon';
+
+            this.initTinymce();
+            this.initChoices();
+
+            this.connectEvents();
+        },
+
+        initViewElements: function () {
+            this.loadJsonForm = document.querySelector('.js-load-json-form');
+            this.json = this.loadJsonForm.querySelector('.js-json');
+
+            this.savedForLaterForm = document.querySelector('.js-saved-for-later-form');
+            this.savedForLater = this.savedForLaterForm.querySelector('.js-saved-for-later');
+            this.deletedSavedForLater = this.savedForLaterForm.querySelector('.js-delete-saved-for-later');
+
+            this.editPostSection = document.getElementById('edit-post');
+            this.createPostSection = document.getElementById('create-post');
+
             this.form = document.querySelector('.js-post-creator-form');
-            
             this.id = this.form.querySelector('.js-id');
             this.file = this.form.querySelector('.js-file');
             this.imageUrl = this.form.querySelector('.js-image-url');
@@ -53,22 +56,7 @@
             this.relatedPosts = this.form.querySelector('.js-related-posts');
             this.content = this.form.querySelector('.js-content');
 
-            this.editForm = document.querySelector('.js-post-editor-form');
-            this.json = this.editForm.querySelector('.js-json');
-
-            this.datePostedPicker = new Pikaday({ 
-                field: this.datePosted
-            });
-
-            this.processNjkData(njkData);
-
-            // Set default author... Meeeee :)
-            this.author.value = 'Liam Snowdon';
-
-            this.initTinymce();
-            this.initChoices();
-
-            this.connectEvents();
+            this.saveForLater = document.querySelector('.js-save-for-later');
         },
 
         /**
@@ -106,7 +94,12 @@
                 removeItemButton: true,
                 placeholderValue: 'Add related post',
                 choices: this.relatedPostsChoices
-            })
+            });
+
+            this.savedForLaterChoicesSelect = new Choices('#saved-for-later', {
+                searchEnabled: false,
+                choices: this.savedForLaterChoices
+            });
         },
 
         /**
@@ -150,46 +143,23 @@
          */
         connectEvents: function () {
             this.form.addEventListener('submit', this.onFormSubmit.bind(this));
-            this.editForm.addEventListener('submit', this.onEditFormSubmit.bind(this));
+            this.loadJsonForm.addEventListener('submit', this.onLoadJsonFormSubmit.bind(this));
+            this.savedForLaterForm.addEventListener('submit', this.onSavedForLaterFormSubmit.bind(this));
+            this.saveForLater.addEventListener('click', this.onSaveForLater.bind(this));
+            this.deletedSavedForLater.addEventListener('click', this.onDeleteSavedFormLater.bind(this));
         },
 
         /**
-         * Submits the form.
+         * Copies the post JSON data to the clipboard
          * 
          * @param event 
          */
         onFormSubmit: function (event) {
             event.preventDefault();
 
-            /*
-            From tinyMCE docs:
-            "Calls the save method on all editor instances in the collection. 
-            This can be useful when a form is to be submitted."
-
-            Effectively, it manually updates the <textarea> content to ensure
-            it is ready for form submission.
-            */
             tinymce.triggerSave();
 
-            var data = JSON.stringify({
-                id: this.id ? Number(this.id.value) : null,
-                file: this.file ? this.file.value: null,
-                imageUrl: this.imageUrl ? this.imageUrl.value : null,
-                author: this.author ? this.author.value : null,
-            
-                title: this.title.value,
-                intro: this.intro.value,
-                datePosted: this.datePosted ? new Date(this.datePosted.value).toISOString() : null,
-                category: Number(this.category.value),
-                tags: Array.from(this.tags.selectedOptions).map(function (option) {
-                    return Number(option.value);
-                }),
-                relatedPosts: Array.from(this.relatedPosts.selectedOptions).map(function (option) {
-                    return Number(option.value);
-                }),
-
-                content: this.content.value
-            });
+            var data = JSON.stringify(this.getDataFromForm());
 
             navigator.clipboard.writeText(data)
                 .then(function () {
@@ -199,7 +169,12 @@
                 });
         },
 
-        onEditFormSubmit: function (event) {
+        /**
+         * Takes JSON as user input and fills out the form from it.
+         * 
+         * @param event 
+         */
+        onLoadJsonFormSubmit: function (event) {
             event.preventDefault();
 
             var jsonData = this.json.value;
@@ -217,33 +192,170 @@
                 return;
             }
 
-            this.id.value = jsonData.id | null;
-            this.file.value = jsonData.file || null;
-            this.imageUrl.value = jsonData.imageUrl || null;
-            this.author.value = jsonData.author || null;
-            this.title.value = jsonData.title || null;
-            this.intro.value = jsonData.intro || null;
+            this.fillFormFromPostData(jsonData);
+            this.scrollToForm();
+        },
+
+        /**
+         * Fills out form from a post object
+         * 
+         * @param {Object} post 
+         */
+        fillFormFromPostData: function (post) {
+            this.resetForm();
+
+            this.id.value = post.id | null;
+            this.file.value = post.file || null;
+            this.imageUrl.value = post.imageUrl || null;
+            this.author.value = post.author || null;
+            this.title.value = post.title || null;
+            this.intro.value = post.intro || null;
             
-            if (jsonData.content) {
-                tinymce.editors.content.setContent(jsonData.content)
+            if (post.content) {
+                tinymce.editors.content.setContent(post.content)
             }
 
-            if (jsonData.datePosted) {
-                this.datePostedPicker.setDate(jsonData.datePosted);
+            if (post.datePosted) {
+                this.datePostedPicker.setDate(post.datePosted);
             }
             
-            if (typeof jsonData.category !== 'undefined') {
-                this.categoryChoicesSelect.setChoiceByValue(jsonData.category);
+            if (typeof post.category !== 'undefined') {
+                this.categoryChoicesSelect.setChoiceByValue(post.category);
             }
 
-            if (jsonData.tags && jsonData.tags.length > 0) {
-                this.tagsChoicesSelect.setChoiceByValue(jsonData.tags);
+            if (post.tags && post.tags.length > 0) {
+                this.tagsChoicesSelect.setChoiceByValue(post.tags);
             }
             
-            if (jsonData.relatedPosts && jsonData.relatedPosts.length > 0) {
-                this.relatedPostsChoicesSelect.setChoiceByValue(jsonData.relatedPosts);
+            if (post.relatedPosts && post.relatedPosts.length > 0) {
+                this.relatedPostsChoicesSelect.setChoiceByValue(post.relatedPosts);
             }
-        }
+        },
+
+        /**
+         * Gets post data from the form
+         */
+        getDataFromForm: function () {
+            return {
+                id: this.id ? Number(this.id.value) : null,
+                file: this.file ? this.file.value: null,
+                imageUrl: this.imageUrl ? this.imageUrl.value : null,
+                author: this.author ? this.author.value : null,
+            
+                title: this.title.value,
+                intro: this.intro.value,
+                datePosted: this.datePosted ? new Date(this.datePosted.value).toISOString() : null,
+                category: Number(this.category.value),
+                tags: Array.from(this.tags.selectedOptions).map(function (option) {
+                    return Number(option.value);
+                }),
+                relatedPosts: Array.from(this.relatedPosts.selectedOptions).map(function (option) {
+                    return Number(option.value);
+                }),
+
+                content: this.content.value
+            };
+        },
+
+        /**
+         * Reset form to initial state
+         */
+        resetForm: function () {
+            this.id.value = null;
+            this.file.value = null;
+            this.imageUrl.value = null;
+            this.author.value = null;
+            this.title.value = null;
+            this.intro.value = null;
+
+            tinymce.editors.content.resetContent();
+            this.datePostedPicker.clear();
+            this.categoryChoicesSelect.removeActiveItems();
+            this.tagsChoicesSelect.removeActiveItems();
+            this.relatedPostsChoicesSelect.removeActiveItems();
+        },
+
+        scrollToForm: function () {
+            this.createPostSection.scrollIntoView();
+        },
+
+        /**
+         * --------------
+         * SAVE FOR LATER
+         * --------------
+         */
+
+        getSavedForLaterPosts: function () {
+            return JSON.parse(localStorage.getItem(STORAGE.SAVED_FOR_LATER_POSTS));
+        },
+
+        setSavedForLaterPosts: function (posts) {
+            localStorage.setItem(STORAGE.SAVED_FOR_LATER_POSTS, JSON.stringify(posts));
+        },
+
+        setSavedForLaterChoices: function () {
+            var savedForLaterPosts = this.getSavedForLaterPosts();
+
+            this.savedForLaterChoices = savedForLaterPosts.map(function (post, index) {
+                return {
+                    value: index,
+                    label: post.title
+                };
+            });
+        },
+
+        onSavedForLaterFormSubmit: function (event) {
+            event.preventDefault();
+
+            var savedForLaterPosts = this.getSavedForLaterPosts();
+            var post = savedForLaterPosts[Number(this.savedForLater.value)];
+
+            this.fillFormFromPostData(post);
+            this.scrollToForm();
+        },
+
+        onSaveForLater: function () {
+            tinymce.triggerSave();
+
+            var data = this.getDataFromForm();
+            var currentSavedForLaterPosts = JSON.parse(localStorage.getItem(STORAGE.SAVED_FOR_LATER_POSTS));
+
+            if (!currentSavedForLaterPosts) {
+                currentSavedForLaterPosts = [];
+            }
+
+            currentSavedForLaterPosts.push(data);
+
+            this.setSavedForLaterPosts(currentSavedForLaterPosts);
+
+            alert('Post saved for later.');
+            
+            this.resetForm();
+            this.setSavedForLaterChoices();
+            
+            this.savedForLaterChoicesSelect.removeActiveItems();
+            this.savedForLaterChoicesSelect.setChoices(this.savedForLaterChoices, 'value', 'label', true);
+        },
+
+        onDeleteSavedFormLater: function () {
+            if (this.savedForLater.value === '') {
+                return;
+            }
+
+            var postIndex = Number(this.savedForLater.value);
+            var savedForLaterPosts = this.getSavedForLaterPosts();
+
+            console.log(savedForLaterPosts);
+            console.log(postIndex);
+
+            savedForLaterPosts.splice(postIndex, 1);
+
+            this.setSavedForLaterPosts(savedForLaterPosts);
+            this.setSavedForLaterChoices();
+            
+            this.savedForLaterChoicesSelect.removeActiveItems();
+            this.savedForLaterChoicesSelect.setChoices(this.savedForLaterChoices, 'value', 'label', true);
+        },
     };
 
     window.Blog = window.Blog || {};

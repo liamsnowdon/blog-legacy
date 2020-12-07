@@ -11,44 +11,73 @@
         Use this tool to create blog posts. After filling out all fields, hit the "Copy to JSON" button to copy the 
         post data to the clipboard and add it to the posts.json file for nunjucks.
 
-        Alternatively, edit a blog post by providing the JSON from data.json, hitting "Load post data" and the form will be
-        prefilled with its data.
+        Alternatively, edit a blog post by providing the JSON from data.json or from selecting from the "saved for later" dropdown.
       </p>
     </div>
   </header>
 
   <main>
-    <div class="l-wrapper">
+    <div 
+      id="edit-post" 
+      class="l-wrapper l-wrapper--grey-2"
+    >
       <div class="l-content">
-        <h2>Edit a post</h2>
+        <div class="l-content__title">
+          <h2>Edit a post</h2>
+        </div>
           
         <div class="l-grid">
-          <form class="js-post-editor-form">
-            <div class="l-grid__row">            
-              <div class="l-grid__column l-grid__column--12">
-                <div class="c-input">
-                  <input 
-                    id="id"
-                    class="c-input__input js-json"
-                    placeholder="JSON"
-                    type="text"
-                    name="json"
+          <div class="l-grid__row">            
+            <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6">
+              <form class="js-load-json-form">
+                <p>Load a blog post for editing from its JSON, located in posts.json.</p>
+
+                <div class="c-textarea">
+                  <textarea
+                    class="c-textarea__input js-json"
                     required
-                  />
-
-                  <label class="c-input__label" for="json">JSON</label>
+                    rows="8"
+                  ></textarea>
                 </div>
-              </div>
+                
+
+                <div class="d-flex justify-end mt-20 mb-20">
+                  <button class="c-button">Load JSON</button>
+                </div>
+              </form>
             </div>
 
-            <div class="d-flex justify-end mt-20 mb-20">
-              <button class="c-button">Load post data</button>
+            <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6">
+              <form class="js-saved-for-later-form">
+                <p>Continue editing the posts that have been saved for later.</p>
+                <select
+                  id="saved-for-later"
+                  class="js-saved-for-later"
+                  required
+                  name
+                > 
+                  <option value="" placeholder>Select a post</option>
+                </select>
+
+                <div class="d-flex justify-end mt-20 mb-20">
+                  <button class="c-button mr-20 js-delete-saved-for-later" type="button">Delete</button>
+                  <button class="c-button">Load saved post</button>
+                </div>
+              </form>
             </div>
-          </form>
+          </div>
         </div>
-        
-        <hr>
+      </div>
+    </div>
 
+    <div 
+      id="create-post" 
+      class="l-wrapper"
+    >
+      <div class="l-content">
+        <div class="l-content__title">
+          <h2>Create a post</h2>
+        </div>
         <div class="l-grid">
           <form class="js-post-creator-form">
             <h3>General</h3>
@@ -211,6 +240,7 @@
             <textarea name="content" id="content" rows="5" class="js-content"></textarea>
 
             <div class="d-flex justify-end mt-20">
+              <button class="c-button mr-20 js-save-for-later" type="button">Save for later</button>
               <button class="c-button">Copy to JSON</button>
             </div>
           </form>
