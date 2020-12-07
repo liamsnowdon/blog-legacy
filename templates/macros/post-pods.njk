@@ -1,6 +1,6 @@
 {% macro postPod(post) %}
   <div class="c-post">
-    <div class="c-post__image" style="background-image: url({{ post.file }})"></div>
+    <div class="c-post__image" style="background-image: url('{{ post.imageUrl }}')"></div>
 
     <div class="c-post__content">
       <a class="c-post__category" href="/categories/{{ data.categories[post.category].file }}">{{ data.categories[post.category].name }}</a>
@@ -28,7 +28,7 @@
 
 {% macro mostRecentPostPod(post) %}
   <div class="c-recent-post">
-    <div class="c-recent-post__image" style="background-image: url({{ post.file }})"></div>
+    <div class="c-recent-post__image" style="background-image: url('{{ post.imageUrl }}')"></div>
     <div class="c-recent-post__content">
       <h3 class="c-recent-post__title">{{ post.title }}</h3>
       <h5 class="c-recent-post__subtitle">

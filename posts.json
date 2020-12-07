@@ -35,7 +35,7 @@
     {
         "id": 4,
         "file": "precompiling-nunjucks.html",
-        "imageUrl": "/assets/posts/precompiling-nunjucks.jpg",
+        "imageUrl": "/assets/images/posts/precompiling-nunjucks/precompiling-nunjucks.jpeg",
         "author": "Liam Snowdon",
         "title": "Pre-compiling Nunjucks templates with Gulp",
         "intro": "Nunjucks is great for templating your HTML, but it's even better when that markup is pre-compiled at build time.",
