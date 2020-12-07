@@ -142,6 +142,7 @@
                     placeholder="HTML File"
                     type="text"
                     name="file"
+                    autocomplete="off"
                     required
                   />
 
@@ -202,6 +203,7 @@
                     id="title"
                     class="c-input__input js-title"
                     placeholder="Title"
+                    autocomplete="off"
                     type="text"
                     name="title"
                     required
@@ -218,6 +220,7 @@
                     id="intro"
                     class="c-input__input js-intro"
                     placeholder="Intro"
+                    autocomplete="off"
                     type="text"
                     name="intro"
                     required
@@ -290,6 +293,8 @@
     </div>
 </footer>
 
+    <script src="/assets/third-party/prism/prism.js"></script>
+
     
   <script src="/assets/third-party/choices/scripts/choices.min.js"></script>
   <script src="/assets/third-party/tinymce/js/tinymce/tinymce.min.js"></script>
@@ -307,14 +312,14 @@
       ];
 
       var posts = [
-        'Using the &lt;picture&gt; element for responsive images','Handling button hover states for touchscreen devices','Integrating Gulp 4 into your workflow','header','Liam test',
+        'Using the &lt;picture&gt; element for responsive images','Handling button hover states for touchscreen devices','Integrating Gulp 4 into your workflow','Pre-compiling Nunjucks templates with Gulp',
       ];
 
       var njkData = {
         tags: tags,
         categories: categories,
         posts: posts,
-        newPostId: 6
+        newPostId: 5
       };
 
       window.Blog.PostCreator.initialise(njkData);

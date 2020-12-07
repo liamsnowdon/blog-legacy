@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    
+    <title>Blog</title>
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="asdwads">
+    <meta name="author" content="Liam Snowdon">
+
+    <meta property="og:title" content="Blog">
+    <meta property="og:description" content="asdwads">
+    <meta property="og:image" content="">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="600">
+    <meta property="og:url" content="https://blog.liamsnowdon.co.uk">
+    <meta property="og:site_name" content="Blog">
+    <meta name="twitter:card" content="summary">
+
+    <link rel="stylesheet" href="/assets/css/styles.css">
+  </head>
+  <body>
+    <nav class="l-navigation js-navigation">
+    <div class="l-navigation__links">
+        <a class="l-navigation__link l-navigation__link--home" href="/">Blog</a>
+
+        <ul class="l-navigation__list">
+            <li class="l-navigation__item">
+                <a class="l-navigation__link" href="/categories.html">Categories</a>
+            </li>
+
+            <li class="l-navigation__item">
+                <a class="l-navigation__link" href="/tags.html">Tags</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+    
+  
+  <div class="post-hero" style="">
+    <div class="l-content">
+      <div class="post-hero__content">
+        <div class="post-hero__left">
+          <h1>Pre-compiling Nunjucks templates with Gulp</h1>
+          <p>Nunjucks is great for templating your HTML, but it&#39;s even better when that markup is pre-compiled at build time.</p>
+        </div>
+        
+        <div class="post-hero__right">
+          <h5><strong>Posted:</strong> Monday 7 December 2020</h5>
+
+          <h5><strong>Category:</strong> <a href="/categories/javascript.html">JavaScript</a></h5>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <main>
+    <nav class="l-sticky-nav">
+    <ul class="l-sticky-nav__list">
+        
+            <li class="l-sticky-nav__item">
+                <a class="l-sticky-nav__link" href="/categories/html.html"><i class="fab fa-html5"></i> <span class="l-sticky-nav__link-text">HTML</span></a>
+            </li>
+        
+            <li class="l-sticky-nav__item">
+                <a class="l-sticky-nav__link" href="/categories/css.html"><i class="fab fa-css3-alt"></i> <span class="l-sticky-nav__link-text">CSS</span></a>
+            </li>
+        
+            <li class="l-sticky-nav__item">
+                <a class="l-sticky-nav__link" href="/categories/javascript.html"><i class="fab fa-js"></i> <span class="l-sticky-nav__link-text">JavaScript</span></a>
+            </li>
+        
+    </ul>
+</nav>
+
+    
+  <div id="post" class="l-wrapper">
+    <div class="l-content">
+      <div class="post">
+        <article class="post__article">
+          <div><p>When your site is spanned across multiple pages and sections, odds are that a lot of your HTML will end up getting duplicated across files. Most commonly it will be your &lt;head&gt; tag, a navigation bar or slider, a footer, etc. This is where a templating engine will come in handy. There are many templating engines out there, some have advantages over the other so you want to find the right one for your needs. To name a few:</p>
+<ul>
+<li>EJS</li>
+<li>Handlebars</li>
+<li>Mustache</li>
+<li>Nunjucks</li>
+<li>...and many more.</li>
+</ul>
+<p>In this post I will be focusing on using Nunjucks and, more specifically, how to integrate it with Gulp for precompiling pages. Nunjucks files have the extension "<strong>.njk</strong>", for example: "index.njk".</p>
+<p>To begin with, let's take a quick look at some of the main features Nunjucks offers.</p>
+<h2>Features</h2>
+<h3>Template Inheritance</h3>
+<p>Nunjucks templates can inherit or "<strong>extend</strong>" from its parent template. This allows you to create boilerplates for your pages, whether that be the core markup with your metadata, stylesheets and scripts, or a particular page layout like a product page. This is done with two important tags:</p>
+<ol>
+<li>block</li>
+<li>extends</li>
+</ol>
+<p>A parent template may look like this:</p>
+<pre class="language-markup"><code>&lt;!-- base.njk --&gt;
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    
+    &lt;title&gt;{% block pageTitle %}Page Title{% endblock %}&lt;/title&gt;
+
+    &lt;link rel="stylesheet" href="/assets/css/styles.css"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+
+    {% block content %}{% endblock %}
+
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>You will see there are two blocks above: <strong>pageTitle</strong> and <strong>content</strong>. Blocks are sections that can be overridden by child templates. Let's see how that works with the&nbsp;<strong>extends</strong> tag.</p>
+<pre class="language-markup"><code>&lt;!-- product-listing.njk --&gt;
+
+{% extends "base.njk" %}
+
+{% block pageTitle %}Browse our range of products{% endblock %}
+
+{% block content %}
+  &lt;header class="l-header"&gt;
+    &lt;div class="l-header__content"&gt;
+      &lt;h1 class="l-header__heading"&gt;Our Products&lt;/h1&gt;
+    &lt;/div&gt;
+  &lt;/header&gt;
+{% endblock %}</code></pre>
+<p>The&nbsp;<strong>extends</strong> tag is used to tell Nunjucks what file to inherit from as its parent. The <strong>block</strong> tags are then used to inject that content where the blocks appear in the inherited template. Take a look at the output:</p>
+<pre class="language-markup"><code>&lt;!-- product-listing.html --&gt;
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    
+    &lt;title&gt;Browse our range of products&lt;/title&gt;
+
+    &lt;link rel="stylesheet" href="/assets/css/styles.css"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+
+    &lt;header class="l-header"&gt;
+      &lt;div class="l-header__content"&gt;
+        &lt;h1 class="l-header__heading"&gt;Categories&lt;/h1&gt;
+      &lt;/div&gt;
+    &lt;/header&gt;
+
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h3>Partials</h3>
+<p>One of the most popular features of templating engines is the ability to include partials into your templates. These are commonly headers, navigations, pods, footers, etc. This is done by using the&nbsp;<strong>include</strong> tag, like this:</p>
+<pre class="language-markup"><code>{% include "partials/sticky-navigation.njk" %}</code></pre>
+<p>This would inject that partial template wherever it is used. Oftentimes though you will need to render a partial with some data, for example a product pod will have the product's name, image, description, etc. This is done by using macros.</p>
+<h3>Macros</h3>
+<p>Macros can be thought of as partials that have access to the data that you pass it when it is called. It is called similarly to a standard function where you pass in the data as a parameter. Consider this macro:</p>
+<pre class="language-markup"><code>&lt;!-- product-macro.njk --&gt;
+
+{% macro pod(product) %}
+  &lt;div class="c-pod"&gt;
+    &lt;div class="c-pod__image c-pod__image--{{ product.alias }}"&gt;&lt;/div&gt;
+    &lt;div class="c-pod__content"&gt;
+      &lt;h5 class="c-pod__title"&gt;{{ product.name }}&lt;/h4&gt;
+      &lt;p class="c-pod__description"&gt;
+        {{ product.description }}
+      &lt;/p&gt;
+      
+      &lt;div class="c-pod__button-holder"&gt;
+        &lt;a class="c-button" href="/products/{{ product.alias }}"&gt;Shop now&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+{% endmacro %}</code></pre>
+<p>This product pod displays the product's image, name, description and a link to the product page. We can now use this macro in our templates. If it's used in a different file it will need to be imported using the&nbsp;<strong>import</strong> tag. It is then called like a standard function.</p>
+<pre class="language-markup"><code>&lt;!-- business-cards.njk --&gt;
+
+{% extends 'product-page.njk' %}
+
+{% import 'macros/product-macro.njk' as productMacro %}
+
+&lt;!-- you can use the set tag to set a variable. You will notice the "| getById(8)" filter at the end. We will discuss this in the next section --&gt;
+{% set product = products | getById(8) %}
+
+{% block productPod %}
+  {{ productMacro.pod(product) }}
+{% endblock %}</code></pre>
+<p>Looking inside the&nbsp;<strong>productPod</strong> block, it would render something like:</p>
+<p>&nbsp;</p>
+<pre class="language-markup"><code>&lt;!-- business-cards.html --&gt;
+
+&lt;div class="c-pod"&gt;
+    &lt;div class="c-pod__image c-pod__image--business-cards"&gt;&lt;/div&gt;
+    &lt;div class="c-pod__content"&gt;
+      &lt;h5 class="c-pod__title"&gt;Business Cards&lt;/h4&gt;
+      &lt;p class="c-pod__description"&gt;
+        This is the business cards description.
+      &lt;/p&gt;
+      
+      &lt;div class="c-pod__button-holder"&gt;
+        &lt;a class="c-button" href="/products/business-cards"&gt;Shop now&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;</code></pre>
+<p>You can see how powerful macros can be when rendering partials with custom data.</p>
+<h3>Filters</h3>
+<p>Filters are another powerful feature of Nunjucks and allow you to manipulate data to JavaScript's limit. There are a number of built-in filters in Nunjucks but you are able to add custom filters for your particular needs. It uses the same syntax as filters from popular frameworks like Vue and Angular:</p>
+<pre class="language-markup"><code>&lt;!-- index.njk --&gt;
+
+&lt;!-- built in filter for transforming string to lowercase --&gt;
+{{ product.name | lower }}
+
+&lt;!-- custom filter for getting an object from an array by its ID --&gt;
+{% set product = products | getById(8) %}</code></pre>
+<h2>Integrating Nunjucks with Gulp</h2>
+<p>Using Nunjucks in the browser means all the templating is done on the client side at runtime. With Gulp, we can build all the pages using templates, partials and macros at buildtime so all the HTML files are all ready for when a user visits the page. Note: we will be using Gulp 4 in the following code snippets, feel free to rewrite it in an older version if you prefer.</p>
+<p>This is the file structure we will use with Gulp:</p>
+<p><img src="assets/images/posts/nunjucks-file-structure.jpg" alt="The file structure used with Nunjucks and Gulp" /></p>
+<p>The Gulp plugin we will be using is&nbsp;<strong>gulp-nunjucks-render</strong>. Let's install it with NPM and add it to our gulpfile.</p>
+<pre class="language-markup"><code>npm install gulp-nunjucks-render --save-dev</code></pre>
+<pre class="language-javascript"><code>const nunjucksRender = require('gulp-nunjucks-render');
+
+function nunjucks () {
+    // Gets .html and .njk files in pages folder
+    return gulp.src('pages/**/*.+(html|njk)')
+        // Renders template with nunjucks
+        .pipe(nunjucksRender({
+            path: ['templates']
+        }))
+        .pipe(gulp.dest('./'));
+}
+
+exports.nunjucks = nunjucks;</code></pre>
+<p>Nothing special here with the function, it behaves like any other Gulp task.</p>
+<ol>
+<li>Nunjucks files are sourced from the pages directory and looks for <strong>.html</strong> or <strong>.njk</strong> files (it will work for either)</li>
+<li>Pipes it through&nbsp;<strong>gulp-nunjucks-render</strong> plugin and we specify the directory the templates are located (these are the partials, macros, boilerplates, etc).</li>
+<li>The built HTML files are placed in the destination directory.</li>
+</ol>
+<p>The difference between&nbsp;<strong>pages</strong> and&nbsp;<strong>templates</strong> is the built HTML files come from the&nbsp;<strong>pages</strong> nunjucks files, whereas the&nbsp;<strong>templates</strong> files are included in others.</p>
+<h3>Injecting data into our pages and templates</h3>
+<p>We discussed macros earlier and how they accept data when rendering, but where does this data come from? With Gulp we can globally add data to all Nunjucks files. We can store this data in JSON files. Let's continue with the product theme and say we have the following JSON file:</p>
+<pre class="language-javascript"><code>[
+    {
+        "id": 1,
+        "name": "Business Cards",
+        "alias": "business-cards",
+        "description": "This is the business cards description." 
+    },
+    {
+        "id": 2,
+        "name": "Postcards",
+        "alias": "postcards",
+        "description": "This is the postcards description." 
+    },
+]</code></pre>
+<p>&nbsp;To get this data into the Nunjucks files, we can use the <strong>manageEnv</strong> property when piping through in the Gulp task. We will use&nbsp;<strong>fs</strong> to read the JSON file.</p>
+<pre class="language-javascript"><code>const fs = require('fs');
+
+const manageEnv = (env) =&gt; {
+    const products = JSON.parse(fs.readFileSync('products.json'));
+
+    env.addGlobal('data', {
+        products
+    });
+};
+
+function nunjucks () {
+    // Gets .html and .njk files in pages folder
+    return gulp.src('pages/**/*.+(html|njk)')
+        // Renders template with nunjucks
+        .pipe(nunjucksRender({
+            path: ['templates'],
+            manageEnv
+        }))
+        .pipe(gulp.dest('./'));
+}</code></pre>
+<p>When in any Nunjucks file, including partials and macros, you now have access to the products under&nbsp;<strong>data.products</strong>.</p>
+<h3>Adding custom filters</h3>
+<p>We can add custom filters inside this <strong>manageEnv</strong> property too.&nbsp;Instead of using the <strong>addGlobal</strong> method,&nbsp;<strong>addFilter</strong> is used.</p>
+<pre class="language-javascript"><code>env.addFilter('getById', (array, id) =&gt; {
+    return array.find(item =&gt; item.id === id);
+});</code></pre>
+<p>Now we can make use of that filter in Nunjucks tags.</p>
+<pre class="language-markup"><code>&lt;!-- this will return the business cards object from products.json --&gt;
+{% set product = data.products | getById(1) %}</code></pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p></div>
+        </article>
+
+        <aside class="post__sidebar">
+          
+  <div class="sidebar-pod">
+    <div class="sidebar-pod__header">
+        <h4>Related posts</h4>
+    </div>
+
+    <div class="sidebar-pod__content">
+      
+        
+
+        <a class="sidebar-pod__row" href="/posts/" title="Integrating Gulp 4 into your workflow">
+          <span class="sidebar-pod__title">Integrating Gulp 4 into your workflow</span>
+          <span class="sidebar-pod__date">12/6/2020</span>
+        </a>
+      
+    </div>
+  </div>
+
+          
+  <div class="sidebar-pod">
+    <div class="sidebar-pod__header">
+      <h4>Most recent in JavaScript</h4>
+    </div>
+    <div class="sidebar-pod__content">
+      
+        
+          <a class="sidebar-pod__row" href="/posts/precompiling-nunjucks.html" title="Pre-compiling Nunjucks templates with Gulp">
+            <span class="sidebar-pod__title">Pre-compiling Nunjucks templates with Gulp</span>
+            <span class="sidebar-pod__date">7/12/2020</span>
+          </a>
+        
+      
+        
+      
+        
+      
+        
+          <a class="sidebar-pod__row" href="/posts/" title="Integrating Gulp 4 into your workflow">
+            <span class="sidebar-pod__title">Integrating Gulp 4 into your workflow</span>
+            <span class="sidebar-pod__date">12/6/2020</span>
+          </a>
+        
+      
+  </div>
+</div>
+
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  </main>
+
+
+    <footer class="l-footer">
+    <div class="l-footer__content">
+        Copyright &copy; <span class="js-copyright-year"></span> Liam Snowdon
+    </div>
+</footer>
+
+    <script src="/assets/third-party/prism/prism.js"></script>
+
+     
+  </body>
+</html>

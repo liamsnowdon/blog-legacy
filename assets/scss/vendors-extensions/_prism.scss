@@ -1,3 +1,9 @@
-:not(pre) > code[class*="language-"], pre[class*="language-"] {
+:not(pre) > code[class*="language-"], 
+pre[class*="language-"] {
   background: $primary-color !important;
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+  font-size: 14px;
 }

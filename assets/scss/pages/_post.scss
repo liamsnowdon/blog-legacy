@@ -67,6 +67,7 @@
 
     &__article {
         margin-bottom: 40px;
+        min-width: 0;
 
         @include breakpoint('medium') {
             margin: 0;

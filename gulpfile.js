@@ -7,7 +7,6 @@ const mqPacker = require('css-mqpacker');
 const autoprefixer = require('autoprefixer');
 const sourcemaps = require('gulp-sourcemaps');
 const nunjucksRender = require('gulp-nunjucks-render');
-// const data = require('gulp-data');
 const browserSync = require('browser-sync').create();
 
 sass.compiler = require('dart-sass');
