@@ -28,6 +28,10 @@ const manageEnvironment = (environment) => {
         categories
     });
 
+    environment.addFilter('getById', (array, id) => {
+        return array.find(item => item.id === id);
+    });
+
     environment.addFilter('longDate', (date) => {
         return longDate(date);
     });

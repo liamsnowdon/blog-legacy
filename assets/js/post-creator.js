@@ -63,11 +63,24 @@
          * Initialises the tinyMCE editor for the content textarea
          */
         initTinymce: function () {
+            tinymce.PluginManager.add('inlinecode', function (editor, url) {
+                editor.ui.registry.addButton('inlinecode', {
+                    tooltip: 'Insert inline code sample',
+                    icon: 'sourcecode',
+                    onAction: function () {
+                        var selection = editor.selection.getContent();
+
+                        editor.insertContent('<code class="b-inline-code">' + selection + '</code>');
+                    }
+                });
+            });
+
             tinymce.init({
                 selector: '#content',
                 height: 500,
-                plugins: 'codesample code lists link image',
-                toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | link | bullist numlist outdent indent | codesample code | image | removeformat',
+                plugins: 'codesample inlinecode lists link image',
+                toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | link | bullist numlist outdent indent | codesample inlinecode | image | removeformat',
+                menubar: false,
                 image_dimensions: false,
                 image_prepend_url: '/assets/images/posts/'
             });

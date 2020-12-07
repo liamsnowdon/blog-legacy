@@ -2,7 +2,7 @@
 
 {% import 'macros/tags-page.njk' as tagsPage %}
 
-{% set tag = data.tags[1] %}
+{% set tag = data.tags | getById(2) %}
 
 {% block content %}
   {{ tagsPage.header(tag) }}

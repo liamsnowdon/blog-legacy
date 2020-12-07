@@ -9,14 +9,12 @@
 {% endmacro %}
 
 {% macro content(tag) %}
-  {% set tagIndex = data.tags|index(tag) %}
-
   <div class="l-wrapper">
     <div class="l-content">
       <div class="l-grid">
         <div class="l-grid__row l-grid__row--column-margins">
           {% for post in data.posts %}
-            {% if post.tags|includes(tagIndex) %}
+            {% if post.tags|includes(tag.id) %}
               <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column--large-3">
                 {{ pods.postPod(post) }}
               </div>

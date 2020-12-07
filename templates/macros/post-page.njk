@@ -1,4 +1,6 @@
 {% macro header(post) %}
+  {% set category = data.categories | getById(post.category) %}
+
   <div class="post-hero" style="">
     <div class="l-content">
       <div class="post-hero__content">
@@ -9,14 +11,16 @@
         
         <div class="post-hero__right">
           <h5><strong>Posted:</strong> {{ post.datePosted|longDate }}</h5>
-
-          <h5><strong>Category:</strong> <a href="/categories/{{ data.categories[post.category].file }}">{{ data.categories[post.category].name }}</a></h5>
+          
+          <h5><strong>Category:</strong> <a href="/categories/{{ category.file }}">{{ category.name }}</a></h5>
           
           {% if post.tags.length %}
             <h5>
               <strong>Tags:</strong>
-              {% for tag in post.tags %}
-                <a href="/tags/{{ data.tags[tag].file }}">{{ data.tags[tag].name }}</a>
+              {% for tagId in post.tags %}
+                {% set tag = data.tags | getById(tagId) %}
+                
+                <a href="/tags/{{ tag.file }}">{{ tag.name }}</a>
               {% endfor %}
             </h5>
           {% endif %}
@@ -50,8 +54,8 @@
     </div>
 
     <div class="sidebar-pod__content">
-      {% for index in post.relatedPosts %}
-        {% set relatedPost = data.posts[index] %}
+      {% for id in post.relatedPosts %}
+        {% set relatedPost = data.posts | getById(id) %}
 
         <a class="sidebar-pod__row" href="/posts/{{ relatedPost.file }}" title="{{ relatedPost.title }}">
           <span class="sidebar-pod__title">{{ relatedPost.title }}</span>
@@ -63,13 +67,17 @@
 {% endmacro %}
 
 {% macro mostRecentInCategory(post) %}
+  {% set category = data.categories | getById(post.category) %}
+
   <div class="sidebar-pod">
     <div class="sidebar-pod__header">
-      <h4>Most recent in {{ data.categories[post.category].name }}</h4>
+      <h4>Most recent in {{ category.name }}</h4>
     </div>
     <div class="sidebar-pod__content">
       {% for recentPost in data.posts|sort(true, true, 'datePosted') %}
-        {% if data.categories[recentPost.category].name === data.categories[post.category].name %}
+        {% set recentPostCategory = data.categories | getById(recentPost.category) %}
+        
+        {% if recentPostCategory.name === category.name %}
           <a class="sidebar-pod__row" href="/posts/{{ recentPost.file }}" title="{{ recentPost.title }}">
             <span class="sidebar-pod__title">{{ recentPost.title }}</span>
             <span class="sidebar-pod__date">{{ recentPost.datePosted|shortDate }}</span>

@@ -2,7 +2,7 @@
 
 {% import "macros/post-page.njk" as postPage %}
 
-{% set post = data.posts[1] %}
+{% set post = data.posts | getById(2) %}
 
 {% block content %}
   {{ postPage.header(post) }}

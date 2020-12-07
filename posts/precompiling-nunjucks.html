@@ -39,6 +39,8 @@
 
     
   
+  
+
   <div class="post-hero" style="">
     <div class="l-content">
       <div class="post-hero__content">
@@ -49,7 +51,7 @@
         
         <div class="post-hero__right">
           <h5><strong>Posted:</strong> Monday 7 December 2020</h5>
-
+          
           <h5><strong>Category:</strong> <a href="/categories/javascript.html">JavaScript</a></h5>
           
           
@@ -91,11 +93,11 @@
 <li>Nunjucks</li>
 <li>...and many more.</li>
 </ul>
-<p>In this post I will be focusing on using Nunjucks and, more specifically, how to integrate it with Gulp for precompiling pages. Nunjucks files have the extension "<strong>.njk</strong>", for example: "index.njk".</p>
+<p>In this post I will be focusing on using Nunjucks and, more specifically, how to integrate it with Gulp for precompiling pages. Nunjucks files have the extension <code class="b-inline-code">.njk</code>, for example: <code class="b-inline-code">index.njk</code>.</p>
 <p>To begin with, let's take a quick look at some of the main features Nunjucks offers.</p>
 <h2>Features</h2>
 <h3>Template Inheritance</h3>
-<p>Nunjucks templates can inherit or "<strong>extend</strong>" from its parent template. This allows you to create boilerplates for your pages, whether that be the core markup with your metadata, stylesheets and scripts, or a particular page layout like a product page. This is done with two important tags:</p>
+<p>Nunjucks templates can inherit or <strong>extend</strong>&nbsp;from its parent template. This allows you to create boilerplates for your pages, whether that be the core markup with your metadata, stylesheets and scripts, or a particular page layout like a product page. This is done with two important tags:</p>
 <ol>
 <li>block</li>
 <li>extends</li>
@@ -191,7 +193,6 @@
   {{ productMacro.pod(product) }}
 {% endblock %}</code></pre>
 <p>Looking inside the&nbsp;<strong>productPod</strong> block, it would render something like:</p>
-<p>&nbsp;</p>
 <pre class="language-markup"><code>&lt;!-- business-cards.html --&gt;
 
 &lt;div class="c-pod"&gt;
@@ -238,8 +239,8 @@ function nunjucks () {
 exports.nunjucks = nunjucks;</code></pre>
 <p>Nothing special here with the function, it behaves like any other Gulp task.</p>
 <ol>
-<li>Nunjucks files are sourced from the pages directory and looks for <strong>.html</strong> or <strong>.njk</strong> files (it will work for either)</li>
-<li>Pipes it through&nbsp;<strong>gulp-nunjucks-render</strong> plugin and we specify the directory the templates are located (these are the partials, macros, boilerplates, etc).</li>
+<li>Nunjucks files are sourced from the pages directory and looks for <code class="b-inline-code">.html</code> or <code class="b-inline-code">.njk</code> files (it will work for either)</li>
+<li>Pipes it through <code class="b-inline-code">gulp-nunjucks-render</code> plugin and we specify the directory the templates are located (these are the partials, macros, boilerplates, etc).</li>
 <li>The built HTML files are placed in the destination directory.</li>
 </ol>
 <p>The difference between&nbsp;<strong>pages</strong> and&nbsp;<strong>templates</strong> is the built HTML files come from the&nbsp;<strong>pages</strong> nunjucks files, whereas the&nbsp;<strong>templates</strong> files are included in others.</p>
@@ -259,7 +260,7 @@ exports.nunjucks = nunjucks;</code></pre>
         "description": "This is the postcards description." 
     },
 ]</code></pre>
-<p>&nbsp;To get this data into the Nunjucks files, we can use the <strong>manageEnv</strong> property when piping through in the Gulp task. We will use&nbsp;<strong>fs</strong> to read the JSON file.</p>
+<p>&nbsp;To get this data into the Nunjucks files, we can use the <code class="b-inline-code">manageEnv</code> property when piping through in the Gulp task. We will use <code class="b-inline-code">fs</code> to read the JSON file.</p>
 <pre class="language-javascript"><code>const fs = require('fs');
 
 const manageEnv = (env) =&gt; {
@@ -280,17 +281,15 @@ function nunjucks () {
         }))
         .pipe(gulp.dest('./'));
 }</code></pre>
-<p>When in any Nunjucks file, including partials and macros, you now have access to the products under&nbsp;<strong>data.products</strong>.</p>
+<p>When in any Nunjucks file, including partials and macros, you now have access to the products under <code class="b-inline-code">data.products</code>.</p>
 <h3>Adding custom filters</h3>
-<p>We can add custom filters inside this <strong>manageEnv</strong> property too.&nbsp;Instead of using the <strong>addGlobal</strong> method,&nbsp;<strong>addFilter</strong> is used.</p>
+<p>We can add custom filters inside this <code class="b-inline-code">manageEnv</code> property too. Instead of using the <code class="b-inline-code">addGlobal</code> method, <code class="b-inline-code">addFilter</code> is used.</p>
 <pre class="language-javascript"><code>env.addFilter('getById', (array, id) =&gt; {
     return array.find(item =&gt; item.id === id);
 });</code></pre>
 <p>Now we can make use of that filter in Nunjucks tags.</p>
 <pre class="language-markup"><code>&lt;!-- this will return the business cards object from products.json --&gt;
-{% set product = data.products | getById(1) %}</code></pre>
-<p>&nbsp;</p>
-<p>&nbsp;</p></div>
+{% set product = data.products | getById(1) %}</code></pre></div>
         </article>
 
         <aside class="post__sidebar">
@@ -313,12 +312,16 @@ function nunjucks () {
   </div>
 
           
+  
+
   <div class="sidebar-pod">
     <div class="sidebar-pod__header">
       <h4>Most recent in JavaScript</h4>
     </div>
     <div class="sidebar-pod__content">
       
+        
+        
         
           <a class="sidebar-pod__row" href="/posts/precompiling-nunjucks.html" title="Pre-compiling Nunjucks templates with Gulp">
             <span class="sidebar-pod__title">Pre-compiling Nunjucks templates with Gulp</span>
@@ -327,9 +330,15 @@ function nunjucks () {
         
       
         
-      
+        
         
       
+        
+        
+        
+      
+        
+        
         
           <a class="sidebar-pod__row" href="/posts/" title="Integrating Gulp 4 into your workflow">
             <span class="sidebar-pod__title">Integrating Gulp 4 into your workflow</span>
