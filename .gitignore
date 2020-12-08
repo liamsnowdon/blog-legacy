@@ -1,2 +1,7 @@
 .idea
 node_modules
+
+# Nunjucks pages that are built automatically through Gulp
+pages/categories
+pages/posts
+pages/tags
