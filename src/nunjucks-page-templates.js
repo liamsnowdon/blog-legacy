@@ -1,9 +1,9 @@
 export const tagTemplate = `{% extends "base.njk" %}
 
-{% block metaTitle %}<% TAG_NAME %> Posts{% endblock %}
+{% block metaTitle %}<% TAG_NAME %> Posts | Liam Snowdon's Blog{% endblock %}
 {% block metaDescription %}<% TAG_INTRO %>{% endblock %}
 
-{% block metaOgTitle %}<% TAG_NAME %> Posts{% endblock %}
+{% block metaOgTitle %}<% TAG_NAME %> Posts | Liam Snowdon's Blog{% endblock %}
 {% block metaOgDescription %}<% TAG_INTRO %>{% endblock %}
 {% block metaOgImage %}<% TAG_IMAGE_URL %>{% endblock %}
 {% block metaOgUrl %}/tags/<% TAG_FILE %>{% endblock %}
@@ -25,10 +25,10 @@ export const tagTemplate = `{% extends "base.njk" %}
 
 export const categoryTemplate = `{% extends "base.njk" %}
 
-{% block metaTitle %}<% CATEGORY_NAME %> Posts{% endblock %}
+{% block metaTitle %}<% CATEGORY_NAME %> Posts | Liam Snowdon's Blog{% endblock %}
 {% block metaDescription %}<% CATEGORY_INTRO %>{% endblock %}
 
-{% block metaOgTitle %}<% CATEGORY_NAME %> Posts{% endblock %}
+{% block metaOgTitle %}<% CATEGORY_NAME %> Posts | Liam Snowdon's Blog{% endblock %}
 {% block metaOgDescription %}<% CATEGORY_INTRO %>{% endblock %}
 {% block metaOgImage %}<% CATEGORY_IMAGE_URL %>{% endblock %}
 {% block metaOgUrl %}/categories/<% CATEGORY_FILE %>{% endblock %}
@@ -67,10 +67,10 @@ export const categoryTemplate = `{% extends "base.njk" %}
 
 export const postTemplate = `{% extends "base.njk" %}
 
-{% block metaTitle %}<% POST_TITLE %>{% endblock %}
+{% block metaTitle %}<% POST_TITLE %> | Liam Snowdon's Blog{% endblock %}
 {% block metaDescription %}<% POST_INTRO %>{% endblock %}
 
-{% block metaOgTitle %}<% POST_TITLE %>{% endblock %}
+{% block metaOgTitle %}<% POST_TITLE %> | Liam Snowdon's Blog{% endblock %}
 {% block metaOgDescription %}<% POST_INTRO %>{% endblock %}
 {% block metaOgType %}article{% endblock %}
 
