@@ -1,4 +1,4 @@
-const tag = `{% extends "base.njk" %}
+export const tagTemplate = `{% extends "base.njk" %}
 
 {% block metaTitle %}<% TAG_NAME %> Posts{% endblock %}
 {% block metaDescription %}<% TAG_INTRO %>{% endblock %}
@@ -23,7 +23,7 @@ const tag = `{% extends "base.njk" %}
 {% endblock %}
 `;
 
-const category = `{% extends "base.njk" %}
+export const categoryTemplate = `{% extends "base.njk" %}
 
 {% block metaTitle %}<% CATEGORY_NAME %> Posts{% endblock %}
 {% block metaDescription %}<% CATEGORY_INTRO %>{% endblock %}
@@ -65,7 +65,7 @@ const category = `{% extends "base.njk" %}
 {% endblock %}
 `;
 
-const post = `{% extends "base.njk" %}
+export const postTemplate = `{% extends "base.njk" %}
 
 {% block metaTitle %}<% POST_TITLE %>{% endblock %}
 {% block metaDescription %}<% POST_INTRO %>{% endblock %}
@@ -97,7 +97,3 @@ const post = `{% extends "base.njk" %}
   </main>
 {% endblock %}
 `;
-
-exports.tag = tag;
-exports.category = category;
-exports.post = post;

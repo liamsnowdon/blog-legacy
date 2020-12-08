@@ -1,16 +1,19 @@
-const fs = require('fs');
-const gulp = require('gulp');
-const sass = require('gulp-sass');
-const postcss = require('gulp-postcss');
-const cssnano = require('cssnano');
-const mqPacker = require('css-mqpacker');
-const autoprefixer = require('autoprefixer');
-const nunjucksRender = require('gulp-nunjucks-render');
-const browserSync = require('browser-sync').create();
+import fs from 'fs';
+import gulp from 'gulp';
+import sass from 'gulp-sass';
+import postcss from 'gulp-postcss';
+import cssnano from 'cssnano';
+import mqPacker from 'css-mqpacker';
+import autoprefixer from 'autoprefixer';
+import nunjucksRender from 'gulp-nunjucks-render';
+import browserSync from 'browser-sync';
+
+import manageEnvironment from './environment';
+import { tagTemplate, categoryTemplate, postTemplate } from './nunjucks-page-templates';
+
+browserSync.create();
 
 sass.compiler = require('dart-sass');
-
-const nunjucksPageTemplates = require('./nunjucks-page-templates');
 
 const postcssPlugins = [
     autoprefixer({ cascade: false }),
@@ -18,52 +21,19 @@ const postcssPlugins = [
     cssnano()
 ];
 
-const manageEnvironment = (environment) => {
-    const posts = JSON.parse(fs.readFileSync('./data/posts.json'));
-    const tags = JSON.parse(fs.readFileSync('./data/tags.json'));
-    const categories = JSON.parse(fs.readFileSync('./data/categories.json'));
-
-    environment.addGlobal('data', {
-        posts,
-        tags,
-        categories
-    });
-
-    environment.addFilter('getById', (array, id) => {
-        return array.find(item => item.id === id);
-    });
-
-    environment.addFilter('longDate', (date) => {
-        return longDate(date);
-    });
-
-    environment.addFilter('shortDate', (date) => {
-        return shortDate(date);
-    });
-
-    environment.addFilter('includes', (arr, item) => {
-        return arr.includes(item);
-    });
-
-    environment.addFilter('index', (arr, item) => {
-        return arr.findIndex(function (i) { return i === item });
-    });
-};
-
-function css () {
+export const css = () => {
     return gulp.src('../assets/scss/styles.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(postcss(postcssPlugins))
         .pipe(gulp.dest('../assets/css'));
 }
 
-function watchScss () {
+export const watchScss = () => {
     gulp.watch('../assets/scss/**/*.scss', css);
 }
 
-function createTagPages (cb) {
+export const createTagPages = (cb) => {
     const tags = JSON.parse(fs.readFileSync('./data/tags.json'));
-    const tagTemplate = nunjucksPageTemplates.tag;
 
     tags.forEach(tag => {
         const content = tagTemplate
@@ -79,9 +49,8 @@ function createTagPages (cb) {
     cb();
 }
 
-function createCategoryPages (cb) {
+export const createCategoryPages = (cb) => {
     const categories = JSON.parse(fs.readFileSync('./data/categories.json'));
-    const categoryTemplate = nunjucksPageTemplates.category;
 
     categories.forEach(category => {
         const content = categoryTemplate
@@ -97,11 +66,9 @@ function createCategoryPages (cb) {
     cb();
 }
 
-function createPostPages (cb) {
+export const createPostPages = (cb) => {
     const posts = JSON.parse(fs.readFileSync('./data/posts.json'));
     const tags = JSON.parse(fs.readFileSync('./data/tags.json'));
-
-    const postTemplate = nunjucksPageTemplates.post;
     
     posts.forEach(post => {
         const articleTagPropertyTemplate = '<meta property="article:tag" content="<% content %>">';
@@ -135,7 +102,7 @@ function createPostPages (cb) {
     cb();
 }
 
-function nunjucks () {
+export const nunjucks = () => {
     // Gets .html and .njk files in pages
     return gulp.src('./pages/**/*.+(html|njk)')
         // Renders template with nunjucks
@@ -146,7 +113,7 @@ function nunjucks () {
         .pipe(gulp.dest('../'));
 }
 
-function watchNunjucks () {
+export const watchNunjucks = () => {
     gulp.watch([
         './pages/**/*.njk',
         './templates/**/*.njk',
@@ -156,7 +123,7 @@ function watchNunjucks () {
     ], nunjucks);
 }
 
-function sync () {
+export const sync = () => {
     browserSync.init({
         server: {
             baseDir: '../',
@@ -165,37 +132,8 @@ function sync () {
     });
 }
 
-function longDate (date) {
-    if (!date) return '';
+export const createNunjucksPages = gulp.parallel(createPostPages, createCategoryPages, createTagPages);
+export const nunjucksBuild = gulp.series(gulp.parallel(createPostPages, createCategoryPages, createTagPages), nunjucks);
+export const watch = gulp.series(css, nunjucks, gulp.parallel(watchScss, watchNunjucks));
 
-    if (typeof date === 'string') {
-        date = new Date(date);
-    }
-
-    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', "December"];
-
-    return `${days[date.getDay()]} ${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
-}
-
-function shortDate (date) {
-    if (!date) return '';
-
-    if (typeof date === 'string') {
-        date = new Date(date);
-    }
-
-    return `${date.getDate()}/${(date.getMonth() + 1)}/${date.getFullYear()}`;
-}
-
-exports.createPostPages = createPostPages;
-exports.createCategoryPages = createCategoryPages;
-exports.createTagPages = createTagPages;
-exports.createNunjucksPages = gulp.parallel(createPostPages, createCategoryPages, createTagPages);
-exports.nunjucks = nunjucks;
-exports['nunjucks.build'] = gulp.series(gulp.parallel(createPostPages, createCategoryPages, createTagPages), nunjucks);
-
-exports.sync = sync;
-exports.css = css;
-exports.watch = gulp.series(css, nunjucks, gulp.parallel(watchScss, watchNunjucks));
-exports.default = css;
+export default css;
