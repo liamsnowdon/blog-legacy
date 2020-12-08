@@ -1,5 +1,13 @@
 {% extends "base.njk" %}
 
+{% block metaTitle %}Tags | Browse the post tags{% endblock %}
+{% block metaDescription %}Posts are given tags to make it easy to find posts about a particular area.{% endblock %}
+
+{% block metaOgTitle %}Tags | Browse the post tags{% endblock %}
+{% block metaOgDescription %}Posts are given tags to make it easy to find posts about a particular area.{% endblock %}
+{% block metaOgImage %}/assets/images/tags.jpg{% endblock %}
+{% block metaOgUrl %}/tags.html{% endblock %}
+
 {% import 'macros/tags-page.njk' as tagsPage %}
 
 {% block content %}
