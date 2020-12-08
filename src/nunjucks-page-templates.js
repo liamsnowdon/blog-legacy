@@ -1,4 +1,4 @@
-const tag = `{% extends "layout.njk" %}
+const tag = `{% extends "base.njk" %}
 
 {% import 'macros/tags-page.njk' as tagsPage %}
 
@@ -15,7 +15,7 @@ const tag = `{% extends "layout.njk" %}
 {% endblock %}
 `;
 
-const category = `{% extends "layout.njk" %}
+const category = `{% extends "base.njk" %}
 
 {% block content %}
   {% import 'macros/post-pods.njk' as pods %}
@@ -48,7 +48,7 @@ const category = `{% extends "layout.njk" %}
 {% endblock %}
 `;
 
-const post = `{% extends "layout.njk" %}
+const post = `{% extends "base.njk" %}
 
 {% import "macros/post-page.njk" as postPage %}
 
