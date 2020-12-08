@@ -62,6 +62,12 @@
           <span class="sidebar-pod__date">{{ relatedPost.datePosted|shortDate }}</span>
         </a>
       {% endfor %}
+
+      {% if post.relatedPosts.length === 0 %}
+        <div class="sidebar-pod__row is-empty">
+            Could not find any related posts.
+        </div>
+      {% endif %}
     </div>
   </div>
 {% endmacro %}

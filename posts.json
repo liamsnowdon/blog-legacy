@@ -23,6 +23,7 @@
     },
     {
         "id": 3,
+        "file": "gulp4.html",
         "datePosted": "06/12/2020",
         "imageUrl": "/assets/posts/gulp.jpg",
         "author": "Liam Snowdon",
@@ -30,6 +31,7 @@
         "intro": "There are many build tools out there. Gulp 4 is the new-ish major version of Gulp.js which introduces new features removing the need of other dependencies.",
         "category": 3,
         "tags": [],
+        "relatedPosts": [],
         "content": "<p>As dnajsn dkajsdj nakjsndjk nasknd jkansjkdn kjansjkd najksndkj asd ajnsdjj nwjdnj njdwnw.</p>\n<pre class=\"language-markup\"><code>&lt;div&gt;&lt;h3&gt;As snd wnjaknsd&lt;/h2&gt;&lt;p&gt;Asd njwan ksndkankwdn k&lt;/p&gt;&lt;/div&gt;</code></pre>"
     },
     {

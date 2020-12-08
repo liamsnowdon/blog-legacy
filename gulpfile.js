@@ -5,11 +5,12 @@ const postcss = require('gulp-postcss');
 const cssnano = require('cssnano');
 const mqPacker = require('css-mqpacker');
 const autoprefixer = require('autoprefixer');
-const sourcemaps = require('gulp-sourcemaps');
 const nunjucksRender = require('gulp-nunjucks-render');
 const browserSync = require('browser-sync').create();
 
 sass.compiler = require('dart-sass');
+
+const nunjucksPageTemplates = require('./nunjucks-page-templates');
 
 const postcssPlugins = [
     autoprefixer({ cascade: false }),
@@ -49,24 +50,56 @@ const manageEnvironment = (environment) => {
     });
 };
 
-function devCss () {
-    return gulp.src('assets/scss/styles.scss')
-        .pipe(sourcemaps.init())
-        .pipe(sass().on('error', sass.logError))
-        .pipe(postcss(postcssPlugins))
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest('assets/css'));
-}
-
-function prodCss () {
+function css () {
     return gulp.src('assets/scss/styles.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(postcss(postcssPlugins))
         .pipe(gulp.dest('assets/css'));
 }
 
-function watchCss () {
-    gulp.watch('assets/scss/**/*.scss', devCss);
+function watchScss () {
+    gulp.watch('assets/scss/**/*.scss', css);
+}
+
+function createTagPages (cb) {
+    const tags = JSON.parse(fs.readFileSync('tags.json'));
+    const tagTemplate = nunjucksPageTemplates.tag;
+
+    tags.forEach(tag => {
+        const content = tagTemplate.replace('<% TAG_ID %>', tag.id);
+
+        fs.writeFileSync(`./pages/tags/${tag.file.split('.html')[0]}.njk`, content);
+    });
+
+    cb();
+}
+
+function createCategoryPages (cb) {
+    const categories = JSON.parse(fs.readFileSync('categories.json'));
+    const categoryTemplate = nunjucksPageTemplates.category;
+
+    categories.forEach(category => {
+        const content = categoryTemplate
+            .replace('<% CATEGORY_ID %>', category.id)
+            .replace('<% CATEGORY_NAME %>', category.name);
+
+        fs.writeFileSync(`./pages/categories/${category.file.split('.html')[0]}.njk`, content);
+    });
+
+    cb();
+}
+
+function createPostPages (cb) {
+    const posts = JSON.parse(fs.readFileSync('posts.json'));
+    const postTemplate = nunjucksPageTemplates.post;
+
+    posts.forEach(post => {
+        const content = postTemplate.replace('<% POST_ID %>', post.id);
+
+        fs.writeFileSync(`./pages/posts/${post.file.split('.html')[0]}.njk`, content);
+    });
+
+    cb();
 }
 
 function nunjucks () {
@@ -115,9 +148,14 @@ function shortDate (date) {
     return `${date.getDate()}/${(date.getMonth() + 1)}/${date.getFullYear()}`;
 }
 
+exports.createPostPages = createPostPages;
+exports.createCategoryPages = createCategoryPages;
+exports.createTagPages = createTagPages;
+exports.createNunjucksPages = gulp.parallel(createPostPages, createCategoryPages, createTagPages);
 exports.nunjucks = nunjucks;
+exports['nunjucks.build'] = gulp.series(gulp.parallel(createPostPages, createCategoryPages, createTagPages), nunjucks);
+
 exports.sync = sync;
-exports.dev = devCss;
-exports.watch = gulp.series(devCss, nunjucks, gulp.parallel(watchCss, watchNunjucks));
-exports.prod = prodCss;
-exports.default = devCss;
+exports.css = css;
+exports.watch = gulp.series(css, nunjucks, gulp.parallel(watchScss, watchNunjucks));
+exports.default = css;
