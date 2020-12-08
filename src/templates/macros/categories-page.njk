@@ -1,6 +1,6 @@
 {% macro pod(category) %}
   <div class="c-pod">
-    <div class="c-pod__image c-pod__image--{{ category.name | lower }}"></div>
+    <div class="c-pod__image" style="background-image: url('{{ category.imageUrl }}')"></div>
     <div class="c-pod__content">
       <h5 class="c-pod__title">{{ category.name }}</h4>
       <p class="c-pod__intro">

@@ -1,5 +1,13 @@
 const tag = `{% extends "base.njk" %}
 
+{% block metaTitle %}<% TAG_NAME %> Posts{% endblock %}
+{% block metaDescription %}<% TAG_INTRO %>{% endblock %}
+
+{% block metaOgTitle %}<% TAG_NAME %> Posts{% endblock %}
+{% block metaOgDescription %}<% TAG_INTRO %>{% endblock %}
+{% block metaOgImage %}<% TAG_IMAGE_URL %>{% endblock %}
+{% block metaOgUrl %}/tags/<% TAG_FILE %>{% endblock %}
+
 {% import 'macros/tags-page.njk' as tagsPage %}
 
 {% set tag = data.tags | getById(<% TAG_ID %>) %}
@@ -16,6 +24,14 @@ const tag = `{% extends "base.njk" %}
 `;
 
 const category = `{% extends "base.njk" %}
+
+{% block metaTitle %}<% CATEGORY_NAME %> Posts{% endblock %}
+{% block metaDescription %}<% CATEGORY_INTRO %>{% endblock %}
+
+{% block metaOgTitle %}<% CATEGORY_NAME %> Posts{% endblock %}
+{% block metaOgDescription %}<% CATEGORY_INTRO %>{% endblock %}
+{% block metaOgImage %}<% CATEGORY_IMAGE_URL %>{% endblock %}
+{% block metaOgUrl %}/categories/<% CATEGORY_FILE %>{% endblock %}
 
 {% block content %}
   {% import 'macros/post-pods.njk' as pods %}
@@ -49,6 +65,22 @@ const category = `{% extends "base.njk" %}
 `;
 
 const post = `{% extends "base.njk" %}
+
+{% block metaTitle %}<% POST_TITLE %>{% endblock %}
+{% block metaDescription %}<% POST_INTRO %>{% endblock %}
+
+{% block metaOgTitle %}<% POST_TITLE %>{% endblock %}
+{% block metaOgDescription %}<% POST_INTRO %>{% endblock %}
+{% block metaOgType %}article{% endblock %}
+
+{% block metaArticle %}
+  <meta property="article:published_time" content="<% POST_DATE_POSTED %>">
+  <meta property="article:author" content="<% POST_AUTHOR %>">
+  <% ARTICLE_TAGS %>
+{% endblock %}
+
+{% block metaOgImage %}<% POST_IMAGE_URL %>{% endblock %}
+{% block metaOgUrl %}/categories/<% POST_FILE %>{% endblock %}
 
 {% import "macros/post-page.njk" as postPage %}
 

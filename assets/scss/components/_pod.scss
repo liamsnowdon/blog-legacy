@@ -7,22 +7,6 @@
         height: 300px;
         width: 100%;
         background: center/cover no-repeat $primary-grey;
-
-        &--html {
-            background-image: url('/assets/images/categories/html.png');
-        }
-
-        &--css {
-            background-image: url('/assets/images/categories/css.png');
-        }
-
-        &--sass {
-            background-image: url('/assets/images/categories/sass.png');
-        }
-
-        &--javascript {
-            background-image: url('/assets/images/categories/javascript.png');
-        }
     }
 
     &__content {

@@ -66,7 +66,12 @@ function createTagPages (cb) {
     const tagTemplate = nunjucksPageTemplates.tag;
 
     tags.forEach(tag => {
-        const content = tagTemplate.replace('<% TAG_ID %>', tag.id);
+        const content = tagTemplate
+            .replace(/<% TAG_ID %>/g, tag.id)
+            .replace(/<% TAG_NAME %>/g, tag.name)
+            .replace(/<% TAG_INTRO %>/g, tag.intro)
+            .replace(/<% TAG_IMAGE_URL %>/g, tag.imageUrl)
+            .replace(/<% TAG_FILE %>/g, tag.file);
 
         fs.writeFileSync(`./pages/tags/${tag.file.split('.html')[0]}.njk`, content);
     });
@@ -80,8 +85,11 @@ function createCategoryPages (cb) {
 
     categories.forEach(category => {
         const content = categoryTemplate
-            .replace('<% CATEGORY_ID %>', category.id)
-            .replace('<% CATEGORY_NAME %>', category.name);
+            .replace(/<% CATEGORY_ID %>/g, category.id)
+            .replace(/<% CATEGORY_NAME %>/g, category.name)
+            .replace(/<% CATEGORY_INTRO %>/g, category.intro)
+            .replace(/<% CATEGORY_IMAGE_URL %>/g, category.imageUrl)
+            .replace(/<% CATEGORY_FILE %>/g, category.file);
 
         fs.writeFileSync(`./pages/categories/${category.file.split('.html')[0]}.njk`, content);
     });
@@ -91,10 +99,35 @@ function createCategoryPages (cb) {
 
 function createPostPages (cb) {
     const posts = JSON.parse(fs.readFileSync('./data/posts.json'));
-    const postTemplate = nunjucksPageTemplates.post;
+    const tags = JSON.parse(fs.readFileSync('./data/tags.json'));
 
+    const postTemplate = nunjucksPageTemplates.post;
+    
     posts.forEach(post => {
-        const content = postTemplate.replace('<% POST_ID %>', post.id);
+        const articleTagPropertyTemplate = '<meta property="article:tag" content="<% content %>">';
+        let articleTagPropertyHtmlString = '';
+
+        let postTags = [];
+
+        post.tags.forEach((tagId) => {            
+            const matchedTag = tags.find(t => t.id === tagId);
+
+            postTags.push(matchedTag);
+        });
+
+        postTags.forEach((tag) => {
+            articleTagPropertyHtmlString += articleTagPropertyTemplate.replace('<% content %>', tag.name);
+        });
+
+        const content = postTemplate
+            .replace(/<% POST_ID %>/g, post.id)
+            .replace(/<% POST_TITLE %>/g, post.title)
+            .replace(/<% POST_INTRO %>/g, post.intro)
+            .replace(/<% POST_IMAGE_URL %>/g, post.imageUrl)
+            .replace(/<% POST_DATE_POSTED %>/g, post.datePosted)
+            .replace(/<% POST_AUTHOR %>/g, post.author)
+            .replace(/<% POST_FILE %>/g, post.file)
+            .replace(/<% ARTICLE_TAGS %>/g, articleTagPropertyHtmlString ? articleTagPropertyHtmlString : '');
 
         fs.writeFileSync(`./pages/posts/${post.file.split('.html')[0]}.njk`, content);
     });
