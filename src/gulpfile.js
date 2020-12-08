@@ -19,9 +19,9 @@ const postcssPlugins = [
 ];
 
 const manageEnvironment = (environment) => {
-    const posts = JSON.parse(fs.readFileSync('posts.json'));
-    const tags = JSON.parse(fs.readFileSync('tags.json'));
-    const categories = JSON.parse(fs.readFileSync('categories.json'));
+    const posts = JSON.parse(fs.readFileSync('./data/posts.json'));
+    const tags = JSON.parse(fs.readFileSync('./data/tags.json'));
+    const categories = JSON.parse(fs.readFileSync('./data/categories.json'));
 
     environment.addGlobal('data', {
         posts,
@@ -51,18 +51,18 @@ const manageEnvironment = (environment) => {
 };
 
 function css () {
-    return gulp.src('assets/scss/styles.scss')
+    return gulp.src('../assets/scss/styles.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(postcss(postcssPlugins))
-        .pipe(gulp.dest('assets/css'));
+        .pipe(gulp.dest('../assets/css'));
 }
 
 function watchScss () {
-    gulp.watch('assets/scss/**/*.scss', css);
+    gulp.watch('../assets/scss/**/*.scss', css);
 }
 
 function createTagPages (cb) {
-    const tags = JSON.parse(fs.readFileSync('tags.json'));
+    const tags = JSON.parse(fs.readFileSync('./data/tags.json'));
     const tagTemplate = nunjucksPageTemplates.tag;
 
     tags.forEach(tag => {
@@ -75,7 +75,7 @@ function createTagPages (cb) {
 }
 
 function createCategoryPages (cb) {
-    const categories = JSON.parse(fs.readFileSync('categories.json'));
+    const categories = JSON.parse(fs.readFileSync('./data/categories.json'));
     const categoryTemplate = nunjucksPageTemplates.category;
 
     categories.forEach(category => {
@@ -90,7 +90,7 @@ function createCategoryPages (cb) {
 }
 
 function createPostPages (cb) {
-    const posts = JSON.parse(fs.readFileSync('posts.json'));
+    const posts = JSON.parse(fs.readFileSync('./data/posts.json'));
     const postTemplate = nunjucksPageTemplates.post;
 
     posts.forEach(post => {
@@ -104,17 +104,23 @@ function createPostPages (cb) {
 
 function nunjucks () {
     // Gets .html and .njk files in pages
-    return gulp.src('pages/**/*.+(html|njk)')
+    return gulp.src('./pages/**/*.+(html|njk)')
         // Renders template with nunjucks
         .pipe(nunjucksRender({
-            path: ['templates'],
+            path: ['./templates'],
             manageEnv: manageEnvironment
         }))
-        .pipe(gulp.dest('./'));
+        .pipe(gulp.dest('../'));
 }
 
 function watchNunjucks () {
-    gulp.watch(['pages/**/*.njk', 'templates/**/*.njk', 'data.json'], nunjucks);
+    gulp.watch([
+        './pages/**/*.njk',
+        './templates/**/*.njk',
+        './data/posts.json',
+        './data/categories.json',
+        './data/tags.json'
+    ], nunjucks);
 }
 
 function sync () {
