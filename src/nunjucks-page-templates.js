@@ -39,6 +39,7 @@ const category = `{% extends "base.njk" %}
   <header class="l-header">
     <div class="l-header__content">
       <h1 class="l-header__heading"><% CATEGORY_NAME %> Posts</h1>
+      <p><% CATEGORY_INTRO %></p>
     </div>
   </header>
 

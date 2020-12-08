@@ -159,6 +159,7 @@ function watchNunjucks () {
 function sync () {
     browserSync.init({
         server: {
+            baseDir: '../',
             index: "index.html"
         }
     });
