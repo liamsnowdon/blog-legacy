@@ -5,11 +5,13 @@ export default (environment) => {
     const posts = JSON.parse(fs.readFileSync('./data/posts.json'));
     const tags = JSON.parse(fs.readFileSync('./data/tags.json'));
     const categories = JSON.parse(fs.readFileSync('./data/categories.json'));
+    const version = Utilities.generateTimestamp();
 
     environment.addGlobal('data', {
         posts,
         tags,
-        categories
+        categories,
+        version: `?v=${version}`
     });
 
     environment.addFilter('getById', (array, id) => {

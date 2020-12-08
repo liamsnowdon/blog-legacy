@@ -1,3 +1,5 @@
+{% import "macros/asset-loader.njk" as assetLoader %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -21,7 +23,7 @@
     <meta property="og:site_name" content="Blog">
     <meta name="twitter:card" content="summary">
 
-    <link rel="stylesheet" href="/assets/css/styles.css">
+    {{ assetLoader.link("/assets/css/styles.css") }}
   </head>
   <body>
     {% include "partials/navigation.njk" %}
@@ -30,7 +32,7 @@
 
     {% include "partials/footer.njk" %}
 
-    <script src="/assets/third-party/prism/prism.js"></script>
+    {{ assetLoader.script("/assets/third-party/prism/prism.js") }}
 
     {% block additionalJS %} {% endblock %}
   </body>
