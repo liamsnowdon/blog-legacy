@@ -7,7 +7,6 @@
 @import 'base/reset';
 @import 'base/helpers';
 @import 'base/base';
-@import 'base/helpers';
 @import 'base/typography';
 
 // Layout
@@ -20,10 +19,7 @@
 
 // Components
 @import 'components/buttons';
-@import 'components/dialog';
 @import 'components/form-input';
-@import 'components/newsletter';
-@import 'components/overlay';
 @import 'components/pod';
 @import 'components/post';
 @import 'components/scroll-to-top';
@@ -31,7 +27,6 @@
 // Pages
 @import 'pages/homepage';
 @import 'pages/post';
-@import 'pages/search';
 
 // Vendors
 @import 'vendors/animate-css/animate-css';
