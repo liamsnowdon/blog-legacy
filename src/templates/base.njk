@@ -45,6 +45,8 @@
     {% include "partials/footer.njk" %}
 
     {{ assetLoader.script("/assets/third-party/prism/prism.js") }}
+    {{ assetLoader.script("/assets/third-party/smooth-scroll/smooth-scroll.polyfills.min.js") }}
+    {{ assetLoader.script("/assets/js/script.js") }}
 
     {% block additionalJS %} {% endblock %}
   </body>
