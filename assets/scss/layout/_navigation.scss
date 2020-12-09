@@ -85,7 +85,7 @@
         text-decoration: none;
         color: $primary-white;
 
-        .fab {
+        [class^="fa"] {
             margin-right: 0.3rem;
 
             @include breakpoint('medium', 'down') {

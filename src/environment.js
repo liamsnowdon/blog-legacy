@@ -33,4 +33,12 @@ export default (environment) => {
     environment.addFilter('index', (arr, item) => {
         return arr.findIndex(function (i) { return i === item });
     });
+
+    environment.addFilter('limitTo', (arr, limit) => {
+        return arr.splice(0, limit);
+    });
+
+    environment.addFilter('categoryPosts', (arr, categoryId) => {
+        return arr.filter(item => item.category === categoryId);
+    })
 };

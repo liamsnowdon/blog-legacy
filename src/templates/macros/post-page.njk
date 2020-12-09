@@ -80,7 +80,7 @@
       <h4>Most recent in {{ category.name }}</h4>
     </div>
     <div class="sidebar-pod__content">
-      {% for recentPost in data.posts|sort(true, true, 'datePosted') %}
+      {% for recentPost in data.posts | sort(true, true, 'datePosted') %}
         {% set recentPostCategory = data.categories | getById(recentPost.category) %}
         
         {% if recentPostCategory.name === category.name %}

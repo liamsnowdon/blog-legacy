@@ -5,7 +5,7 @@
         "imageUrl": "/assets/images/categories/html.png",
         "name": "HTML",
         "intro": "The markup language for displaying content for web pages. With it, you can show text, images, videos and more. If you're seeing something on a web site, it is made up of HTML.",
-        "faClass": "fa-html5"
+        "faClass": "fab fa-html5"
     },
     {
         "id": 2,
@@ -13,7 +13,7 @@
         "imageUrl": "/assets/images/categories/css.png",
         "name": "CSS",
         "intro": "Using stylesheets, a page can be styled to your designs and imagination. Whether it's layout, colour themes, typography or input fields, CSS will play the role of how your site will look.",
-        "faClass": "fa-css3-alt"
+        "faClass": "fab fa-css3-alt"
     },
     {
         "id": 3,
@@ -21,6 +21,14 @@
         "imageUrl": "/assets/images/categories/javascript.png",
         "name": "JavaScript",
         "intro": "The programming language of the web, JavaScript gives you the power to control a web page to your heart's content; updating the DOM, sending asynchronous requests, dynamic content and more interactive elements like carousels, maps and even games.",
-        "faClass": "fa-js"
+        "faClass": "fab fa-js"
+    },
+    {
+        "id": 4,
+        "file": "general.html",
+        "imageUrl": "/assets/images/categories/general.png",
+        "name": "General",
+        "intro": "Any cool things, news and updates that do not belong in a category will be here.",
+        "faClass": "far fa-newspaper"
     }
 ]

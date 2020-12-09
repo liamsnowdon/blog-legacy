@@ -1,9 +1,11 @@
 <nav class="l-sticky-nav">
-    <ul class="l-sticky-nav__list">
-        {% for category in data.categories %}
-            <li class="l-sticky-nav__item">
-                <a class="l-sticky-nav__link" href="/categories/{{ category.file }}"><i class="fab {{ category.faClass }}"></i> <span class="l-sticky-nav__link-text">{{ category.name }}</span></a>
-            </li>
-        {% endfor %}
-    </ul>
+  <ul class="l-sticky-nav__list">
+    {% for category in data.categories %}
+      <li class="l-sticky-nav__item">
+          <a class="l-sticky-nav__link" href="/categories/{{ category.file }}">
+            <i class="{{ category.faClass }}"></i>
+            <span class="l-sticky-nav__link-text">{{ category.name }}</span></a>
+        </li>
+    {% endfor %}
+  </ul>
 </nav>

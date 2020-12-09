@@ -27,10 +27,8 @@
           <h2>Most recent</h2>
         </div>
 
-        {% for post in data.posts|sort(true, true, 'datePosted') %}
-          {% if loop.index0 < 1 %}   
-            {{ pods.mostRecentPostPod(post) }}
-          {% endif %}
+        {% for post in data.posts | sort(true, true, 'datePosted') | limitTo(1) %}
+          {{ pods.mostRecentPostPod(post) }}
         {% endfor %}
       </div>
 
@@ -42,31 +40,22 @@
 
           <div class="l-grid">
             <div class="l-grid__row l-grid__row--column-margins">
-              {% set htmlPostFound = false %}
-              {% set cssPostFound = false %}
-              {% set javascriptPostFound = false %}
+              {% for post in data.posts | categoryPosts(1) | sort(true, true, 'datePosted') | limitTo(1) %}
+                <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column--large-4">
+                  {{ pods.postPod(post) }}
+                </div>
+              {% endfor %}
 
-              {% for post in data.posts|sort(true, true, 'datePosted') %}
-                {% if post.category === 1 and not htmlPostFound %}
-                  {% set htmlPostFound = true %}
-                  <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column--large-4">
-                    {{ pods.postPod(post) }}
-                  </div>
-                {% endif %}
+              {% for post in data.posts | categoryPosts(2) | sort(true, true, 'datePosted') | limitTo(1) %}
+                <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column--large-4">
+                  {{ pods.postPod(post) }}
+                </div>
+              {% endfor %}
 
-                {% if post.category === 2 and not cssPostFound %}
-                  {% set cssPostFound = true %}
-                  <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column--large-4">
-                    {{ pods.postPod(post) }}
-                  </div>
-                {% endif %}
-
-                {% if post.category === 3 and not javascriptPostFound %}
-                  {% set javascriptPostFound = true %}
-                  <div class="l-grid__column l-grid__column--12 l-grid__column--large-4">
-                    {{ pods.postPod(post) }}
-                  </div>
-                {% endif %}
+              {% for post in data.posts | categoryPosts(3) | sort(true, true, 'datePosted') | limitTo(1) %}
+                <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column--large-4">
+                  {{ pods.postPod(post) }}
+                </div>
               {% endfor %}
             </div>
           </div>
@@ -81,7 +70,7 @@
 
           <div class="l-grid">
             <div class="l-grid__row l-grid__row--column-margins">
-              {% for post in data.posts|sort(true, true, 'datePosted') %}
+              {% for post in data.posts | sort(true, true, 'datePosted') %}
                 <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column--large-3">
                   {{ pods.postPod(post) }}
                 </div>
