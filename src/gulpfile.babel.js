@@ -7,6 +7,8 @@ import mqPacker from 'css-mqpacker';
 import autoprefixer from 'autoprefixer';
 import nunjucksRender from 'gulp-nunjucks-render';
 import browserSync from 'browser-sync';
+import concat from 'gulp-concat';
+import uglify from 'gulp-uglify';
 
 import manageEnvironment from './environment';
 import { tagTemplate, categoryTemplate, postTemplate } from './nunjucks-page-templates';
@@ -15,23 +17,69 @@ browserSync.create();
 
 sass.compiler = require('dart-sass');
 
+/**
+ * Plugis to use with PostCSS
+ * 
+ * autoprefixer - automatically adds prefixes to properties based on browserlist config
+ * mqPacker - merges all media queries into one
+ * csssnano - minify
+ */
 const postcssPlugins = [
     autoprefixer({ cascade: false }),
     mqPacker(),
     cssnano()
 ];
 
+/**
+ * Better handling of errors when piping
+ * 
+ * @param {string} name 
+ */
+function createErrorHandler(name) {
+    return function (err) {
+        console.error('Error from ' + name + ' in compress task', err.toString());
+    };
+}
+
+/**
+ * CSS files
+ * 
+ * 1. Compile Sass
+ * 2. Pass through PostCSS plugins
+ */
 export const css = () => {
-    return gulp.src('../assets/scss/styles.scss')
+    return gulp.src('./assets/scss/styles.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(postcss(postcssPlugins))
         .pipe(gulp.dest('../assets/css'));
 }
 
-export const watchScss = () => {
-    gulp.watch('../assets/scss/**/*.scss', css);
+/**
+ * JavaScript files
+ * 
+ * 1. Concatenate 
+ * 2. Minify
+ */
+export const js = () => {
+    return gulp.src(['./assets/third-party/**/*.js', './assets/js/*.js'])
+        .pipe(concat('main.js'))
+        .pipe(uglify().on('error', createErrorHandler('uglify')))
+        .pipe(gulp.dest('../assets/js'));
 }
 
+/**
+ * Watches JS and SCSS files
+ */
+export const watchAssets = () => {
+    gulp.watch('./assets/scss/**/*.scss', css);
+    gulp.watch(['./assets/third-party/**/*.js', './assets/js/*.js'], js);
+}
+
+/**
+ * Creates tag pages with nunjucks
+ * 
+ * @param cb 
+ */
 export const createTagPages = (cb) => {
     const tags = JSON.parse(fs.readFileSync('./data/tags.json'));
 
@@ -49,6 +97,11 @@ export const createTagPages = (cb) => {
     cb();
 }
 
+/**
+ * Creates category pages with nunjucks
+ * 
+ * @param cb 
+ */
 export const createCategoryPages = (cb) => {
     const categories = JSON.parse(fs.readFileSync('./data/categories.json'));
 
@@ -66,6 +119,11 @@ export const createCategoryPages = (cb) => {
     cb();
 }
 
+/**
+ * Creates post pages with nunjucks
+ * 
+ * @param cb 
+ */
 export const createPostPages = (cb) => {
     const posts = JSON.parse(fs.readFileSync('./data/posts.json'));
     const tags = JSON.parse(fs.readFileSync('./data/tags.json'));
@@ -102,6 +160,9 @@ export const createPostPages = (cb) => {
     cb();
 }
 
+/**
+ * Builds html files from nunjucks pages
+ */
 export const nunjucks = () => {
     // Gets .html and .njk files in pages
     return gulp.src('./pages/**/*.+(html|njk)')
@@ -113,6 +174,9 @@ export const nunjucks = () => {
         .pipe(gulp.dest('../'));
 }
 
+/**
+ * Watches all files that nunjucks uses, including data.
+ */
 export const watchNunjucks = () => {
     gulp.watch([
         './pages/**/*.njk',
@@ -123,6 +187,9 @@ export const watchNunjucks = () => {
     ], nunjucks);
 }
 
+/**
+ * Initialises browser sync
+ */
 export const sync = () => {
     browserSync.init({
         server: {
@@ -134,6 +201,6 @@ export const sync = () => {
 
 export const createNunjucksPages = gulp.parallel(createPostPages, createCategoryPages, createTagPages);
 export const nunjucksBuild = gulp.series(gulp.parallel(createPostPages, createCategoryPages, createTagPages), nunjucks);
-export const watch = gulp.series(css, nunjucks, gulp.parallel(watchScss, watchNunjucks));
+export const watch = gulp.series(gulp.parallel(css, js), nunjucks, gulp.parallel(watchAssets, watchNunjucks));
 
-export default css;
+export default gulp.parallel(css, js, nunjucks);
