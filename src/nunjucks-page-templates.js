@@ -102,4 +102,8 @@ export const postTemplate = `{% extends "base.njk" %}
     {{ postPage.content(post) }}
   </main>
 {% endblock %}
+
+{% block additionalJS %}
+  <script src="https://cdn.jsdelivr.net/gh/ireade/caniuse-embed/public/caniuse-embed.min.js"></script>
+{% endblock %}
 `;

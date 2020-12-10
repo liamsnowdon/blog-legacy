@@ -1,3 +1,7 @@
+#post {
+    padding: 25px 40px 40px;
+}
+
 .post-hero {
     padding: 30px 25px;
     border-bottom: 1px solid $primary-color;
@@ -78,7 +82,7 @@
     &__sidebar {
         position: sticky;
         align-self: flex-start;
-        top: 100px;
+        top: 85px;
 
         @include breakpoint('medium') {
             flex: 0 1 400px;
@@ -93,7 +97,7 @@
     overflow: hidden;
 
     &:not(:last-child) {
-        margin-bottom: 40px;
+        margin-bottom: 25px;
     }
 
     &__header {
@@ -143,4 +147,8 @@
     &__date {
         flex: 0 1 auto;
     }
+}
+
+.ciu_embed {
+    margin: 20px 0 -20px;
 }

@@ -17,8 +17,10 @@
     cursor: pointer;
 
     &:hover {
-        background-color: $button-hover-dark;
-        border-color: $button-hover-dark;
-        text-decoration: none;
+        @media (hover: hover) {
+            background-color: $button-hover-dark;
+            border-color: $button-hover-dark;
+            text-decoration: none;
+        }
     }
 }

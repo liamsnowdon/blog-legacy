@@ -40,5 +40,5 @@ export default (environment) => {
 
     environment.addFilter('categoryPosts', (arr, categoryId) => {
         return arr.filter(item => item.category === categoryId);
-    })
+    });
 };

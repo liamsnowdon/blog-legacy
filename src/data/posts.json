@@ -13,13 +13,19 @@
     {
         "id": 2,
         "file": "mobile-button-hover-states.html",
+        "imageUrl": "/assets/posts/mobile-hover-states/mobile-hover-states.png",
+        "author": "Liam Snowdon",
         "title": "Handling button hover states for touchscreen devices",
+        "intro": "On mobile devices hover states don't work the same as they do for desktop. The workaround is to use a special media query.",
+        "datePosted": "2020-12-16T00:00:00.000Z",
         "category": 2,
-        "intro": "Lorem ipsum blah blah blah 2",
-        "tags": [1, 2],
-        "datePosted": "2019-12-04T05:12:20.330Z",
-        "content": "This is the content for the mobile button hover states post.",
-        "relatedPosts": [1]
+        "tags": [
+            1
+        ],
+        "relatedPosts": [
+            1
+        ],
+        "content": "<p>On mobile and touchscreen devices, when an element with a <code class=\"b-inline-code\">:hover</code> pseudo-class is pressed the hover state styles will persist even after the pointing device has been released. This might not be noticeable in many cases if a button takes you to another page, however if not, the issue will arise. This can be solved with using a <strong>hover media query</strong>.</p>\n<p>The W3 spec defines it as the following:</p>\n<blockquote>\n<p>The hover media feature is used to query the user&rsquo;s ability to hover over elements on the page with the primary pointing device. If a device has multiple pointing devices, the&nbsp;hover media feature must reflect the characteristics of the &ldquo;primary&rdquo; pointing device, as determined by the user agent.</p>\n</blockquote>\n<p>The value of the media query is either&nbsp;<strong>none</strong> or&nbsp;<strong>hover</strong>. Let's take a look at the syntax:</p>\n<pre class=\"language-css\"><code>/* _buttons.scss */\n\n.button {\n    background-color: #1997c6;\n    border: 1px solid #1997c6;\n    text-decoration: none;\n\n    &amp;:hover {\n        // Only apply hover styles on devices that support hover\n        @media (hover: hover) {\n            background-color: darken(#1997c6, 10%)\n            border-color: darken(#1997c6, 10%)\n        }\n    }\n}</code></pre>\n<p>In the example above, on any device that supports hovering over elements will darken the background-color and the border-color. That's pretty much it!</p>\n<p>&nbsp;</p>\n<h2>Browser Compatibility</h2>\n<p>Browser support for <code class=\"b-inline-code\">@media (hover: hover)</code> is pretty good nowadays.</p>\n<div class=\"ciu_embed\" data-feature=\"css-media-interaction\" data-periods=\"future_1,current,past_1,past_2\" data-accessible-colours=\"false\"><picture><source srcset=\"https://caniuse.bitsofco.de/image/css-media-interaction.webp\" type=\"image/webp\" /><source srcset=\"https://caniuse.bitsofco.de/image/css-media-interaction.png\" type=\"image/png\" /><img src=\"https://caniuse.bitsofco.de/image/css-media-interaction.jpg\" alt=\"Data on support for the css-media-interaction feature across the major browsers from caniuse.com\" /></picture></div>\n<p>Although, there is one problem you may have which is IE if you need to support it. There's a workaround for it though, it just involves using a reset.</p>\n<pre class=\"language-css\"><code>/* _buttons.scss */\n\n.button {\n    background-color: #1997c6;\n    border: 1px solid #1997c6;\n    text-decoration: none;\n\n    &amp;:hover {\n        // Hover states are done as normal so it works in IE\n        background-color: darken(#1997c6, 10%);\n        border-color: darken(#1997c6, 10%);\n        \n        // Reset hover states here for devices that don't support hover\n        @media (hover: none) {\n            background-color: #1997c6;\n            border-color: #1997c6;\n        }\n    }\n}</code></pre>\n<h2>Conclusion</h2>\n<p>This will solve those issues with buttons persisting their hover styles on mobile. There are a few other interaction media features: \"<strong>pointer</strong>\",&nbsp;\"<strong>any-pointer</strong>\" and \"<strong>any-hover</strong>\". They're worth a read on the <a title=\"All Available Interaction Capabilities: the any-pointer and any-hover features\" href=\"https://www.w3.org/TR/mediaqueries-4/#any-input\" target=\"_blank\" rel=\"noopener\">W3 spec</a>.</p>"
     },
     {
         "id": 3,

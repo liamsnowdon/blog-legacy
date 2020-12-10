@@ -9,18 +9,18 @@
     
     <title>Handling button hover states for touchscreen devices | Liam Snowdon's Blog</title>
     <meta name="robots" content="index, follow">
-    <meta name="description" content="Lorem ipsum blah blah blah 2">
+    <meta name="description" content="On mobile devices hover states don't work the same as they do for desktop. The workaround is to use a special media query.">
     <meta name="author" content="Liam Snowdon">
 
     <meta property="og:title" content="Handling button hover states for touchscreen devices | Liam Snowdon's Blog">
-    <meta property="og:description" content="Lorem ipsum blah blah blah 2">
+    <meta property="og:description" content="On mobile devices hover states don't work the same as they do for desktop. The workaround is to use a special media query.">
     <meta property="og:type" content="article">
     
-  <meta property="article:published_time" content="2019-12-04T05:12:20.330Z">
-  <meta property="article:author" content="undefined">
-  <meta property="article:tag" content="Responsive"><meta property="article:tag" content="Accessibility">
+  <meta property="article:published_time" content="2020-12-16T00:00:00.000Z">
+  <meta property="article:author" content="Liam Snowdon">
+  <meta property="article:tag" content="Responsive">
 
-    <meta property="og:image" content="https://blog.liamsnowdon.co.ukundefined">
+    <meta property="og:image" content="https://blog.liamsnowdon.co.uk/assets/posts/mobile-hover-states/mobile-hover-states.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="600">
     <meta property="og:url" content="https://blog.liamsnowdon.co.uk/categories/mobile-button-hover-states.html">
@@ -39,7 +39,7 @@
     <meta name="msapplication-TileColor" content="#00aba9">
     <meta name="theme-color" content="#252830">
 
-    <link rel="stylesheet" href="/assets/css/styles.css?v=2020119151237545">
+    <link rel="stylesheet" href="/assets/css/styles.css?v=202011100213561">
   </head>
   <body>
     <nav class="l-navigation js-navigation">
@@ -68,11 +68,11 @@
       <div class="post-hero__content">
         <div class="post-hero__left">
           <h1>Handling button hover states for touchscreen devices</h1>
-          <p>Lorem ipsum blah blah blah 2</p>
+          <p>On mobile devices hover states don&#39;t work the same as they do for desktop. The workaround is to use a special media query.</p>
         </div>
         
         <div class="post-hero__right">
-          <h5><strong>Posted:</strong> Wednesday 4th December 2019</h5>
+          <h5><strong>Posted:</strong> Wednesday 16th December 2020</h5>
           
           <h5><strong>Category:</strong> <a href="/categories/css.html">CSS</a></h5>
           
@@ -83,10 +83,6 @@
                 
                 
                 <a href="/tags/responsive.html">Responsive</a>
-              
-                
-                
-                <a href="/tags/accessibility.html">Accessibility</a>
               
             </h5>
           
@@ -132,7 +128,54 @@
     <div class="l-content">
       <div class="post">
         <article class="post__article">
-          <div>This is the content for the mobile button hover states post.</div>
+          <div><p>On mobile and touchscreen devices, when an element with a <code class="b-inline-code">:hover</code> pseudo-class is pressed the hover state styles will persist even after the pointing device has been released. This might not be noticeable in many cases if a button takes you to another page, however if not, the issue will arise. This can be solved with using a <strong>hover media query</strong>.</p>
+<p>The W3 spec defines it as the following:</p>
+<blockquote>
+<p>The hover media feature is used to query the user&rsquo;s ability to hover over elements on the page with the primary pointing device. If a device has multiple pointing devices, the&nbsp;hover media feature must reflect the characteristics of the &ldquo;primary&rdquo; pointing device, as determined by the user agent.</p>
+</blockquote>
+<p>The value of the media query is either&nbsp;<strong>none</strong> or&nbsp;<strong>hover</strong>. Let's take a look at the syntax:</p>
+<pre class="language-css"><code>/* _buttons.scss */
+
+.button {
+    background-color: #1997c6;
+    border: 1px solid #1997c6;
+    text-decoration: none;
+
+    &amp;:hover {
+        // Only apply hover styles on devices that support hover
+        @media (hover: hover) {
+            background-color: darken(#1997c6, 10%)
+            border-color: darken(#1997c6, 10%)
+        }
+    }
+}</code></pre>
+<p>In the example above, on any device that supports hovering over elements will darken the background-color and the border-color. That's pretty much it!</p>
+<p>&nbsp;</p>
+<h2>Browser Compatibility</h2>
+<p>Browser support for <code class="b-inline-code">@media (hover: hover)</code> is pretty good nowadays.</p>
+<div class="ciu_embed" data-feature="css-media-interaction" data-periods="future_1,current,past_1,past_2" data-accessible-colours="false"><picture><source srcset="https://caniuse.bitsofco.de/image/css-media-interaction.webp" type="image/webp" /><source srcset="https://caniuse.bitsofco.de/image/css-media-interaction.png" type="image/png" /><img src="https://caniuse.bitsofco.de/image/css-media-interaction.jpg" alt="Data on support for the css-media-interaction feature across the major browsers from caniuse.com" /></picture></div>
+<p>Although, there is one problem you may have which is IE if you need to support it. There's a workaround for it though, it just involves using a reset.</p>
+<pre class="language-css"><code>/* _buttons.scss */
+
+.button {
+    background-color: #1997c6;
+    border: 1px solid #1997c6;
+    text-decoration: none;
+
+    &amp;:hover {
+        // Hover states are done as normal so it works in IE
+        background-color: darken(#1997c6, 10%);
+        border-color: darken(#1997c6, 10%);
+        
+        // Reset hover states here for devices that don't support hover
+        @media (hover: none) {
+            background-color: #1997c6;
+            border-color: #1997c6;
+        }
+    }
+}</code></pre>
+<h2>Conclusion</h2>
+<p>This will solve those issues with buttons persisting their hover styles on mobile. There are a few other interaction media features: "<strong>pointer</strong>",&nbsp;"<strong>any-pointer</strong>" and "<strong>any-hover</strong>". They're worth a read on the <a title="All Available Interaction Capabilities: the any-pointer and any-hover features" href="https://www.w3.org/TR/mediaqueries-4/#any-input" target="_blank" rel="noopener">W3 spec</a>.</p></div>
         </article>
 
         <aside class="post__sidebar">
@@ -168,18 +211,18 @@
         
         
         
-      
-        
-        
-        
-      
-        
-        
-        
           <a class="sidebar-pod__row" href="/posts/mobile-button-hover-states.html" title="Handling button hover states for touchscreen devices">
             <span class="sidebar-pod__title">Handling button hover states for touchscreen devices</span>
-            <span class="sidebar-pod__date">4/12/2019</span>
+            <span class="sidebar-pod__date">16/12/2020</span>
           </a>
+        
+      
+        
+        
+        
+      
+        
+        
         
       
         
@@ -205,8 +248,10 @@
     </div>
 </footer>
 
-    <script src="/assets/js/main.js?v=2020119151237545"></script>
+    <script src="/assets/js/main.js?v=202011100213561"></script>
 
-     
+    
+  <script src="https://cdn.jsdelivr.net/gh/ireade/caniuse-embed/public/caniuse-embed.min.js"></script>
+
   </body>
 </html>

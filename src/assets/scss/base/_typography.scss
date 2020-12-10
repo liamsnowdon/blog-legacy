@@ -77,6 +77,24 @@ a {
     }
 }
 
+blockquote {
+    border-left: 8px solid $primary-color;
+    margin-left: 30px;
+    padding-left: 30px;
+    font-size: 22px;
+    font-style: italic;
+
+    &::before,
+    &::after {
+        content: "\"";
+        position: relative;
+    }
+    
+    p {
+        display: inline;
+    }
+}
+
 .b-small {
     margin: 0 0 0.5rem 0;
     font-size: $body-small-font-size;
