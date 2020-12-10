@@ -5,8 +5,18 @@
 .post-hero {
     padding: 30px 25px;
     border-bottom: 1px solid $primary-color;
-    background: $primary-color;
+    background-color: $primary-color;
     color: $primary-white;
+
+    &__background {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: center/cover no-repeat transparent;
+        opacity: 0.1;
+    }
 
     @include breakpoint('medium') {
         padding: 80px 40px;

@@ -2,7 +2,8 @@
   {% set category = data.categories | getById(post.category) %}
 
   <div class="post-hero" style="">
-    <div class="l-content">
+    <div class="post-hero__background" style="background-image: url('{{ post.imageUrl }}')"></div>
+    <div class="l-content p-relative">
       <div class="post-hero__content">
         <div class="post-hero__left">
           <h1>{{ post.title }}</h1>

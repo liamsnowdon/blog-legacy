@@ -1,7 +1,8 @@
 // Table of Contents
 // 1. Display
-// 2. Typography
+// 2. Position
 // 3. Margin
+// 4. Typography
 // --------------
 
 // 1. Display
@@ -30,7 +31,60 @@
   justify-content: flex-end !important;
 }
 
-// 2. Typography
+// 2. Position
+// ---------
+.p-relative {
+  position: relative !important;
+}
+
+// 3. Margin
+// --------------
+
+.m-0 {
+  margin: 0 !important;
+}
+
+.mt-0 {
+  margin-top: 0 !important;
+}
+
+.mt-20 {
+margin-top: 20px !important;
+}
+
+.mr-0 {
+  margin-right: 0 !important;
+}
+
+.mr-20 {
+margin-right: 20px !important;
+}
+
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.mb-5 {
+  margin-bottom: 5px !important;
+}
+
+.mb-8 {
+  margin-bottom: 8px !important;
+}
+
+.mb-10 {
+  margin-bottom: 10px !important;
+}
+
+.mb-20 {
+margin-bottom: 20px !important;
+}
+
+.ml-0 {
+  margin-left: 0 !important;
+}
+
+// 4. Typography
 // --------------
 
 .fw-500 {
@@ -55,53 +109,6 @@
 
 .ws-no-wrap {
   white-space: nowrap !important;
-}
-
-// 3. Margin
-// --------------
-
-.m-0 {
-    margin: 0 !important;
-}
-
-.mt-0 {
-    margin-top: 0 !important;
-}
-
-.mt-20 {
-  margin-top: 20px !important;
-}
-
-.mr-0 {
-    margin-right: 0 !important;
-}
-
-.mr-20 {
-  margin-right: 20px !important;
-}
-
-.mb-0 {
-    margin-bottom: 0 !important;
-}
-
-.mb-5 {
-    margin-bottom: 5px !important;
-}
-
-.mb-8 {
-    margin-bottom: 8px !important;
-}
-
-.mb-10 {
-    margin-bottom: 10px !important;
-}
-
-.mb-20 {
-  margin-bottom: 20px !important;
-}
-
-.ml-0 {
-    margin-left: 0 !important;
 }
 
 .blue-highlight {

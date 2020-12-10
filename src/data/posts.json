@@ -13,7 +13,7 @@
     {
         "id": 2,
         "file": "mobile-button-hover-states.html",
-        "imageUrl": "/assets/posts/mobile-hover-states/mobile-hover-states.png",
+        "imageUrl": "/assets/images/posts/mobile-hover-states/mobile-hover-states.jpeg",
         "author": "Liam Snowdon",
         "title": "Handling button hover states for touchscreen devices",
         "intro": "On mobile devices hover states don't work the same as they do for desktop. The workaround is to use a special media query.",
