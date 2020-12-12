@@ -37,7 +37,7 @@ const postcssPlugins = [
  */
 function createErrorHandler(name) {
     return function (err) {
-        console.error('Error from ' + name + ' in compress task', err.toString());
+        console.error('Error from ' + name + ' in task', err.toString());
     };
 }
 

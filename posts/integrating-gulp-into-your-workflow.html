@@ -1,0 +1,361 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    
+    <title>Integrating Gulp into your workflow | Liam Snowdon's Blog</title>
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="A task runner will make performing those repetitive tasks a lot more efficient and lets you worry about the actual development.">
+    <meta name="author" content="Liam Snowdon">
+
+    <meta property="og:title" content="Integrating Gulp into your workflow | Liam Snowdon's Blog">
+    <meta property="og:description" content="A task runner will make performing those repetitive tasks a lot more efficient and lets you worry about the actual development.">
+    <meta property="og:type" content="article">
+    
+  <meta property="article:published_time" content="2019-12-25T00:00:00.000Z">
+  <meta property="article:author" content="Liam Snowdon">
+  <meta property="article:tag" content="Workflow">
+
+    <meta property="og:image" content="https://blog.liamsnowdon.co.uk/assets/images/posts/gulp/gulp.jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="600">
+    <meta property="og:url" content="https://blog.liamsnowdon.co.uk/posts/integrating-gulp-into-your-workflow.html">
+    <meta property="og:site_name" content="Liam Snowdon | Blog">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@scssliam">
+    <meta name="twitter:creator" content="@scssliam">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252830">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#252830">
+
+    <link rel="stylesheet" href="/assets/css/styles.css">
+  </head>
+  <body>
+    <nav class="l-navigation js-navigation">
+    <div class="l-navigation__links">
+        <a class="l-navigation__link l-navigation__link--home" href="/">Blog</a>
+
+        <ul class="l-navigation__list">
+            <li class="l-navigation__item">
+                <a class="l-navigation__link" href="/categories.html">Categories</a>
+            </li>
+
+            <li class="l-navigation__item">
+                <a class="l-navigation__link" href="/tags.html">Tags</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+    
+  
+  
+
+  <div class="post-hero">
+    <div class="post-hero__background" style="background-image: url('/assets/images/posts/gulp/gulp.jpeg')"></div>
+    <div class="l-content p-relative">
+      <div class="post-hero__content">
+        <div class="post-hero__left">
+          <h1>Integrating Gulp into your workflow</h1>
+          <p>A task runner will make performing those repetitive tasks a lot more efficient and lets you worry about the actual development.</p>
+        </div>
+        
+        <div class="post-hero__right">
+          <h5><strong>Posted:</strong> Wednesday 25th December 2019</h5>
+          
+          <h5><strong>Category:</strong> <a href="/categories/javascript.html">JavaScript</a></h5>
+          
+          
+            <h5>
+              <strong>Tags:</strong>
+              
+                
+                
+                <a href="/tags/workflow.html">Workflow</a>
+              
+            </h5>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <main>
+    <nav class="l-sticky-nav">
+  <ul class="l-sticky-nav__list">
+    
+      <li class="l-sticky-nav__item">
+          <a class="l-sticky-nav__link" href="/categories/html.html">
+            <i class="fab fa-html5"></i>
+            <span class="l-sticky-nav__link-text">HTML</span></a>
+        </li>
+    
+      <li class="l-sticky-nav__item">
+          <a class="l-sticky-nav__link" href="/categories/css.html">
+            <i class="fab fa-css3-alt"></i>
+            <span class="l-sticky-nav__link-text">CSS</span></a>
+        </li>
+    
+      <li class="l-sticky-nav__item">
+          <a class="l-sticky-nav__link" href="/categories/javascript.html">
+            <i class="fab fa-js"></i>
+            <span class="l-sticky-nav__link-text">JavaScript</span></a>
+        </li>
+    
+      <li class="l-sticky-nav__item">
+          <a class="l-sticky-nav__link" href="/categories/general.html">
+            <i class="far fa-newspaper"></i>
+            <span class="l-sticky-nav__link-text">General</span></a>
+        </li>
+    
+  </ul>
+</nav>
+
+    
+  <div id="post" class="l-wrapper">
+    <div class="l-content">
+      <div class="post">
+        <article class="post__article">
+          <div><p>A good development workflow will automatically manage all your assets for you including bundling, minifying, compiling and optimising. Sure you could do this manually, but running one command to do all this for you will save you a bunch of time.</p>
+<p>One particular tool, Gulp.js, is a great task runner for these purposes, and there are many plugins you can integrate into it to manage all your development needs. Common tasks include:</p>
+<ul>
+<li>Compiling Sass to CSS.</li>
+<li>Running CSS through PostCSS</li>
+<li>Miniying CSS and JS</li>
+<li>Automatically adding browser prefixes for CSS properties</li>
+<li>Concatenating CSS and JS files together</li>
+</ul>
+<p>Let's take a look at how we can create a basic Gulp workflow, but first we will need to install the gulp-cli globally so we can use the Gulp commands in the terminal.</p>
+<pre class="language-markup"><code>npm install -g gulp-cli</code></pre>
+<p>Nice! We're now ready to start the project. For the rest of this article, this will be the following file structure we will be using:</p>
+<p><img src="assets/images/posts/gulp/file-structure.jpg" alt="File structure for using Gulp" /></p>
+<p>&nbsp;</p>
+<h2>Preparing the project</h2>
+<p>First we need to initialise the project for packages, we will use NPM for this.</p>
+<pre class="language-markup"><code>npm init</code></pre>
+<p>This will take you throught the process of setting up the project and allow you to install node packages. If you take a look inside the project, you will see a file called <code class="b-inline-code">package.json</code>. This is where you will be saving all the development dependencies that Gulp will be using. We can now install gulp.</p>
+<pre class="language-markup"><code>npm install --save-dev gulp</code></pre>
+<p>If you look inside <code class="b-inline-code">package.json</code> again you will see Gulp as a development dependency and its files will now be inside the node_modules folder that NPM creates. Gulp is now ready to be used!</p>
+<p>&nbsp;</p>
+<h2><strong>Creating the gulpfile</strong></h2>
+<p>When we use the Gulp CLI, it will look for a file called <code class="b-inline-code">gulpfile.js</code> and then the tasks it exports. So, let's create this file in the same location as <code class="b-inline-code">package.json</code>. We can add a basic task just to see it working. You can copy the following into your gulpfile:</p>
+<pre class="language-javascript"><code>// gulpfile.js
+
+const gulp = require('gulp');
+
+function test () {
+    console.log('This is the test task');
+}
+
+exports.test = test;</code></pre>
+<p>This is the basics of creating a gulp task and exporting it. Using the Gulp CLI, we can run that test task by running <code class="b-inline-code">gulp test</code>, have a go! You will notice there will be an error that the task didn't complete due to forgetting to signal async completion. You can ignore this for now, we will talk about this later. All you need to know for now is that gulp tasks are asynchronous, so you need to tell Gulp when a task has finished.</p>
+<p>&nbsp;</p>
+<h2>Adding more dependencies</h2>
+<p>Let's install some more dependencies to deal with our assets:</p>
+<pre class="language-markup"><code>npm install --save-dev gulp-sass gulp-postcss cssnano css-mqpacker autoprefixer gulp-concat gulp-uglify</code></pre>
+<p>There are several plugins here so let's quickly go over what they do:</p>
+<ol>
+<li>gulp-sass compiles our Sass to CSS</li>
+<li>gulp-postcss runs the CSS through PostCSS plugins</li>
+<li>cssnano minifies the CSS</li>
+<li>css-mqpacker combines multiple media queries that are the same into one</li>
+<li>autoprefixer automatically adds browser prefixes to CSS properties</li>
+<li>gulp-concat concatenates JS files together into one</li>
+<li>gulp-uglify minifies the JS</li>
+</ol>
+<p>Go ahead and <strong>require</strong> these in the gulpfile like we did with <code class="b-inline-code">const gulp = require('gulp');</code></p>
+<pre class="language-javascript"><code>// gulpfile.js
+
+const gulp = require('gulp');
+const sass = require('sass');
+const postcss = require('gulp-postcss');
+const cssnano = require('cssnano');
+const mqPacker.= require('css-mqpacker');
+const autoprefixer = require('autoprefixer');
+const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');</code></pre>
+<p>&nbsp;</p>
+<h2>CSS Task</h2>
+<p>Let's create our first real task, which will process our CSS. You can go ahead and delete the test function and export for it that we wrote earlier.</p>
+<pre class="language-javascript"><code>// gulpfile.js
+
+const postcssPlugins = [
+    autoprefixer({ cascade: false }),
+    mqPacker(),
+    cssnano()
+];
+
+function css () {
+    return gulp.src('./assets/scss/styles.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(postcss(postcssPlugins))
+        .pipe(gulp.dest('../assets/css'));
+}
+
+exports.css = css;</code></pre>
+<p>The css gulp task does the following:</p>
+<ol>
+<li>Gets the Sass file source by its path</li>
+<li>Compiles the Sass to CSS using <code class="b-inline-code">gulp-sass</code>, logging an error message if it encounters an error.</li>
+<li>Runs that CSS through the PostCSS plugins we have defined in an array</li>
+<li>Outputs the final CSS file.</li>
+</ol>
+<p>This task can now be run with <code class="b-inline-code">gulp css</code>. Make sure you've got a <code class="b-inline-code">styles.scss</code> file created already in that source location and try running that task.</p>
+<p>&nbsp;</p>
+<h2>JS Task</h2>
+<p>That's the CSS done, now we need another task that does the JavaScript.</p>
+<pre class="language-javascript"><code>// gulpfile.js
+
+function createErrorHandler(name) {
+    return function (err) {
+        console.error('Error from ' + name + ' in task', err.toString());
+    };
+}
+
+function js () {
+    return gulp.src('./assets/js/*.js')
+        .pipe(concat('main.js'))
+        .pipe(uglify().on('error', createErrorHandler('uglify')))
+        .pipe(gulp.dest('../assets/js'));
+}
+
+exports.js = js;</code></pre>
+<p>The js task does the following:</p>
+<ol>
+<li>Gets all JS files inside the JS folder</li>
+<li>Concatenates them together into a singular <code class="b-inline-code">main.js</code> file</li>
+<li>Minfies it with gulp-uglify, logging logging an error message if it encounters an error.</li>
+<li>Outputs the final main.js file.</li>
+</ol>
+<p>This task can now be run with <code class="b-inline-code">gulp js</code>.</p>
+<p>&nbsp;</p>
+<h2>Watching files</h2>
+<p>At the moment, every time we make a change to a CSS or JS file, we would need to re-run the command again in order for it to take effect. This is where watchers come in. It will watch for changes in any of these files, and re-run the commands automatically. This is done using the <code class="b-inline-code">gulp.watch</code> method.</p>
+<pre class="language-javascript"><code>// gulpfile.js
+
+function watch () {
+    gulp.watch('./assets/scss/**/*.scss', css);
+    gulp.watch(./assets/js/*.js', js);
+}
+
+exports.watch = watch;</code></pre>
+<p>Simple enough, right? We can now run <code class="b-inline-code">gulp watch</code> to let Gulp automatically run our CSS and JS tasks without having to worry about doing it ourselves.</p>
+<p>&nbsp;</p>
+<h2>Running tasks in parallel and series</h2>
+<p>Gulp 4 introduced two really cool methods that brings a new way of running tasks together.</p>
+<ol>
+<li><code class="b-inline-code">gulp.parallel</code> will run all tasks together at the same time and finishes when all tasks inside it are done.</li>
+<li><code class="b-inline-code">gulp.series</code> will run tasks sequentially and so therefore finishes after the last task in the list is done.</li>
+</ol>
+<p>This is a good opportunity to create an additional task that runs all three of our tasks together. Remove the <code class="b-inline-code">exports.watch = watch;</code> from the gulpfile and add the following export instead:</p>
+<pre class="language-javascript"><code>exports.watch = gulp.series(gulp.parallel(css, js), watch);</code></pre>
+<p>Now with a simple <code class="b-inline-code">gulp watch</code> command, it will run the css and js tasks in parallel (at the same time) and after that is done, it will run the watch task. <code class="b-inline-code">gulp.parallel</code> and <code class="b-inline-code">gulp.series</code> provides you with a lot more control over how tasks are run together.</p>
+<p>&nbsp;</p>
+<h2>Signalling async completion</h2>
+<p>An important thing to remember is that, as of Gulp 4, synchronous tasks are no longer supported. This means you need to let Gulp know when a task has finished using one of the following methods:</p>
+<ol>
+<li>Returning a stream - this is how we did the css and js tasks</li>
+<li>Returning a promise</li>
+<li>Returning an event emitter</li>
+<li>Returning a child process</li>
+<li>Returning an observable</li>
+<li>Using an error-first callback</li>
+</ol>
+<p>Gulp has examples of how to use each method which you can view <a title="Signalling async completion in gulp tasks" href="https://gulpjs.com/docs/en/getting-started/async-completion#no-synchronous-tasks" target="_blank" rel="noopener">here</a>. If you get a "<em>Did you forget to signal async completion?</em><em style="box-sizing: border-box; color: #1c1e21; font-family: Poppins, sans-serif; font-size: 15px; background-color: #ffffff;">" </em>error from one of your tasks, none of the methods above have been used.</p></div>
+        </article>
+
+        <aside class="post__sidebar">
+          
+  <div class="sidebar-pod">
+    <div class="sidebar-pod__header">
+        <h4>Related posts</h4>
+    </div>
+
+    <div class="sidebar-pod__content">
+      
+        
+
+        <a class="sidebar-pod__row" href="/posts/precompiling-nunjucks.html" title="Pre-compiling Nunjucks templates with Gulp">
+          <span class="sidebar-pod__title">Pre-compiling Nunjucks templates with Gulp</span>
+          <span class="sidebar-pod__date">7/12/2020</span>
+        </a>
+      
+
+      
+    </div>
+  </div>
+
+          
+  
+
+  <div class="sidebar-pod">
+    <div class="sidebar-pod__header">
+      <h4>Most recent in JavaScript</h4>
+    </div>
+    <div class="sidebar-pod__content">
+      
+        
+        
+        
+      
+        
+        
+        
+      
+        
+        
+        
+          <a class="sidebar-pod__row" href="/posts/precompiling-nunjucks.html" title="Pre-compiling Nunjucks templates with Gulp">
+            <span class="sidebar-pod__title">Pre-compiling Nunjucks templates with Gulp</span>
+            <span class="sidebar-pod__date">7/12/2020</span>
+          </a>
+        
+      
+        
+        
+        
+          <a class="sidebar-pod__row" href="/posts/integrating-gulp-into-your-workflow.html" title="Integrating Gulp into your workflow">
+            <span class="sidebar-pod__title">Integrating Gulp into your workflow</span>
+            <span class="sidebar-pod__date">25/12/2019</span>
+          </a>
+        
+      
+  </div>
+</div>
+
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  </main>
+
+
+    <a class="c-scroll-to-top js-scroll-to-top-button" data-scroll href="#top"></a>
+
+<footer class="l-footer">
+    <div class="l-footer__content">
+        Copyright &copy; <span class="js-copyright-year"></span> Liam Snowdon
+    </div>
+</footer>
+
+    <script src="/assets/js/main.js"></script>
+
+    
+  <script src="https://cdn.jsdelivr.net/gh/ireade/caniuse-embed/public/caniuse-embed.min.js"></script>
+
+  </body>
+</html>
