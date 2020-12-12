@@ -200,7 +200,7 @@ export const sync = () => {
 }
 
 export const createNunjucksPages = gulp.parallel(createPostPages, createCategoryPages, createTagPages);
-export const nunjucksBuild = gulp.series(gulp.parallel(createPostPages, createCategoryPages, createTagPages), nunjucks);
+export const build = gulp.series(gulp.parallel(createPostPages, createCategoryPages, createTagPages), nunjucks);
 export const watch = gulp.series(gulp.parallel(css, js), nunjucks, gulp.parallel(watchAssets, watchNunjucks));
 
 export default gulp.parallel(css, js, nunjucks);
