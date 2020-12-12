@@ -8,44 +8,9 @@
     },
     {
         "id": 2,
-        "file": "accessibility.html",
-        "imageUrl": "/assets/images/tags/accessibility.jpg",
-        "name": "Accessibility",
-        "intro": "Making your web pages accessibile is key to making sure all your users are able to use it."
-    },
-    {
-        "id": 3,
-        "file": "forms.html",
-        "imageUrl": "/assets/images/tags/forms.jpg",
-        "name": "Forms",
-        "intro": "Collecting user input is done with forms and is commonly used to send data to a server for processing."
-    },
-    {
-        "id": 4,
-        "file": "documentation.html",
-        "imageUrl": "/assets/images/tags/documentation.jpg",
-        "name": "Documentation",
-        "intro": "It is important to keep your code well documented so it's easy for you and others to understand how it works."
-    },
-    {
-        "id": 5,
-        "file": "architecture.html",
-        "imageUrl": "/assets/images/tags/architecture.jpg",
-        "name": "Architecture",
-        "intro": "Having a well thought out architecture makes it easy to split out files and find them when you need to."
-    },
-    {
-        "id": 6,
-        "file": "sass.html",
-        "imageUrl": "/assets/images/tags/sass.jpg",
-        "name": "Sass",
-        "intro": "Syntactically Awesome Style Sheets. One of the most popular preprocessors for CSS."
-    },
-    {
-        "id": 7,
-        "file": "typography.html",
-        "imageUrl": "/assets/images/tags/typography.jpg",
-        "name": "Typography",
-        "intro": "There are many typeface options out there and choosing the right ones for your website is key for creating the best reading experience."
+        "file": "workflow.html",
+        "imageUrl": "/assets/images/tags/workflow.jpg",
+        "name": "Workflow",
+        "intro": "A good workflow will help you perform your development tasks as easy as possible."
     }
 ]
