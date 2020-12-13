@@ -2,7 +2,13 @@
   {% set category = data.categories | getById(post.category) %}
 
   <div class="post-hero">
-    <div class="post-hero__background" style="background-image: url('{{ post.imageUrl }}')"></div>
+    <picture class="post-hero__background">
+      <source 
+        srcset="{{ post.headerUrl }}"
+        media="(min-width: 768px)"
+      >
+      <img src="{{ post.thumbnailUrl }}" alt="{{ post.title }}" />
+    </picture>
     <div class="l-content p-relative">
       <div class="post-hero__content">
         <div class="post-hero__left">

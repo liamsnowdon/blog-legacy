@@ -86,7 +86,7 @@ export const postTemplate = `{% extends "base.njk" %}
   <% ARTICLE_TAGS %>
 {% endblock %}
 
-{% block metaOgImage %}<% POST_IMAGE_URL %>{% endblock %}
+{% block metaOgImage %}<% POST_OG_IMAGE_URL %>{% endblock %}
 {% block metaOgUrl %}/posts/<% POST_FILE %>{% endblock %}
 
 {% import "macros/post-page.njk" as postPage %}

@@ -148,7 +148,7 @@ export const createPostPages = (cb) => {
             .replace(/<% POST_ID %>/g, post.id)
             .replace(/<% POST_TITLE %>/g, post.title)
             .replace(/<% POST_INTRO %>/g, post.intro)
-            .replace(/<% POST_IMAGE_URL %>/g, post.imageUrl)
+            .replace(/<% POST_OG_IMAGE_URL %>/g, post.ogImageUrl)
             .replace(/<% POST_DATE_POSTED %>/g, post.datePosted)
             .replace(/<% POST_AUTHOR %>/g, post.author)
             .replace(/<% POST_FILE %>/g, post.file)

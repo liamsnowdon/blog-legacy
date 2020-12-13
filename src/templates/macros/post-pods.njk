@@ -2,8 +2,8 @@
   {% set category = data.categories | getById(post.category) %}
 
   <div class="c-post">
-    <div class="c-post__image" style="background-image: url('{{ post.imageUrl }}')"></div>
-
+    <div class="c-post__image" style="background-image: url('{{ post.thumbnailUrl }}')"></div>
+  
     <div class="c-post__content">
       <a class="c-post__category" href="/categories/{{ category.file }}">{{ category.name }}</a>
 
@@ -34,7 +34,7 @@
   {% set category = data.categories | getById(post.category) %}
 
   <div class="c-recent-post">
-    <div class="c-recent-post__image" style="background-image: url('{{ post.imageUrl }}')"></div>
+    <div class="c-recent-post__image" style="background-image: url('{{ post.thumbnailUrl }}')"></div>
     <div class="c-recent-post__content">
       <h3 class="c-recent-post__title">{{ post.title }}</h3>
       <h5 class="c-recent-post__subtitle">

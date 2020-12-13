@@ -10,13 +10,17 @@
     color: $primary-white;
 
     &__background {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        background: center/cover no-repeat transparent;
-        opacity: 0.1;
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.1;
+        }
     }
 
     @include breakpoint('medium') {
