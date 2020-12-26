@@ -61,16 +61,16 @@
     </div>
 
     <div class="sidebar-pod__content">
-      {% for id in post.relatedPosts %}
-        {% set relatedPost = data.posts | getById(id) %}
+      {% set relatedPosts = data.posts | relatedPosts(post) %}
 
+      {% for relatedPost in relatedPosts %}
         <a class="sidebar-pod__row" href="/posts/{{ relatedPost.file }}" title="{{ relatedPost.title }}">
           <span class="sidebar-pod__title">{{ relatedPost.title }}</span>
           <span class="sidebar-pod__date">{{ relatedPost.datePosted|shortDate }}</span>
         </a>
       {% endfor %}
 
-      {% if post.relatedPosts.length === 0 %}
+      {% if relatedPosts.length === 0 %}
         <div class="sidebar-pod__row is-empty">
             Could not find any related posts.
         </div>
