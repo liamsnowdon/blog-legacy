@@ -31,7 +31,8 @@
     "gulp-nunjucks-render": "^2.2.3",
     "gulp-postcss": "^9.0.0",
     "gulp-sass": "^4.1.0",
-    "gulp-uglify": "^3.0.2"
+    "gulp-uglify": "^3.0.2",
+    "merge-stream": "^2.0.0"
   },
   "babel": {
     "presets": [

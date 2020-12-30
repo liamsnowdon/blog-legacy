@@ -9,6 +9,7 @@ import nunjucksRender from 'gulp-nunjucks-render';
 import browserSync from 'browser-sync';
 import concat from 'gulp-concat';
 import uglify from 'gulp-uglify';
+import merge from 'merge-stream';
 
 import manageEnvironment from './environment';
 import { tagTemplate, categoryTemplate, postTemplate } from './nunjucks-page-templates';
@@ -37,7 +38,7 @@ const postcssPlugins = [
  */
 function createErrorHandler(name) {
     return function (err) {
-        console.error('Error from ' + name + ' in task', err.toString());
+        console.error(`Error from ${name} in task ${err.toString()}`);
     };
 }
 
@@ -57,14 +58,20 @@ export const css = () => {
 /**
  * JavaScript files
  * 
- * 1. Concatenate 
- * 2. Minify
+ * 1. Concatenate third party and core file
+ * 2. Minify all JS
  */
 export const js = () => {
-    return gulp.src(['./assets/third-party/**/*.js', './assets/js/*.js'])
+    const core =  gulp.src(['./assets/third-party/**/*.js', './assets/js/core.js'])
         .pipe(concat('main.js'))
         .pipe(uglify().on('error', createErrorHandler('uglify')))
         .pipe(gulp.dest('../assets/js'));
+
+    const pages = gulp.src('./assets/js/pages/*.js')
+        .pipe(uglify().on('error', createErrorHandler('uglify')))
+        .pipe(gulp.dest('../assets/js/pages'));
+
+    return merge(core, pages);
 }
 
 /**
@@ -72,7 +79,7 @@ export const js = () => {
  */
 export const watchAssets = () => {
     gulp.watch('./assets/scss/**/*.scss', css);
-    gulp.watch(['./assets/third-party/**/*.js', './assets/js/*.js'], js);
+    gulp.watch(['./assets/third-party/**/*.js', './assets/js/**/*.js'], js);
 }
 
 /**

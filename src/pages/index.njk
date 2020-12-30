@@ -4,6 +4,23 @@
   {% import "macros/post-pods.njk" as pods %}
 
   <div class="homepage-hero">
+    <div class="homepage-hero__swiper-cont">
+      <div class="homepage-hero__swiper swiper-container js-homepage-swiper">
+        <div class="swiper-wrapper">
+          {% for post in data.posts | sort(true, true, 'datePosted') | limitTo(5) %}
+            <div class="homepage-hero__slide swiper-slide">
+              <picture class="homepage-hero__slide-image">
+                <source 
+                  srcset="{{ post.headerImageUrl }}"
+                  media="(min-width: 768px)"
+                >
+                <img src="{{ post.thumbnailImageUrl }}" alt="{{ post.title }}" />
+              </picture>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
     <div class="homepage-hero__content">
       <h1 class="homepage-hero__title">
         Welcome to my blog!
@@ -31,53 +48,58 @@
           {{ pods.mostRecentPostPod(post) }}
         {% endfor %}
       </div>
+    </div>
 
-      <div class="l-wrapper l-wrapper--grey-2">
-        <div class="l-content">
-          <div class="l-content__title">
-            <h2>Most recent by category</h2>
-          </div>
+    <div class="l-wrapper l-wrapper--grey-2">
+      <div class="l-content">
+        <div class="l-content__title">
+          <h2>Most recent by category</h2>
+        </div>
 
-          <div class="l-grid">
-            <div class="l-grid__row l-grid__row--column-margins">
-              {% for post in data.posts | categoryPosts(1) | sort(true, true, 'datePosted') | limitTo(1) %}
-                <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column--large-4">
-                  {{ pods.postPod(post) }}
-                </div>
-              {% endfor %}
+        <div class="l-grid">
+          <div class="l-grid__row l-grid__row--column-margins">
+            {% for post in data.posts | categoryPosts(1) | sort(true, true, 'datePosted') | limitTo(1) %}
+              <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column--large-4">
+                {{ pods.postPod(post) }}
+              </div>
+            {% endfor %}
 
-              {% for post in data.posts | categoryPosts(2) | sort(true, true, 'datePosted') | limitTo(1) %}
-                <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column--large-4">
-                  {{ pods.postPod(post) }}
-                </div>
-              {% endfor %}
+            {% for post in data.posts | categoryPosts(2) | sort(true, true, 'datePosted') | limitTo(1) %}
+              <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column--large-4">
+                {{ pods.postPod(post) }}
+              </div>
+            {% endfor %}
 
-              {% for post in data.posts | categoryPosts(3) | sort(true, true, 'datePosted') | limitTo(1) %}
-                <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column--large-4">
-                  {{ pods.postPod(post) }}
-                </div>
-              {% endfor %}
-            </div>
+            {% for post in data.posts | categoryPosts(3) | sort(true, true, 'datePosted') | limitTo(1) %}
+              <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column--large-4">
+                {{ pods.postPod(post) }}
+              </div>
+            {% endfor %}
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="l-wrapper">
-        <div class="l-content">
-          <div class="l-content__title">
-            <h2>All posts</h2>
-          </div>
+    <div class="l-wrapper">
+      <div class="l-content">
+        <div class="l-content__title">
+          <h2>All posts</h2>
+        </div>
 
-          <div class="l-grid">
-            <div class="l-grid__row l-grid__row--column-margins">
-              {% for post in data.posts | sort(true, true, 'datePosted') %}
-                <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column--large-3">
-                  {{ pods.postPod(post) }}
-                </div>
-              {% endfor %}
-            </div>
+        <div class="l-grid">
+          <div class="l-grid__row l-grid__row--column-margins">
+            {% for post in data.posts | sort(true, true, 'datePosted') %}
+              <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6 l-grid__column--large-3">
+                {{ pods.postPod(post) }}
+              </div>
+            {% endfor %}
           </div>
         </div>
       </div>
-    </main>
-  {% endblock %}
+    </div>
+  </main>
+{% endblock %}
+
+{% block additionalJS %} 
+  <script src="/assets/js/pages/homepage.js"></script>
+{% endblock %}
