@@ -1,21 +1,22 @@
 {
-  "name": "blog-static",
+  "name": "blog",
   "version": "1.0.0",
-  "description": "Static version of my blog",
+  "description": "Blog built with Nunjucks",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "gulp sync & gulp watch",
+    "build": "gulp build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/liamsnowdon/blog-static.git"
+    "url": "git+https://github.com/liamsnowdon/blog.git"
   },
-  "author": "",
+  "author": "Liam Snowdon",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/liamsnowdon/blog-static/issues"
+    "url": "https://github.com/liamsnowdon/blog/issues"
   },
-  "homepage": "https://github.com/liamsnowdon/blog-static#readme",
+  "homepage": "https://github.com/liamsnowdon/blog#readme",
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/preset-env": "^7.12.7",
@@ -27,7 +28,6 @@
     "dart-sass": "^1.25.0",
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",
-    "gulp-data": "^1.3.1",
     "gulp-nunjucks-render": "^2.2.3",
     "gulp-postcss": "^9.0.0",
     "gulp-sass": "^4.1.0",
