@@ -1,94 +1,55 @@
 .l-footer {
-    padding: 10px 25px;
+    margin: 50px auto 0;
+    padding: 20px;
+    color: white;
     background: $primary-color;
-    color: $primary-white;
-    font-size: $body-small-font-size;
-    text-align: center;
+    font-size: 14px;
 
-    &__content {
-        max-width: $global-width;
-        margin: 0 auto;
+    a {
+      color: white;
     }
 
     &__main {
-        display: flex;
-        justify-content: center;
-        margin: 10px auto 20px;
-
-        @include breakpoint('medium', 'down') {
-            flex-direction: column;
-        }
-
-        @include breakpoint('medium') {
-            max-width: 500px;
-        }
-    }
-
-    &__social {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex: 0 1 auto;
-        padding: 20px 50px;
-        font-size: 30px;
-    
-        @include breakpoint('medium', 'down') {
-            order: 2;
-        }
-    }
-
-    &__icon {
-        color: white;
-
-        &:not(:last-child) {
-            margin-right: 15px;
-        }
-    }
-
-    &__nav {
-        display: flex;
-        flex: 1 0 0;
-        padding: 10px;
-
-        @include breakpoint('medium') {
-            border-left: 4px solid white;
-            padding: 20px 50px;
-        }
-
-        @include breakpoint('medium', 'down') {
-            justify-content: center;
-        }
+      display: flex;
+      max-width: 800px;
+      margin: 0 auto;
     }
 
     &__links {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        font-size: 16px;
-
-        &:not(:last-child) {
-            margin-right: 80px;
-        }
+      flex: 0 1 auto;
+      border-right: 2px solid white;
+      padding-right: 20px;
+      margin-right: 20px;
     }
 
     &__link {
-        &:not(:last-child) {
-            margin-bottom: 5px;
-        }
-
-        a {
-            color: white;
-            font-weight: 400;
-        }
+      display: block;
+      margin: 10px;
     }
 
-    &__link-heading {
-        &:not(:last-child) {
-            margin-bottom: 15px;
-        }
-
-        a {
-            color: white;
-        }
+    &__social {
+      flex: 1 0 0;
     }
-}
+
+    &__social-links {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 2px solid white;
+    }
+
+    &__social-link {
+      font-size: 30px;
+
+      &:not(:last-child) {
+        margin-right: 10px;
+      }
+
+      &:hover {
+          text-decoration: none;
+      }
+    }
+
+    &__disclaimer {
+      margin-top: 30px;
+    }
+  }

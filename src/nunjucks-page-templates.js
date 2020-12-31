@@ -50,6 +50,22 @@ export const categoryTemplate = `{% extends "base.njk" %}
 
     <div class="l-wrapper">
       <div class="l-content">
+        <nav class="c-breadcrumbs">
+          <ul class="c-breadcrumbs__links">
+            <li class="c-breadcrumbs__link">
+              <a href="/">Home</a>
+            </li>
+
+            <li class="c-breadcrumbs__link">
+              <a href="/categories.html">Categories</a>
+            </li>
+
+            <li class="c-breadcrumbs__link c-breadcrumbs__link--active-page">
+              <% CATEGORY_NAME %>
+            </li>
+          </ul>
+        </nav>
+
         {% if posts | length > 0 %}
           <div class="l-grid">
             <div class="l-grid__row l-grid__row--column-margins">

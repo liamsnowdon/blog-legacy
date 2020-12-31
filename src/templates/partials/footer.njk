@@ -1,45 +1,25 @@
-<a class="c-scroll-to-top js-scroll-to-top-button" data-scroll href="#top"></a>
+<a class="c-scroll-to-top js-scroll-to-top-button" href="#top"></a>
 
 <footer class="l-footer">
-    <div class="l-footer__content">
-        <div class="l-footer__main">
-            <div class="l-footer__social">
-                <a class="l-footer__icon" href="https://www.linkedin.com/in/liam-snowdon/" target="_blank">
+    <div class="l-footer__main">
+        <nav class="l-footer__links">
+            <a href="/categories.html" class="l-footer__link">
+                Categories
+            </a>
+            <a href="/tags.html" class="l-footer__link">
+                Tags
+            </a>
+        </nav>
+        <div class="l-footer__social">
+            <h6>Liam Snowdon's Blog</h6>
+            <div class="l-footer__social-links">
+                <a href="https://www.linkedin.com/in/liam-snowdon/" target="_blank" class="l-footer__social-link">
                     <i class="fab fa-linkedin"></i>
                 </a>
-                
-                <a class="l-footer__icon" href="https://github.com/liamsnowdon" target="_blank">
+                <a href="https://github.com/liamsnowdon" target="_blank" class="l-footer__social-link">
                     <i class="fab fa-github"></i>
                 </a>
             </div>
-
-            <div class="l-footer__nav">
-                <ul class="l-footer__links">
-                    <li class="l-footer__link-heading">
-                        <a href="/categories.html">Categories</a>
-                    </li>
-                    
-                    {% for category in data.categories %}
-                        <li class="l-footer__link">
-                            <a href="/categories/{{ category.file }}">{{ category.name }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-
-                <ul class="l-footer__links">
-                    <li class="l-footer__link-heading">
-                        <a href="/tags.html">Tags</a>
-                    </li>
-                    
-                    {% for tag in data.tags %}
-                        <li class="l-footer__link">
-                            <a href="/tags/{{ tag.file }}">{{ tag.name }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
         </div>
-        
-        Copyright &copy; 2021 Liam Snowdon
     </div>
 </footer>

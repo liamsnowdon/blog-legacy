@@ -42,9 +42,6 @@
   var ScrollToTop = {
     initialise: function () {
       this.scrollToTopButton = document.querySelector('.js-scroll-to-top-button');
-      this.scrollToTopButtonSmoothScrollInstance = new SmoothScroll('.js-scroll-to-top-button', {
-        updateURL: false
-      });
 
       this.connectEvents();
     },

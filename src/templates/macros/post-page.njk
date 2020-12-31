@@ -38,8 +38,30 @@
 {% endmacro %}
 
 {% macro content(post) %}
+  {% set category = data.categories | getById(post.category) %}
+
   <div id="post" class="l-wrapper">
     <div class="l-content">
+      <nav class="c-breadcrumbs">
+        <ul class="c-breadcrumbs__links">
+          <li class="c-breadcrumbs__link">
+            <a href="/">Home</a>
+          </li>
+
+          <li class="c-breadcrumbs__link">
+            <a href="/categories.html">Categories</a>
+          </li>
+
+          <li class="c-breadcrumbs__link">
+            <a href="/categories/{{ category.file }}">{{ category.name }}</a>
+          </li>
+
+          <li class="c-breadcrumbs__link c-breadcrumbs__link--active-page">
+            {{ post.title }}
+          </li>
+        </ul>
+      </nav>
+        
       <div class="post">
         <article class="post__article">
           <div>{{ post.content | safe }}</div>

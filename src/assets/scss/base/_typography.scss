@@ -79,10 +79,14 @@ a {
 
 blockquote {
     border-left: 8px solid $primary-color;
-    margin-left: 30px;
+    margin-left: 0;
     padding-left: 30px;
     font-size: 22px;
     font-style: italic;
+
+    @include breakpoint('medium') {
+        margin-left: 30px;
+    }
 
     &::before,
     &::after {
