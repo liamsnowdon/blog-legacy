@@ -35,6 +35,7 @@
     <meta name="msapplication-TileColor" content="#00aba9">
     <meta name="theme-color" content="#252830">
 
+    <script src="https://unpkg.com/scrollreveal@4.0.7/dist/scrollreveal.js"></script>
     <link rel="stylesheet" href="/assets/css/styles.css">
   </head>
   <body>
@@ -58,7 +59,7 @@
     
   <header class="l-header">
     <div class="l-header__content">
-      <h1 class="l-header__heading">Categories</h1>
+      <h1 class="l-header__heading load-hidden js-hero-text">Categories</h1>
     </div>
   </header>
 
@@ -100,7 +101,7 @@
             
               <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6">
                 
-  <div class="c-pod">
+  <div class="c-pod load-hidden js-pod">
     <div class="c-pod__image" style="background-image: url('/assets/images/categories/html/html.jpg')"></div>
     <div class="c-pod__content">
       <h5 class="c-pod__title">HTML</h4>
@@ -118,7 +119,7 @@
             
               <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6">
                 
-  <div class="c-pod">
+  <div class="c-pod load-hidden js-pod">
     <div class="c-pod__image" style="background-image: url('/assets/images/categories/css/css.jpg')"></div>
     <div class="c-pod__content">
       <h5 class="c-pod__title">CSS</h4>
@@ -136,7 +137,7 @@
             
               <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6">
                 
-  <div class="c-pod">
+  <div class="c-pod load-hidden js-pod">
     <div class="c-pod__image" style="background-image: url('/assets/images/categories/javascript/javascript.jpg')"></div>
     <div class="c-pod__content">
       <h5 class="c-pod__title">JavaScript</h4>
@@ -154,7 +155,7 @@
             
               <div class="l-grid__column l-grid__column--12 l-grid__column--medium-6">
                 
-  <div class="c-pod">
+  <div class="c-pod load-hidden js-pod">
     <div class="c-pod__image" style="background-image: url('/assets/images/blog.jpg')"></div>
     <div class="c-pod__content">
       <h5 class="c-pod__title">General</h4>
@@ -181,7 +182,61 @@
 
 <footer class="l-footer">
     <div class="l-footer__content">
-        Copyright &copy; <span class="js-copyright-year"></span> Liam Snowdon
+        <div class="l-footer__main">
+            <div class="l-footer__social">
+                <a class="l-footer__icon" href="https://www.linkedin.com/in/liam-snowdon/" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                
+                <a class="l-footer__icon" href="https://github.com/liamsnowdon" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+
+            <div class="l-footer__nav">
+                <ul class="l-footer__links">
+                    <li class="l-footer__link-heading">
+                        <a href="/categories.html">Categories</a>
+                    </li>
+                    
+                    
+                        <li class="l-footer__link">
+                            <a href="/categories/html.html">HTML</a>
+                        </li>
+                    
+                        <li class="l-footer__link">
+                            <a href="/categories/css.html">CSS</a>
+                        </li>
+                    
+                        <li class="l-footer__link">
+                            <a href="/categories/javascript.html">JavaScript</a>
+                        </li>
+                    
+                        <li class="l-footer__link">
+                            <a href="/categories/general.html">General</a>
+                        </li>
+                    
+                </ul>
+
+                <ul class="l-footer__links">
+                    <li class="l-footer__link-heading">
+                        <a href="/tags.html">Tags</a>
+                    </li>
+                    
+                    
+                        <li class="l-footer__link">
+                            <a href="/tags/responsive.html">Responsive</a>
+                        </li>
+                    
+                        <li class="l-footer__link">
+                            <a href="/tags/workflow.html">Workflow</a>
+                        </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+        Copyright &copy; 2021 Liam Snowdon
     </div>
 </footer>
 

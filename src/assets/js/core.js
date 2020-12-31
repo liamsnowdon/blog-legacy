@@ -1,4 +1,12 @@
 (function () {
+  // Set default config for ScrollReveal
+  ScrollReveal({
+    duration: 1200,
+    delay: 100
+  });
+
+  ScrollReveal().reveal('.js-pod', { interval: 200 });
+  ScrollReveal().reveal('.js-hero-text', { interval: 200, distance: '50px', origin: 'top' });
 
   var Helpers = {
      /**

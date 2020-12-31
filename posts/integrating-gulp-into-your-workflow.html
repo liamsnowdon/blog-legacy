@@ -39,6 +39,7 @@
     <meta name="msapplication-TileColor" content="#00aba9">
     <meta name="theme-color" content="#252830">
 
+    <script src="https://unpkg.com/scrollreveal@4.0.7/dist/scrollreveal.js"></script>
     <link rel="stylesheet" href="/assets/css/styles.css">
   </head>
   <body>
@@ -72,7 +73,7 @@
       <img src="/assets/images/posts/gulp/gulp-thumbnail.jpeg" alt="Integrating Gulp into your workflow" />
     </picture>
     <div class="l-content p-relative">
-      <div class="post-hero__content">
+      <div class="post-hero__content load-hidden js-hero-text">
         <div class="post-hero__left">
           <h1>Integrating Gulp into your workflow</h1>
           <p>A task runner will make performing those repetitive tasks a lot more efficient and lets you worry about the actual development.</p>
@@ -358,7 +359,61 @@ exports.watch = watch;</code></pre>
 
 <footer class="l-footer">
     <div class="l-footer__content">
-        Copyright &copy; <span class="js-copyright-year"></span> Liam Snowdon
+        <div class="l-footer__main">
+            <div class="l-footer__social">
+                <a class="l-footer__icon" href="https://www.linkedin.com/in/liam-snowdon/" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                
+                <a class="l-footer__icon" href="https://github.com/liamsnowdon" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+
+            <div class="l-footer__nav">
+                <ul class="l-footer__links">
+                    <li class="l-footer__link-heading">
+                        <a href="/categories.html">Categories</a>
+                    </li>
+                    
+                    
+                        <li class="l-footer__link">
+                            <a href="/categories/html.html">HTML</a>
+                        </li>
+                    
+                        <li class="l-footer__link">
+                            <a href="/categories/css.html">CSS</a>
+                        </li>
+                    
+                        <li class="l-footer__link">
+                            <a href="/categories/javascript.html">JavaScript</a>
+                        </li>
+                    
+                        <li class="l-footer__link">
+                            <a href="/categories/general.html">General</a>
+                        </li>
+                    
+                </ul>
+
+                <ul class="l-footer__links">
+                    <li class="l-footer__link-heading">
+                        <a href="/tags.html">Tags</a>
+                    </li>
+                    
+                    
+                        <li class="l-footer__link">
+                            <a href="/tags/responsive.html">Responsive</a>
+                        </li>
+                    
+                        <li class="l-footer__link">
+                            <a href="/tags/workflow.html">Workflow</a>
+                        </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+        Copyright &copy; 2021 Liam Snowdon
     </div>
 </footer>
 

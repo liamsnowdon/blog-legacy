@@ -3,8 +3,8 @@
 {% macro header(tag) %}
   <header class="l-header">
     <div class="l-header__content">
-      <h1 class="l-header__heading">'{{ tag.name }}' Posts</h1>
-      <p>{{ tag.intro }}</p>
+      <h1 class="l-header__heading load-hidden js-hero-text">'{{ tag.name }}' Posts</h1>
+      <p class="load-hidden js-hero-text">{{ tag.intro }}</p>
     </div>
   </header>
 {% endmacro %}
@@ -28,7 +28,7 @@
 {% endmacro %}
 
 {% macro pod(tag) %}
-  <div class="c-pod">
+  <div class="c-pod js-pod">
     <div class="c-pod__image c-pod__image--{{ tag.name | lower }}"></div>
     <div class="c-pod__content">
       <h5 class="c-pod__title">{{ tag.name }}</h4>

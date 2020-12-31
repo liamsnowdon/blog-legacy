@@ -1,6 +1,5 @@
 .l-footer {
     padding: 10px 25px;
-    height: 39px;
     background: $primary-color;
     color: $primary-white;
     font-size: $body-small-font-size;
@@ -9,5 +8,87 @@
     &__content {
         max-width: $global-width;
         margin: 0 auto;
+    }
+
+    &__main {
+        display: flex;
+        justify-content: center;
+        margin: 10px auto 20px;
+
+        @include breakpoint('medium', 'down') {
+            flex-direction: column;
+        }
+
+        @include breakpoint('medium') {
+            max-width: 500px;
+        }
+    }
+
+    &__social {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 1 auto;
+        padding: 20px 50px;
+        font-size: 30px;
+    
+        @include breakpoint('medium', 'down') {
+            order: 2;
+        }
+    }
+
+    &__icon {
+        color: white;
+
+        &:not(:last-child) {
+            margin-right: 15px;
+        }
+    }
+
+    &__nav {
+        display: flex;
+        flex: 1 0 0;
+        padding: 10px;
+
+        @include breakpoint('medium') {
+            border-left: 4px solid white;
+            padding: 20px 50px;
+        }
+
+        @include breakpoint('medium', 'down') {
+            justify-content: center;
+        }
+    }
+
+    &__links {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        font-size: 16px;
+
+        &:not(:last-child) {
+            margin-right: 80px;
+        }
+    }
+
+    &__link {
+        &:not(:last-child) {
+            margin-bottom: 5px;
+        }
+
+        a {
+            color: white;
+            font-weight: 400;
+        }
+    }
+
+    &__link-heading {
+        &:not(:last-child) {
+            margin-bottom: 15px;
+        }
+
+        a {
+            color: white;
+        }
     }
 }

@@ -35,6 +35,7 @@
     <meta name="msapplication-TileColor" content="#00aba9">
     <meta name="theme-color" content="#252830">
 
+    <script src="https://unpkg.com/scrollreveal@4.0.7/dist/scrollreveal.js"></script>
     <link rel="stylesheet" href="/assets/css/styles.css">
   </head>
   <body>
@@ -117,13 +118,13 @@
       </div>
     </div>
     <div class="homepage-hero__content">
-      <h1 class="homepage-hero__title">
+      <h1 class="homepage-hero__title load-hidden js-hero-text">
         Welcome to my blog!
       </h1>
-      <h5 class="homepage-hero__subtitle">
+      <h5 class="homepage-hero__subtitle load-hidden js-hero-text">
         A place for fancy, cool front end tips and tricks!
       </h5>
-      <p class="homepage-hero__paragraph">
+      <p class="homepage-hero__paragraph load-hidden js-hero-text">
         My name is Liam Snowdon. I'm a front end developer and this is my blog where I will post about all things HTML, CSS and JavaScript. My posts are categorised and tagged with keywords to make it easy to find exactly what you're looking for.
       </p>
     </div>
@@ -171,7 +172,7 @@
           
   
 
-  <div class="c-recent-post">
+  <div class="c-recent-post js-pod load-hidden">
     <div class="c-recent-post__image" style="background-image: url('/assets/images/posts/handling-responsive-images/handling-responsive-images-thumbnail.jpeg')"></div>
     <div class="c-recent-post__content">
       <h3 class="c-recent-post__title">Handling responsive images</h3>
@@ -219,7 +220,7 @@
                 
   
 
-  <div class="c-post">
+  <div class="c-post js-pod load-hidden">
     <div class="c-post__image" style="background-image: url('/assets/images/posts/handling-responsive-images/handling-responsive-images-thumbnail.jpeg')"></div>
   
     <div class="c-post__content">
@@ -255,7 +256,7 @@
                 
   
 
-  <div class="c-post">
+  <div class="c-post js-pod load-hidden">
     <div class="c-post__image" style="background-image: url('/assets/images/posts/mobile-hover-states/mobile-hover-states-thumbnail.jpeg')"></div>
   
     <div class="c-post__content">
@@ -291,7 +292,7 @@
                 
   
 
-  <div class="c-post">
+  <div class="c-post js-pod load-hidden">
     <div class="c-post__image" style="background-image: url('/assets/images/posts/precompiling-nunjucks/precompiling-nunjucks-thumbnail.jpeg')"></div>
   
     <div class="c-post__content">
@@ -339,7 +340,7 @@
                 
   
 
-  <div class="c-post">
+  <div class="c-post js-pod load-hidden">
     <div class="c-post__image" style="background-image: url('/assets/images/posts/handling-responsive-images/handling-responsive-images-thumbnail.jpeg')"></div>
   
     <div class="c-post__content">
@@ -373,7 +374,7 @@
                 
   
 
-  <div class="c-post">
+  <div class="c-post js-pod load-hidden">
     <div class="c-post__image" style="background-image: url('/assets/images/posts/mobile-hover-states/mobile-hover-states-thumbnail.jpeg')"></div>
   
     <div class="c-post__content">
@@ -407,7 +408,7 @@
                 
   
 
-  <div class="c-post">
+  <div class="c-post js-pod load-hidden">
     <div class="c-post__image" style="background-image: url('/assets/images/posts/precompiling-nunjucks/precompiling-nunjucks-thumbnail.jpeg')"></div>
   
     <div class="c-post__content">
@@ -441,7 +442,7 @@
                 
   
 
-  <div class="c-post">
+  <div class="c-post js-pod load-hidden">
     <div class="c-post__image" style="background-image: url('/assets/images/posts/new-blog/new-blog-thumbnail.jpeg')"></div>
   
     <div class="c-post__content">
@@ -464,7 +465,7 @@
                 
   
 
-  <div class="c-post">
+  <div class="c-post js-pod load-hidden">
     <div class="c-post__image" style="background-image: url('/assets/images/posts/gulp/gulp-thumbnail.jpeg')"></div>
   
     <div class="c-post__content">
@@ -505,7 +506,61 @@
 
 <footer class="l-footer">
     <div class="l-footer__content">
-        Copyright &copy; <span class="js-copyright-year"></span> Liam Snowdon
+        <div class="l-footer__main">
+            <div class="l-footer__social">
+                <a class="l-footer__icon" href="https://www.linkedin.com/in/liam-snowdon/" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                
+                <a class="l-footer__icon" href="https://github.com/liamsnowdon" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+
+            <div class="l-footer__nav">
+                <ul class="l-footer__links">
+                    <li class="l-footer__link-heading">
+                        <a href="/categories.html">Categories</a>
+                    </li>
+                    
+                    
+                        <li class="l-footer__link">
+                            <a href="/categories/html.html">HTML</a>
+                        </li>
+                    
+                        <li class="l-footer__link">
+                            <a href="/categories/css.html">CSS</a>
+                        </li>
+                    
+                        <li class="l-footer__link">
+                            <a href="/categories/javascript.html">JavaScript</a>
+                        </li>
+                    
+                        <li class="l-footer__link">
+                            <a href="/categories/general.html">General</a>
+                        </li>
+                    
+                </ul>
+
+                <ul class="l-footer__links">
+                    <li class="l-footer__link-heading">
+                        <a href="/tags.html">Tags</a>
+                    </li>
+                    
+                    
+                        <li class="l-footer__link">
+                            <a href="/tags/responsive.html">Responsive</a>
+                        </li>
+                    
+                        <li class="l-footer__link">
+                            <a href="/tags/workflow.html">Workflow</a>
+                        </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+        Copyright &copy; 2021 Liam Snowdon
     </div>
 </footer>
 

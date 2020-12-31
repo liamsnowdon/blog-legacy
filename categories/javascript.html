@@ -35,6 +35,7 @@
     <meta name="msapplication-TileColor" content="#00aba9">
     <meta name="theme-color" content="#252830">
 
+    <script src="https://unpkg.com/scrollreveal@4.0.7/dist/scrollreveal.js"></script>
     <link rel="stylesheet" href="/assets/css/styles.css">
   </head>
   <body>
@@ -62,8 +63,8 @@
 
   <header class="l-header">
     <div class="l-header__content">
-      <h1 class="l-header__heading">JavaScript Posts</h1>
-      <p>The programming language of the web, JavaScript gives you the power to control a web page to your heart's content; updating the DOM, sending asynchronous requests, dynamic content and more interactive elements like carousels, maps and even games.</p>
+      <h1 class="l-header__heading load-hidden js-hero-text">JavaScript Posts</h1>
+      <p class="load-hidden js-hero-text">The programming language of the web, JavaScript gives you the power to control a web page to your heart's content; updating the DOM, sending asynchronous requests, dynamic content and more interactive elements like carousels, maps and even games.</p>
     </div>
   </header>
 
@@ -108,7 +109,7 @@
                   
   
 
-  <div class="c-post">
+  <div class="c-post js-pod load-hidden">
     <div class="c-post__image" style="background-image: url('/assets/images/posts/gulp/gulp-thumbnail.jpeg')"></div>
   
     <div class="c-post__content">
@@ -142,7 +143,7 @@
                   
   
 
-  <div class="c-post">
+  <div class="c-post js-pod load-hidden">
     <div class="c-post__image" style="background-image: url('/assets/images/posts/precompiling-nunjucks/precompiling-nunjucks-thumbnail.jpeg')"></div>
   
     <div class="c-post__content">
@@ -184,7 +185,61 @@
 
 <footer class="l-footer">
     <div class="l-footer__content">
-        Copyright &copy; <span class="js-copyright-year"></span> Liam Snowdon
+        <div class="l-footer__main">
+            <div class="l-footer__social">
+                <a class="l-footer__icon" href="https://www.linkedin.com/in/liam-snowdon/" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                
+                <a class="l-footer__icon" href="https://github.com/liamsnowdon" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+
+            <div class="l-footer__nav">
+                <ul class="l-footer__links">
+                    <li class="l-footer__link-heading">
+                        <a href="/categories.html">Categories</a>
+                    </li>
+                    
+                    
+                        <li class="l-footer__link">
+                            <a href="/categories/html.html">HTML</a>
+                        </li>
+                    
+                        <li class="l-footer__link">
+                            <a href="/categories/css.html">CSS</a>
+                        </li>
+                    
+                        <li class="l-footer__link">
+                            <a href="/categories/javascript.html">JavaScript</a>
+                        </li>
+                    
+                        <li class="l-footer__link">
+                            <a href="/categories/general.html">General</a>
+                        </li>
+                    
+                </ul>
+
+                <ul class="l-footer__links">
+                    <li class="l-footer__link-heading">
+                        <a href="/tags.html">Tags</a>
+                    </li>
+                    
+                    
+                        <li class="l-footer__link">
+                            <a href="/tags/responsive.html">Responsive</a>
+                        </li>
+                    
+                        <li class="l-footer__link">
+                            <a href="/tags/workflow.html">Workflow</a>
+                        </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+        Copyright &copy; 2021 Liam Snowdon
     </div>
 </footer>
 

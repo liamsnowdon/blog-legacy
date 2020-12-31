@@ -1,7 +1,7 @@
 {% macro postPod(post) %}
   {% set category = data.categories | getById(post.category) %}
 
-  <div class="c-post">
+  <div class="c-post js-pod load-hidden">
     <div class="c-post__image" style="background-image: url('{{ post.thumbnailImageUrl }}')"></div>
   
     <div class="c-post__content">
@@ -33,7 +33,7 @@
 {% macro mostRecentPostPod(post) %}
   {% set category = data.categories | getById(post.category) %}
 
-  <div class="c-recent-post">
+  <div class="c-recent-post js-pod load-hidden">
     <div class="c-recent-post__image" style="background-image: url('{{ post.thumbnailImageUrl }}')"></div>
     <div class="c-recent-post__content">
       <h3 class="c-recent-post__title">{{ post.title }}</h3>
