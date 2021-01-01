@@ -32,13 +32,17 @@
 
     &__content {
         position: relative;
-        max-width: 1440px;
         padding: 30px 25px;
 
         @include breakpoint('medium') {
             padding: 5rem 2.5rem;
             width: 60%;
         }
+    }
+
+    &__content-outer {
+        max-width: $global-width;
+        margin: 0 auto;
     }
 
     &__title {

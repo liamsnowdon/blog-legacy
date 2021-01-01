@@ -2,10 +2,16 @@
   {% set category = data.categories | getById(post.category) %}
 
   <div class="c-post js-pod load-hidden">
-    <div class="c-post__image" style="background-image: url('{{ post.thumbnailImageUrl }}')"></div>
+    <a 
+      class="c-post__image"
+      href="/posts/{{ post.file }}"
+      style="background-image: url('{{ post.thumbnailImageUrl }}')"
+    ></a>
   
     <div class="c-post__content">
-      <a class="c-post__category" href="/categories/{{ category.file }}">{{ category.name }}</a>
+      <span class="ws-no-wrap d-block mb-10 fw-700">{{ post.datePosted | shortDate }} |
+        <a class="c-post__category" href="/categories/{{ category.file }}">{{ category.name }}</a>
+      </span>
 
       <h6 class="c-post__title">{{ post.title }}</h6>
       <p class="c-post__intro">{{ post.intro }}</p>
@@ -34,12 +40,17 @@
   {% set category = data.categories | getById(post.category) %}
 
   <div class="c-recent-post js-pod load-hidden">
-    <div class="c-recent-post__image" style="background-image: url('{{ post.thumbnailImageUrl }}')"></div>
+    <a 
+      class="c-recent-post__image"
+      href="/posts/{{ post.file }}"
+      style="background-image: url('{{ post.thumbnailImageUrl }}')"
+    ></a>
     <div class="c-recent-post__content">
       <h3 class="c-recent-post__title">{{ post.title }}</h3>
       <h5 class="c-recent-post__subtitle">
         <span class="ws-no-wrap">{{ post.datePosted | shortDate }} |
           <a href="/categories/{{ category.file }}">{{ category.name }}</a>
+        </span>
       </h5>
 
       <p class="c-recent-post__intro">
