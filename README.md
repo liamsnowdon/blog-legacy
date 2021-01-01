@@ -8,8 +8,6 @@ JSON data for posts and tags can be created by using the Blog JSON Generator. Po
 A Gulp tasks builds the Nunjucks (.njk) files automatically for category, tag and post pages directly from JSON using its template in `nunjucks-page-templates.js`. The HTML files are then built with Nunjucks through Gulp like the rest of the pages. The category, tag and post directories are added to `.gitignore` for this reason.
 
 ## 3. Image Dimensions
-Meta Og Image: 1200px x 627px
-
-Post Images: Thumbnail (615px x 350px), Meta Og (1200px x 627px), Header (1300px x 400px)
-Category Images: Thumbnail (615px x 350px), Meta Og (1200px x 627px)
-Tag Images: Thumbnail (615px x 350px), Meta Og (1200px x 627px)
+1. Meta Image: 1200px x 627px
+2. Header: 1300px x 400px
+3. Thumbnail: 615px x 350px

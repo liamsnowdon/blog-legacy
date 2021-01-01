@@ -38,29 +38,28 @@
     <div class="c-recent-post__content">
       <h3 class="c-recent-post__title">{{ post.title }}</h3>
       <h5 class="c-recent-post__subtitle">
-        <span class="ws-no-wrap">20/12/2020 |
+        <span class="ws-no-wrap">{{ post.datePosted | shortDate }} |
           <a href="/categories/{{ category.file }}">{{ category.name }}</a>
-        </h5>
+      </h5>
 
-        <p class="c-recent-post__intro">
-          {{ post.intro }}
+      <p class="c-recent-post__intro">
+        {{ post.intro }}
+      </p>
+
+      {% if post.tags.length %}
+        <p class="fw-600">
+          Tags:
+          <span class="fs-italic">
+            {% for tagId in post.tags %}
+              {% set tag = data.tags | getById(tagId) %}
+
+              <a href="/tags/{{ tag.file }}">{{ tag.name | lower }}</a>
+            {% endfor %}
+          </span>
         </p>
+      {% endif %}
 
-        {% if post.tags.length %}
-          <p class="fw-600">
-            Tags:
-            <span class="fs-italic">
-              {% for tagId in post.tags %}
-                {% set tag = data.tags | getById(tagId) %}
-
-                <a href="/tags/{{ tag.file }}">{{ tag.name | lower }}</a>
-              {% endfor %}
-            </span>
-          </p>
-        {% endif %}
-
-        <a class="c-button" href="/posts/{{ post.file }}">Go to post</a>
-      </div>
+      <a class="c-button" href="/posts/{{ post.file }}">Go to post</a>
     </div>
   </div>
 {% endmacro %}
