@@ -19,7 +19,7 @@ browserSync.create();
 sass.compiler = require('dart-sass');
 
 /**
- * Plugis to use with PostCSS
+ * Plugins to use with PostCSS
  * 
  * autoprefixer - automatically adds prefixes to properties based on browserlist config
  * mqPacker - merges all media queries into one

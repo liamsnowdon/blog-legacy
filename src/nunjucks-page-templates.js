@@ -36,7 +36,7 @@ export const categoryTemplate = `{% extends "base.njk" %}
 {% block content %}
   {% import 'macros/post-pods.njk' as pods %}
 
-  {% set posts = data.posts | categoryPosts(<% CATEGORY_ID %>) %}
+  {% set posts = data.posts | categoryPosts(<% CATEGORY_ID %>) | sort(true, true, 'datePosted') %}
 
   <header class="l-header">
     <div class="l-header__content">

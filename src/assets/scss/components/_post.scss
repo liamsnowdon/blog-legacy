@@ -54,6 +54,7 @@
 
 .c-recent-post {
     position: relative;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);
 
     @include breakpoint('medium') {
         display: flex;
@@ -75,7 +76,7 @@
         align-self: center;
         flex: 0 0 auto;
         width: 100%;
-        padding: 15px;
+        padding: 20px;
 
         @include breakpoint('medium') {
             width: 50%;
