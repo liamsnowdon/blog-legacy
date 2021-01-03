@@ -32,11 +32,10 @@ export const buildCategoryPages = DEV_BUILD_CATEGORY_PAGES;
 export const buildPostPages = DEV_BUILD_POST_PAGES;
 export const devNunjucks = DEV_NUNJUCKS;
 export const watchNunjucks = DEV_WATCH_NUNJUCKS;
-
-export const dev = gulp.series(devCss, devNunjucks, devInject);
-export const watch = gulp.series(devCss, devNunjucks, devInject, gulp.parallel(watchCss, watchNunjucks));
 export const buildNunjucksPages = gulp.parallel(buildPostPages, buildCategoryPages, buildTagPages);
 export const buildPages = gulp.series(gulp.parallel(buildPostPages, buildCategoryPages, buildTagPages), devNunjucks);
+
+export const watch = gulp.series(devCss, buildPages, devInject, gulp.parallel(watchCss, watchNunjucks));
 
 // Production Tasks
 
@@ -47,6 +46,8 @@ export const distJs = DIST_JS;
 export const distInject = DIST_INJECT_ASSETS;
 export const distNunjucks = DIST_NUNJUCKS;
 
+
+export const dev = gulp.series(devCss, buildPages, devInject);
 export const dist = gulp.series(buildNunjucksPages, distNunjucks, distCopyFiles, gulp.parallel(distCss, distJs), distInject);
 
 export default devCss;
