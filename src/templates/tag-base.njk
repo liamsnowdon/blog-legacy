@@ -1,0 +1,22 @@
+{% extends "base.njk" %}
+
+{% block metaTitle %}{{ tag.name }} Posts | Liam Snowdon's Blog{% endblock %}
+{% block metaDescription %}{{ tag.intro }}{% endblock %}
+
+{% block metaOgTitle %}{{ tag.name }} Posts | Liam Snowdon's Blog{% endblock %}
+{% block metaOgDescription %}{{ tag.intro }}{% endblock %}
+{% block metaOgImage %}{{ tag.imageUrl }}{% endblock %}
+{% block metaOgUrl %}/tags/{{ tag.file }}{% endblock %}
+
+{% import 'macros/tags-page.njk' as tagsPage %}
+
+{% block content %}
+  {{ tagsPage.header(tag) }}
+
+  <main>
+    {% include "partials/sticky-navigation.njk" %}
+
+    {{ tagsPage.content(tag) }}
+  </main>
+{% endblock %}
+`
