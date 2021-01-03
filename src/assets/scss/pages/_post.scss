@@ -100,6 +100,14 @@
             max-width: 45%;
         }
     }
+
+    &__share-buttons {
+        display: flex;
+
+        > :not(:last-child) {
+            margin-right: 15px;
+        }
+    }
 }
 
 .sidebar-pod {
@@ -160,6 +168,16 @@
     }
 }
 
+// Embeds
+
+// CanIUse
 .ciu_embed {
     margin: 20px 0 -20px;
+}
+
+// Twitter/Facebook Share
+.twitter-share-button:not(.twitter-share-button-rendered),
+.fb-share-button:not(.fb_iframe_widget) {
+    visibility: hidden;
+    opacity: 0;
 }

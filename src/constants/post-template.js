@@ -21,6 +21,10 @@ const postTemplate = `{% extends "base.njk" %}
 {% set post = data.posts | getById(<% POST_ID %>) %}
 
 {% block content %}
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v9.0" nonce="GqtN5jsR"></script>
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
   {{ postPage.header(post) }}
   
   <main>

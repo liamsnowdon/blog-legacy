@@ -195,5 +195,5 @@ export const watchNunjucks = () => {
       './src/data/posts.json',
       './src/data/categories.json',
       './src/data/tags.json'
-  ], nunjucks);
+  ], gulp.series(nunjucks, injectAssets));
 }
