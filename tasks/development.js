@@ -9,6 +9,7 @@ import inject from 'gulp-inject';
 import nunjucksRender from 'gulp-nunjucks-render';
 
 import manageEnvironment from '../environment';
+import Utilities from '../src/helpers/utilities';
 
 browserSync.create();
 sass.compiler = require('dart-sass');
@@ -61,9 +62,10 @@ export const watchCss = () => {
  */
 export const injectAssets = () => {
   const sources = gulp.src(['./src/assets/third-party/**/*.js', './src/assets/js/core.js', './src/assets/css/styles.css'], {read: false});
+  const cacheBustVersion = `?v=${Utilities.generateTimestamp()}`;
 
   return gulp.src('./src/**/*.html')
-    .pipe(inject(sources, { ignorePath: 'src' }))
+    .pipe(inject(sources, { ignorePath: 'src', addSuffix: cacheBustVersion }))
     .pipe(gulp.dest('./src'));
 };
 

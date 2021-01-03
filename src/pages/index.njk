@@ -102,5 +102,5 @@
 {% endblock %}
 
 {% block additionalJS %} 
-  <script src="/assets/js/pages/homepage.js"></script>
+  {{ assetLoader.script('/assets/js/pages/homepage.js') }}
 {% endblock %}

@@ -12,6 +12,7 @@ import inject from 'gulp-inject';
 import nunjucksRender from 'gulp-nunjucks-render';
 
 import manageEnvironment from '../environment';
+import Utilities from '../src/helpers/utilities';
 
 /**
  * Plugins to use with PostCSS
@@ -109,9 +110,10 @@ export const js = () => {
  */
 export const injectAssets = () => {
   const sources = gulp.src(['./dist/assets/js/main.js', './dist/assets/css/styles.css'], {read: false});
+  const cacheBustVersion = `?v=${Utilities.generateTimestamp()}`;
 
   return gulp.src('./dist/**/*.html')
-    .pipe(inject(sources, { ignorePath: 'dist' }))
+    .pipe(inject(sources, { ignorePath: 'dist', addSuffix: cacheBustVersion }))
     .pipe(gulp.dest('./dist'));
 };
 
