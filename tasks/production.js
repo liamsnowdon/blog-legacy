@@ -9,6 +9,9 @@ import concat from 'gulp-concat';
 import uglify from 'gulp-uglify';
 import merge from 'merge-stream';
 import inject from 'gulp-inject';
+import nunjucksRender from 'gulp-nunjucks-render';
+
+import manageEnvironment from '../environment';
 
 /**
  * Plugins to use with PostCSS
@@ -57,17 +60,8 @@ export const serve = () => {
  * 6. Images
  */
 export const copyAndMoveFiles = () => {
-  const rootFiles = gulp.src('./src/*.{png,xml,ico,svg,webmanifest,html}')
+  const rootFiles = gulp.src('./src/*.{png,xml,ico,svg,webmanifest}')
       .pipe(gulp.dest('./dist'));
-
-  const tags = gulp.src('./src/tags/*.html')
-    .pipe(gulp.dest('./dist/tags'));
-
-  const categories = gulp.src('./src/categories/*.html')
-    .pipe(gulp.dest('./dist/categories'));
-
-  const posts = gulp.src('./src/posts/*.html')
-    .pipe(gulp.dest('./dist/posts'));
 
   const fonts = gulp.src('./src/assets/fonts/**/*')
     .pipe(gulp.dest('./dist/assets/fonts'));
@@ -75,7 +69,7 @@ export const copyAndMoveFiles = () => {
   const images = gulp.src('./src/assets/images/**/*')
     .pipe(gulp.dest('./dist/assets/images'));
 
-  return merge(rootFiles, tags, categories, posts, fonts, images);
+  return merge(rootFiles, fonts, images);
 };
 
 /**
@@ -120,3 +114,17 @@ export const injectAssets = () => {
     .pipe(inject(sources, { ignorePath: 'dist' }))
     .pipe(gulp.dest('./dist'));
 };
+
+/**
+* Builds html files from nunjucks pages
+*/
+export const nunjucks = () => {
+  // Gets .html and .njk files in pages
+  return gulp.src('./src/pages/**/*.+(html|njk)')
+      // Renders template with nunjucks
+      .pipe(nunjucksRender({
+          path: ['./src/templates'],
+          manageEnv: manageEnvironment
+      }))
+      .pipe(gulp.dest('./dist'));
+}
