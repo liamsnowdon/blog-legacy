@@ -1,10 +1,10 @@
 import fs from 'fs';
-import Utilities from './utilities';
+import Utilities from './src/helpers/utilities';
 
 export default (environment) => {
-    const posts = JSON.parse(fs.readFileSync('./data/posts.json'));
-    const tags = JSON.parse(fs.readFileSync('./data/tags.json'));
-    const categories = JSON.parse(fs.readFileSync('./data/categories.json'));
+    const posts = JSON.parse(fs.readFileSync('./src/data/posts.json'));
+    const tags = JSON.parse(fs.readFileSync('./src/data/tags.json'));
+    const categories = JSON.parse(fs.readFileSync('./src/data/categories.json'));
     const version = Utilities.generateTimestamp();
 
     environment.addGlobal('data', {

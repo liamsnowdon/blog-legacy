@@ -36,7 +36,9 @@
     <meta name="theme-color" content="#252830">
 
     <script src="https://unpkg.com/scrollreveal@4.0.7/dist/scrollreveal.js"></script>
-    {{ assetLoader.link("/assets/css/styles.css") }}
+
+    <!-- inject:css -->
+    <!-- endinject -->
   </head>
   <body>
     {% include "partials/navigation.njk" %}
@@ -45,7 +47,8 @@
 
     {% include "partials/footer.njk" %}
 
-    {{ assetLoader.script("/assets/js/main.js") }}
+    <!-- inject:js -->
+    <!-- endinject -->
 
     {% block additionalJS %} {% endblock %}
   </body>

@@ -1,1 +1,0 @@
-var Homepage=function(){var e=".js-homepage-swiper";return{initialise:function(){this.swiperEl=document.querySelector(e),this.swiperInstance=new Swiper(e,{loop:!0,allowTouchMove:!1,autoplay:{delay:5e3,disableOnInteraction:!1}})}}}();Homepage.initialise();

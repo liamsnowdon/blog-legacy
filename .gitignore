@@ -1,5 +1,7 @@
 .idea
 node_modules
+.DS_Store
+dist
 
 # Nunjucks pages that are built automatically through Gulp
 src/pages/categories
