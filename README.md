@@ -23,7 +23,7 @@ npm run serve-prod
 JSON data for posts and tags can be created by using the Blog JSON Generator. Posts and tags JSON data should be placed inside posts.json and tags.json, respectfully.
 
 ## 3. Gulp-built pages
-A Gulp tasks builds the Nunjucks (.njk) files automatically for category, tag and post pages directly from JSON using its template in `nunjucks-page-templates.js`. The HTML files are then built with Nunjucks through Gulp like the rest of the pages. The category, tag and post directories are added to `.gitignore` for this reason.
+Gulp tasks build the Nunjucks (.njk) files automatically for category, tag and post pages directly from JSON which extend a Nunjucks base template. The HTML files are then built with Nunjucks through Gulp like the rest of the pages. The category, tag and post directories are added to `.gitignore` for this reason.
 
 ## 4. Image Dimensions
 1. Meta Image: 1200px x 627px

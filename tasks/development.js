@@ -30,7 +30,10 @@ export const serve = () => {
   browserSync.init({
       server: {
           baseDir: './src',
-          index: "index.html"
+          index: "index.html",
+          // serveStaticOptions: {
+          //   extensions: ["html"]        
+          // }
       }
   });
 };

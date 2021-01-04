@@ -27,7 +27,7 @@
               {% for tagId in post.tags %}
                 {% set tag = data.tags | getById(tagId) %}
                 
-                <a href="/tags/{{ tag.file }}">{{ tag.name }}</a>
+                <a href="/tags/{{ tag.file }}">{{ tag.name | lower }}</a>
               {% endfor %}
             </h5>
           {% endif %}
