@@ -1,3 +1,4 @@
+import fs from 'fs';
 import gulp from 'gulp';
 import browserSync from 'browser-sync';
 import sass from 'gulp-sass';
@@ -132,4 +133,37 @@ export const nunjucks = () => {
           manageEnv: manageEnvironment
       }))
       .pipe(gulp.dest('./dist'));
-}
+};
+
+/**
+ * Creates a JSON file of recent posts to be used on my portfolio site
+ * 
+ * @param cb 
+ */
+export const createPortfolioJson = (cb) => {
+  let posts = JSON.parse(fs.readFileSync('./src/data/posts.json'));
+  const categories = JSON.parse(fs.readFileSync('./src/data/categories.json'));
+  const tags = JSON.parse(fs.readFileSync('./src/data/tags.json'));
+
+  posts.sort((a, b) => {
+    return new Date(b.datePosted) - new Date(a.datePosted);
+  });
+
+  posts = posts.slice(0, 4);
+
+  const recentPosts = posts.map(post => {
+    return {
+      ...post,
+      category: categories.find(cat => cat.id === post.category),
+      tags: post.tags.map(tag => tags.find(t => t.id === tag))
+    };
+  })
+
+  if (!fs.existsSync('./dist/data')) {
+    fs.mkdirSync('./dist/data');
+  }
+
+  fs.writeFileSync('./dist/data/portfolio-recent-posts.json', JSON.stringify(recentPosts, null, 4));
+
+  cb();
+};

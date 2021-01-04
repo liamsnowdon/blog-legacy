@@ -18,7 +18,8 @@ import {
     css as DIST_CSS,
     js as DIST_JS,
     injectAssets as DIST_INJECT_ASSETS,
-    nunjucks as DIST_NUNJUCKS
+    nunjucks as DIST_NUNJUCKS,
+    createPortfolioJson as DIST_CREATE_PORTFOLIO_JSON
 } from './tasks/production';
 
 // Development Tasks
@@ -45,9 +46,10 @@ export const distCss = DIST_CSS;
 export const distJs = DIST_JS;
 export const distInject = DIST_INJECT_ASSETS;
 export const distNunjucks = DIST_NUNJUCKS;
+export const createPortfolioJson = DIST_CREATE_PORTFOLIO_JSON;
 
 
 export const dev = gulp.series(devCss, buildPages, devInject);
-export const dist = gulp.series(buildNunjucksPages, distNunjucks, distCopyFiles, gulp.parallel(distCss, distJs), distInject);
+export const dist = gulp.series(buildNunjucksPages, distNunjucks, distCopyFiles, createPortfolioJson, gulp.parallel(distCss, distJs), distInject);
 
 export default devCss;
