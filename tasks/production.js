@@ -154,6 +154,7 @@ export const createPortfolioJson = (cb) => {
   const recentPosts = posts.map(post => {
     return {
       ...post,
+      datePosted: Utilities.shortDate(post.datePosted),
       category: categories.find(cat => cat.id === post.category),
       tags: post.tags.map(tag => tags.find(t => t.id === tag))
     };
