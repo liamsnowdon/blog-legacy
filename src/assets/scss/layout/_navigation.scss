@@ -13,11 +13,23 @@
     background-color: #212529;
     font-family: $header-font-family;
 
+    &__lists {
+        display: flex;
+        justify-content: space-between;
+        flex: 1 0 auto;
+    }
+
     &__list {
         display: flex;
         margin: 0;
         padding: 0;
         list-style: none;
+
+        &--right {
+            @include breakpoint(small, down) {
+                display: none;
+            }
+        }
     }
 
     &__item {
@@ -32,6 +44,7 @@
     &__links {
         display: flex;
         align-items: center;
+        width: 100%;
     }
 
     &__link {
