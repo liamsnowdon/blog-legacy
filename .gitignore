@@ -4,9 +4,13 @@ node_modules
 dist
 
 # Nunjucks pages that are built automatically through Gulp
-src/pages/categories
+src/pages/categories/*
+!src/pages/categories/index.njk
+
+src/pages/tags/*
+!src/pages/tags/index.njk
+
 src/pages/posts
-src/pages/tags
 
 src/**/*.html
 src/assets/css
