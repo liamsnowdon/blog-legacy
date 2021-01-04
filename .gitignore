@@ -9,3 +9,4 @@ src/pages/posts
 src/pages/tags
 
 src/**/*.html
+src/assets/css
