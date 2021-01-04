@@ -4,10 +4,21 @@
     height: 100%;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);
 
-    &__image {
+    &__image-cont {
+        position: relative;
         height: 300px;
         width: 100%;
-        background: center/cover no-repeat $primary-grey;
+    }
+
+    &__image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 
     &__content {

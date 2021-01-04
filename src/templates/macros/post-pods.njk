@@ -2,11 +2,12 @@
   {% set category = data.categories | getById(post.category) %}
 
   <div class="c-post js-pod load-hidden">
-    <a 
-      class="c-post__image"
+    <a
+      class="c-post__image-cont" 
       href="/posts/{{ post.file }}"
-      style="background-image: url('{{ post.thumbnailImageUrl }}')"
-    ></a>
+    >
+      <img class="c-post__image" src="{{ post.thumbnailImageUrl }}" alt="{{ post.title }}" />
+    </a>
   
     <div class="c-post__content">
       <span class="ws-no-wrap d-block mb-10 fw-700">{{ post.datePosted | shortDate }} |
@@ -41,10 +42,11 @@
 
   <div class="c-recent-post js-pod load-hidden">
     <a 
-      class="c-recent-post__image"
+      class="c-recent-post__image-cont"
       href="/posts/{{ post.file }}"
-      style="background-image: url('{{ post.thumbnailImageUrl }}')"
-    ></a>
+    >
+      <img class="c-recent-post__image" src="{{ post.thumbnailImageUrl }}" alt="{{ post.title }}" />
+    </a>
     <div class="c-recent-post__content">
       <h3 class="c-recent-post__title">{{ post.title }}</h3>
       <h5 class="c-recent-post__subtitle">
