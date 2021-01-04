@@ -31,9 +31,9 @@ export const serve = () => {
       server: {
           baseDir: './src',
           index: "index.html",
-          // serveStaticOptions: {
-          //   extensions: ["html"]        
-          // }
+          serveStaticOptions: {
+            extensions: ["html"]        
+          }
       }
   });
 };

@@ -1,14 +1,14 @@
 [
     {
         "id": 1,
-        "file": "responsive.html",
+        "file": "responsive",
         "imageUrl": "/assets/images/tags/responsive.jpg",
         "name": "Responsive",
         "intro": "Having a responsive website means it will function on a range of devices: mobile, tablet, desktop, etc."
     },
     {
         "id": 2,
-        "file": "workflow.html",
+        "file": "workflow",
         "imageUrl": "/assets/images/tags/workflow.jpg",
         "name": "Workflow",
         "intro": "A good workflow will help you perform your development tasks as easy as possible."

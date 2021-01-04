@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "file": "new-blog.html",
+        "file": "new-blog",
         "thumbnailImageUrl": "/assets/images/posts/new-blog/new-blog-thumbnail.jpg",
         "headerImageUrl": "/assets/images/posts/new-blog/new-blog-header.jpg",
         "ogImageUrl": "/assets/images/posts/new-blog/new-blog.jpg",
@@ -15,7 +15,7 @@
     },
     {
         "id": 2,
-        "file": "integrating-gulp-into-your-workflow.html",
+        "file": "integrating-gulp-into-your-workflow",
         "thumbnailImageUrl": "/assets/images/posts/gulp/gulp-thumbnail.jpg",
         "headerImageUrl": "/assets/images/posts/gulp/gulp-header.jpg",
         "ogImageUrl": "/assets/images/posts/gulp/gulp.jpg",
@@ -31,7 +31,7 @@
     },
     {
         "id": 3,
-        "file": "handling-responsive-images.html",
+        "file": "handling-responsive-images",
         "ogImageUrl": "/assets/images/posts/handling-responsive-images/handling-responsive-images.jpg",
         "thumbnailImageUrl": "/assets/images/posts/handling-responsive-images/handling-responsive-images-thumbnail.jpg",
         "headerImageUrl": "/assets/images/posts/handling-responsive-images/handling-responsive-images-header.jpg",
@@ -47,7 +47,7 @@
     },
     {
         "id": 4,
-        "file": "mobile-button-hover-states.html",
+        "file": "mobile-button-hover-states",
         "ogImageUrl": "/assets/images/posts/mobile-button-hover-states/mobile-button-hover-states.jpg",
         "thumbnailImageUrl": "/assets/images/posts/mobile-button-hover-states/mobile-button-hover-states-thumbnail.jpg",
         "headerImageUrl": "/assets/images/posts/mobile-button-hover-states/mobile-button-hover-states-header.jpg",
@@ -63,7 +63,7 @@
     },
     {
         "id": 5,
-        "file": "precompiling-nunjucks.html",
+        "file": "precompiling-nunjucks",
         "ogImageUrl": "/assets/images/posts/precompiling-nunjucks/precompiling-nunjucks.jpg",
         "thumbnailImageUrl": "/assets/images/posts/precompiling-nunjucks/precompiling-nunjucks-thumbnail.jpg",
         "headerImageUrl": "/assets/images/posts/precompiling-nunjucks/precompiling-nunjucks-header.jpg",
