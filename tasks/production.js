@@ -11,9 +11,11 @@ import uglify from 'gulp-uglify';
 import merge from 'merge-stream';
 import inject from 'gulp-inject';
 import nunjucksRender from 'gulp-nunjucks-render';
+import sitemap from 'gulp-sitemap';
 
 import manageEnvironment from '../environment';
 import Utilities from '../src/helpers/utilities';
+import sitemapConfig from '../sitemap.config';
 
 /**
  * Plugins to use with PostCSS
@@ -168,3 +170,9 @@ export const createPortfolioJson = (cb) => {
 
   cb();
 };
+
+export const createSitemap = () => {
+  return gulp.src('./dist/**/*.html', { read: false })
+    .pipe(sitemap(sitemapConfig))
+    .pipe(gulp.dest('./dist'));
+}

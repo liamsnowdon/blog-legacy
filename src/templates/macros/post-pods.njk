@@ -6,7 +6,7 @@
       class="c-post__image-cont" 
       href="/posts/{{ post.file }}"
     >
-      <img class="c-post__image" src="{{ post.thumbnailImageUrl }}" alt="{{ post.title }}" />
+      <img src="{{ post.thumbnailImageUrl }}" class="c-post__image" alt="{{ post.title }}" />
     </a>
   
     <div class="c-post__content">
@@ -45,7 +45,7 @@
       class="c-recent-post__image-cont"
       href="/posts/{{ post.file }}"
     >
-      <img class="c-recent-post__image" src="{{ post.thumbnailImageUrl }}" alt="{{ post.title }}" />
+      <img src="{{ post.thumbnailImageUrl }}" class="c-recent-post__image" alt="{{ post.title }}" />
     </a>
     <div class="c-recent-post__content">
       <h3 class="c-recent-post__title">{{ post.title }}</h3>
