@@ -12,5 +12,12 @@
         "imageUrl": "/assets/images/tags/workflow.jpg",
         "name": "Workflow",
         "intro": "A good workflow will help you perform your development tasks as easy as possible."
+    },
+    {
+        "id": 3,
+        "file": "sass",
+        "imageUrl": "/assets/images/tags/sass.jpg",
+        "name": "Sass",
+        "intro": "Describing itself as \"CSS with superpowers\", Sass is one of the most popular CSS pre-processors adding a rich number of features to extend its limits."
     }
 ]
