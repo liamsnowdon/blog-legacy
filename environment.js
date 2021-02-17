@@ -8,6 +8,9 @@ export default (environment) => {
     const cacheBustVersion = `?v=${Utilities.generateTimestamp()}`;
 
     environment.addGlobal('data', {
+        env: {
+            cdnHost: process.env.CDN_HOST || ''
+        },
         posts,
         tags,
         categories,

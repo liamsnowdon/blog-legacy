@@ -1,3 +1,5 @@
+{% import "macros/asset-loader.njk" as assetLoader %}
+
 {% macro postPod(post) %}
   {% set category = data.categories | getById(post.category) %}
 
@@ -6,7 +8,7 @@
       class="c-post__image-cont" 
       href="/posts/{{ post.file }}"
     >
-      <img src="{{ post.thumbnailImageUrl }}" class="c-post__image" alt="{{ post.title }}" />
+      <img src="{{ assetLoader.image(post.thumbnailImageUrl) }}" class="c-post__image" alt="{{ post.title }}" />
     </a>
   
     <div class="c-post__content">
@@ -45,7 +47,7 @@
       class="c-recent-post__image-cont"
       href="/posts/{{ post.file }}"
     >
-      <img src="{{ post.thumbnailImageUrl }}" class="c-recent-post__image" alt="{{ post.title }}" />
+      <img src="{{ assetLoader.image(post.thumbnailImageUrl) }}" class="c-recent-post__image" alt="{{ post.title }}" />
     </a>
     <div class="c-recent-post__content">
       <h3 class="c-recent-post__title">{{ post.title }}</h3>

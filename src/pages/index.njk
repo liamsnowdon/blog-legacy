@@ -11,10 +11,10 @@
             <div class="homepage-hero__slide swiper-slide">
               <picture class="homepage-hero__slide-image">
                 <source 
-                  srcset="{{ post.headerImageUrl }}"
+                  srcset="{{ assetLoader.image(post.headerImageUrl) }}"
                   media="(min-width: 768px)"
                 >
-                <img src="{{ post.thumbnailImageUrl }}" alt="{{ post.title }}" />
+                <img src="{{ assetLoader.image(post.thumbnailImageUrl) }}" alt="{{ post.title }}" />
               </picture>
             </div>
           {% endfor %}
@@ -99,8 +99,4 @@
       </div>
     </div>
   </main>
-{% endblock %}
-
-{% block additionalJS %} 
-  {{ assetLoader.script('/assets/js/pages/homepage.js') }}
 {% endblock %}

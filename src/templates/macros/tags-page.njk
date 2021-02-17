@@ -1,4 +1,5 @@
 {% import 'macros/post-pods.njk' as pods %}
+{% import "macros/asset-loader.njk" as assetLoader %}
 
 {% macro header(tag) %}
   <header class="l-header">
@@ -46,7 +47,7 @@
 {% macro pod(tag) %}
   <div class="c-pod js-pod">
     <div class="c-pod__image-cont">
-      <img src="{{ tag.imageUrl }}" class="c-pod__image" alt="{{ tag.name }}" />
+      <img src="{{ assetLoader.image(tag.imageUrl) }}" class="c-pod__image" alt="{{ tag.name }}" />
     </div>
     <div class="c-pod__content">
       <h5 class="c-pod__title">{{ tag.name }}</h4>

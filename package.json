@@ -33,6 +33,7 @@
     "gulp-inject": "^5.0.5",
     "gulp-nunjucks-render": "^2.2.3",
     "gulp-postcss": "^9.0.0",
+    "gulp-rev": "^9.0.0",
     "gulp-sass": "^4.1.0",
     "gulp-sitemap": "^8.0.0",
     "gulp-sourcemaps": "^3.0.0",

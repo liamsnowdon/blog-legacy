@@ -23,6 +23,8 @@ import {
     createSitemap as DIST_CREATE_SITEMAP
 } from './tasks/production';
 
+console.log(`CDN Host: ${process.env.CDN_HOST}`);
+
 // Development Tasks
 
 export const devServe = DEV_SERVE;

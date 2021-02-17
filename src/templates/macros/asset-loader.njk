@@ -1,3 +1,5 @@
-{% macro script(path) %}<script src="{{ path }}{{ data.cacheBustVersion }}"></script>{% endmacro %}
+{% macro script(path) %}{{ path }}{{ data.cacheBustVersion }}{% endmacro %}
 
-{% macro link(path) %}<link rel="stylesheet" href="{{ path }}{{ data.cacheBustVersion }}">{% endmacro %}
+{% macro link(path) %}{{ path }}{{ data.cacheBustVersion }}{% endmacro %}
+
+{% macro image(path) %}{{ data.env.cdnHost }}{{ path }}{% endmacro %}

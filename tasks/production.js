@@ -12,10 +12,13 @@ import merge from 'merge-stream';
 import inject from 'gulp-inject';
 import nunjucksRender from 'gulp-nunjucks-render';
 import sitemap from 'gulp-sitemap';
+import revision from 'gulp-rev';
 
 import manageEnvironment from '../environment';
 import Utilities from '../src/helpers/utilities';
 import sitemapConfig from '../sitemap.config';
+
+const cdnHost = process.env.CDN_HOST || '';
 
 /**
  * Plugins to use with PostCSS
@@ -89,6 +92,7 @@ export const css = () => {
   return gulp.src('./src/assets/scss/styles.scss')
       .pipe(sass().on('error', sass.logError))
       .pipe(postcss(postcssPlugins))
+      .pipe(revision())
       .pipe(gulp.dest('./dist/assets/css'));
 };
 
@@ -99,27 +103,21 @@ export const css = () => {
  * 2. Minify all JS
  */
 export const js = () => {
-  const core =  gulp.src(['./src/assets/third-party/**/*.js', './src/assets/js/core.js'])
+  return gulp.src(['./src/assets/third-party/**/*.js', './src/assets/js/core.js'])
       .pipe(concat('main.js'))
       .pipe(uglify().on('error', createErrorHandler('uglify')))
+      .pipe(revision())
       .pipe(gulp.dest('./dist/assets/js'));
-
-  const pages = gulp.src('./src/assets/js/pages/*.js')
-      .pipe(uglify().on('error', createErrorHandler('uglify')))
-      .pipe(gulp.dest('./dist/assets/js/pages'));
-
-  return merge(core, pages);
 }
 
 /**
  * Injects the main javascript and css files into the html
  */
 export const injectAssets = () => {
-  const sources = gulp.src(['./dist/assets/js/main.js', './dist/assets/css/styles.css'], {read: false});
-  const cacheBustVersion = `?v=${Utilities.generateTimestamp()}`;
+  const sources = gulp.src(['./dist/assets/js/main*.js', './dist/assets/css/styles*.css'], { read: false });
 
   return gulp.src('./dist/**/*.html')
-    .pipe(inject(sources, { ignorePath: 'dist', addSuffix: cacheBustVersion }))
+    .pipe(inject(sources, { ignorePath: 'dist', addRootSlash: false, addPrefix: cdnHost }))
     .pipe(gulp.dest('./dist'));
 };
 
