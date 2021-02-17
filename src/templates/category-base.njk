@@ -8,11 +8,11 @@
 {% block metaOgImage %}{{ category.imageUrl }}{% endblock %}
 {% block metaOgUrl %}/categories/{{ category.file }}{% endblock %}
 
+{% import 'macros/post-pods.njk' as pods %}
+
+{% set posts = data.posts | categoryPosts(category.id) | sort(true, true, 'datePosted') %}
+
 {% block content %}
-  {% import 'macros/post-pods.njk' as pods %}
-
-  {% set posts = data.posts | categoryPosts(category.id) | sort(true, true, 'datePosted') %}
-
   <header class="l-header">
     <div class="l-header__content">
       <h1 class="l-header__heading load-hidden js-hero-text">{{ category.name }} Posts</h1>
