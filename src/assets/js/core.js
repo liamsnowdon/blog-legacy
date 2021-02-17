@@ -65,6 +65,24 @@
     }
   };
 
+  var Homepage = {
+    SWIPER_SELECTOR: '.js-homepage-swiper',
+  
+    initialise: function () {
+      this.swiperEl = document.querySelector(this.SWIPER_SELECTOR);
+
+      this.swiperInstance = new Swiper(this.SWIPER_SELECTOR, {
+        loop: true,
+        allowTouchMove: false,
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+        }
+      });
+    }
+  };
+  
+  Homepage.initialise();
   ScrollToTop.initialise();
 
 })();

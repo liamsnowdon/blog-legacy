@@ -7,7 +7,7 @@
 {% block metaOgDescription %}Posts are given tags to make it easy to find posts about a particular area.{% endblock %}
 {% block metaOgUrl %}/tags{% endblock %}
 
-{% import 'macros/tags-page.njk' as tagsPage %}
+{% import "macros/asset-loader.njk" as assetLoader %}
 
 {% block content %}
   <header class="l-header">
@@ -37,7 +37,21 @@
           <div class="l-grid__row l-grid__row--column-margins">
             {% for tag in data.tags %}
               <div class="l-grid__column l-grid__column--12 l-grid__column--medium-4">
-                {{ tagsPage.pod(tag) }}
+                <div class="c-pod js-pod">
+                  <div class="c-pod__image-cont">
+                    <img src="{{ assetLoader.image(tag.imageUrl) }}" class="c-pod__image" alt="{{ tag.name }}" />
+                  </div>
+                  <div class="c-pod__content">
+                    <h5 class="c-pod__title">{{ tag.name }}</h4>
+                    <p class="c-pod__intro">
+                      {{ tag.intro }}
+                    </p>
+                    
+                    <div class="c-pod__button-holder">
+                      <a class="c-button" href="/tags/{{ tag.file }}">Explore</a>
+                    </div>
+                  </div>
+                </div>
               </div>
             {% endfor %}
           </div>

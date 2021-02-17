@@ -65,10 +65,9 @@ export const watchCss = () => {
  */
 export const injectAssets = () => {
   const sources = gulp.src(['./src/assets/third-party/**/*.js', './src/assets/js/core.js', './src/assets/css/styles.css'], {read: false});
-  const cacheBustVersion = `?v=${Utilities.generateTimestamp()}`;
 
   return gulp.src('./src/**/*.html')
-    .pipe(inject(sources, { ignorePath: 'src', addSuffix: cacheBustVersion }))
+    .pipe(inject(sources, { ignorePath: 'src' }))
     .pipe(gulp.dest('./src'));
 };
 
